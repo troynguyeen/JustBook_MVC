@@ -1,0 +1,327 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/_LayoutPage1.cshtml";
+}
+
+<!-- detail shopping cart -->
+<div class="layout_cartDetail layout_padding collection_section">
+    <div class="container">
+        <div class="orders_detail">
+            <div class="ordersInner">
+                <div class="orders_list">
+                    <h4 class="orders_title">1. Chọn hình thức giao hàng</h4>
+                    <div class="orders_borderLayout">
+                        <div class="custom-radio form-check">
+                            <input class="custom-radioInput form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
+                            <label class="custom-radioLabel form-check-label" for="flexRadioDefault1">
+                                Giao Tiêu Chuẩn
+                            </label>
+                        </div>
+                        <div class="layout_paymentItems">
+                            <div class="item_left">
+                                <ul>
+                                    <li>
+                                        <div class="item_detailOrder">
+                                            <img src="~/images/cart_dungluachonannhan.jpg" alt="" width="50px">
+                                            <div class="order_items">
+                                                <p class="order_nameItem">Đừng Lựa Chọn An Nhàn Khi Còn Trẻ</p>
+                                                <p class="money_paymentDetail" style="margin-top: 10px;">
+                                                    <span>SL: x1</span>
+                                                    <span>
+                                                        57.200đ
+                                                    </span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="item_detailOrder">
+                                            <img src="~/images/cart_tuoitredanggia.jpg" alt="" width="50px">
+                                            <div class="order_items">
+                                                <p class="order_nameItem">Tuổi Trẻ Đáng Giá Bao Nhiêu (Tái Bản)</p>
+                                                <p class="money_paymentDetail" style="margin-top: 10px;">
+                                                    <span>SL: x1</span>
+                                                    <span>
+                                                        52.000đ
+                                                    </span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="item_right">
+                                <div class="heading_order">
+                                    <div class="subheading_order">
+                                        <span class="heading__est-time_order">Giao vào Thứ Hai, 22/03</span>
+                                        <span class="heading__fulfil_order">Được giao bởi JustBook (từ Hồ Chí Minh)</span>
+                                    </div>
+                                    <div>
+                                        <span class="shipping-fee">14.000đ</span>
+                                    </div>
+                                </div>
+                                <div style="color: rgb(120, 120, 120); margin-top: 15px;">
+                                    Giao tiêu chuẩn
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="payments_list">
+                    <h4 class="payments_title">3. Chọn hình thức thanh toán</h4>
+                    <div class="payments_selecting">
+                        <ul>
+                            <li>
+                                <div class="custom-radio form-check">
+                                    <input class="custom-radioInput form-check-input" style="margin: 5px;" type="radio" name="paymentSelecting" id="paymentSelecting1" checked>
+                                    <label class="custom-radioLabel form-check-label" for="paymentSelecting1">
+                                        <div class="item_payment">
+                                            <img class="icons_payment" src="icon/cash_payment.svg" alt="cash" width="32px">
+                                            <span>Thanh toán tiền mặt khi nhận hàng</span>
+                                        </div>
+                                    </label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="custom-radio form-check">
+                                    <input class="custom-radioInput form-check-input" style="margin: 5px;" type="radio" name="paymentSelecting" id="paymentSelecting2">
+                                    <label class="custom-radioLabel form-check-label" for="paymentSelecting2">
+                                        <div class="item_payment">
+                                            <img class="icons_payment" src="icon/debit-card.svg" alt="debit" width="32px">
+                                            <span>Thẻ ATM nội địa/Internet Banking</span>
+                                        </div>
+                                    </label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="custom-radio form-check">
+                                    <input class="custom-radioInput form-check-input" style="margin: 5px;" type="radio" name="paymentSelecting" id="paymentSelecting3">
+                                    <label class="custom-radioLabel form-check-label" for="paymentSelecting3">
+                                        <div class="item_payment">
+                                            <img class="icons_payment" src="icon/credit-card.svg" alt="credit" width="32px">
+                                            <span>Thanh toán bằng thẻ quốc tế Visa, Master, JCB</span>
+                                        </div>
+                                    </label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="custom-radio form-check">
+                                    <input class="custom-radioInput form-check-input" style="margin: 5px;" type="radio" name="paymentSelecting" id="paymentSelecting4">
+                                    <label class="custom-radioLabel form-check-label" for="paymentSelecting4">
+                                        <div class="item_payment">
+                                            <img class="icons_payment" src="https://frontend.tikicdn.com/_desktop-next/static/img/icons/checkout/icon-payment-method-mo-mo.svg" alt="cash" width="32px">
+                                            <span>Thanh toán bằng ví MoMo</span>
+                                        </div>
+                                    </label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="custom-radio form-check">
+                                    <input class="custom-radioInput form-check-input" style="margin: 5px;" type="radio" name="paymentSelecting" id="paymentSelecting5">
+                                    <label class="custom-radioLabel form-check-label" for="paymentSelecting5">
+                                        <div class="item_payment">
+                                            <img class="icons_payment" src="https://frontend.tikicdn.com/_desktop-next/static/img/icons/checkout/icon-payment-method-zalo-pay.svg" alt="cash" width="32px">
+                                            <span>Thanh toán bằng ZaloPay</span>
+                                        </div>
+                                    </label>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="orders_confirm">
+                    <button type="button" class="orders_submit btn btn-danger">ĐẶT MUA</button>
+                    <p class="orders_note">(Xin vui lòng kiểm tra lại đơn hàng trước khi Đặt Mua)</p>
+                </div>
+            </div>
+            <div class="orders_TotalPrices">
+                <div class="shipping_address">
+                    <div class="address_title">
+                        <span>Địa chỉ giao hàng</span>
+                        <a href="#">Sửa</a>
+                    </div>
+                    <div class="address_orders">
+                        <span class="name_ordersAdress">Nguyễn Chí Thành</span>
+                        <span class="street_ordersAdress">69/68 Đặng Thùy Trâm, P. 13, Q. Bình Thạnh, TP. HCM</span>
+                        <span class="phone_ordersAdress">Điện thoại: 0522905064</span>
+                    </div>
+                </div>
+                <div class="cart_prices">
+                    <div class="title_ordersPrices">
+                        <div class="subTitle_ordersPrices">
+                            <b style="font-size: 15px;">Đơn hàng</b>
+                            <p style="font-size: 13px; color: rgb(120, 120, 120);">2 Sản phẩm.</p>
+                        </div>
+                        <a href="#" style="font-size: 13px; margin-top: 4px;">Sửa</a>
+                    </div>
+                    <div class="fromCart">
+                        <div>
+                            <ul>
+                                <li>
+                                    <div class="info_fromCart">
+                                        <div class="item_formCart">
+                                            <strong class="qty_fromCart">1 x</strong>
+                                            <a class="nameItem_formCart" href="#">Đừng Lựa Chọn An Nhàn Khi Còn Trẻ</a>
+                                        </div>
+                                        <div class="prices_fromCart">57.200đ</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="info_fromCart">
+                                        <div class="item_formCart">
+                                            <strong class="qty_fromCart">1 x</strong>
+                                            <a class="nameItem_formCart" href="#">Tuổi Trẻ Đáng Giá Bao Nhiêu (Tái Bản)</a>
+                                        </div>
+                                        <div class="prices_fromCart">52.000đ</div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="fee_payment">
+                            <div class="fee_temporary">
+                                <div>Tạm tính</div>
+                                <div>116.800đ</div>
+                            </div>
+                            <div class="fee_shipping">
+                                <div>Phí vận chuyển</div>
+                                <div>14.000đ</div>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="fee_total">
+                                <strong class="fee_text">Thành tiền: </strong>
+                                <span class="fee_value">
+                                    123.200đ
+                                    <i style="display: block; font-size: 12px; color: rgb(51, 51, 51);">(Đã bao gồm VAT nếu có)</i>
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- contact section end -->
+<!-- section footer start -->
+<div class="section_footer">
+    <div class="container">
+        <div class="mail_section">
+            <div class="row">
+                <div class="col-sm-6 col-lg-2">
+                    <div><a href="#"><img src="~/images/footer-logo.png"></a></div>
+                </div>
+                <div class="col-sm-6 col-lg-2">
+                    <div class="footer-logo"><img src="~/images/phone-icon.png"><span class="map_text">(71) 1234567890</span></div>
+                </div>
+                <div class="col-sm-6 col-lg-3">
+                    <div class="footer-logo"><img src="~/images/email-icon.png"><span class="map_text">Demo@gmail.com</span></div>
+                </div>
+                <div class="col-sm-6 col-lg-3">
+                    <div class="social_icon">
+                        <ul>
+                            <li><a href="#"><img src="~/images/fb-icon.png"></a></li>
+                            <li><a href="#"><img src="~/images/twitter-icon.png"></a></li>
+                            <li><a href="#"><img src="~/images/in-icon.png"></a></li>
+                            <li><a href="#"><img src="~/images/google-icon.png"></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-2"></div>
+            </div>
+        </div>
+        <div class="footer_section_2">
+            <div class="row">
+                <div class="col-sm-4 col-lg-2">
+                    <p class="dummy_text"> ipsum dolor sit amet, consectetur ipsum dolor sit amet, consectetur  ipsum dolor sit amet,</p>
+                </div>
+                <div class="col-sm-4 col-lg-2">
+                    <h2 class="shop_text">Address </h2>
+                    <div class="~/image-icon"><img src="~/images/map-icon.png"><span class="pet_text">No 40 Baria Sreet 15/2 NewYork City, NY, United States.</span></div>
+                </div>
+                <div class="col-sm-4 col-md-6 col-lg-3">
+                    <h2 class="shop_text">Our Company </h2>
+                    <div class="delivery_text">
+                        <ul>
+                            <li>Delivery</li>
+                            <li>Legal Notice</li>
+                            <li>About us</li>
+                            <li>Secure payment</li>
+                            <li>Contact us</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-3">
+                    <h2 class="adderess_text">Products</h2>
+                    <div class="delivery_text">
+                        <ul>
+                            <li>Prices drop</li>
+                            <li>New products</li>
+                            <li>Best sales</li>
+                            <li>Contact us</li>
+                            <li>Sitemap</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-2">
+                    <h2 class="adderess_text">Newsletter</h2>
+                    <div class="form-group">
+                        <input type="text" class="enter_email" placeholder="Enter Your email" name="Name">
+                    </div>
+                    <button class="subscribr_bt">Subscribe</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    </div>
+<!-- section footer end -->
+<div class="copyright">2019 All Rights Reserved. <a href="https://html.design">Free html  Templates</a></div>
+
+
+<!-- Javascript files-->
+<script src="~/js/jquery.min.js"></script>
+<script src="~/js/popper.min.js"></script>
+<script src="~/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/jquery-3.0.0.min.js"></script>
+<script src="~/js/plugin.js"></script>
+<!-- sidebar -->
+<script src="~/js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="~/js/custom.js"></script>
+<!-- javascript -->
+<script src="~/js/owl.carousel.js"></script>
+<script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+<script>
+         $(document).ready(function(){
+         $(".fancybox").fancybox({
+         openEffect: "none",
+         closeEffect: "none"
+         });
+
+
+$('#myCarousel').carousel({
+            interval: false
+        });
+
+        //scroll slides on swipe for touch enabled devices
+
+        $("#myCarousel").on("touchstart", function(event){
+
+            var yClick = event.originalEvent.touches[0].pageY;
+            $(this).one("touchmove", function(event){
+
+                var yMove = event.originalEvent.touches[0].pageY;
+                if( Math.floor(yClick - yMove) > 1 ){
+                    $(".carousel").carousel('next');
+                }
+                else if( Math.floor(yClick - yMove) < -1 ){
+                    $(".carousel").carousel('prev');
+                }
+            });
+            $(".carousel").on("touchend", function(){
+                $(this).off("touchmove");
+            });
+        	});
+		});
+</script>
