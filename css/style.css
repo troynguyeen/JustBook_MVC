@@ -1,4 +1,4 @@
-/*--------------------------------------------------------------------- File Name: style.css ---------------------------------------------------------------------*/
+﻿/*--------------------------------------------------------------------- File Name: style.css ---------------------------------------------------------------------*/
 
 
 /*--------------------------------------------------------------------- import Fonts ---------------------------------------------------------------------*/
@@ -1299,6 +1299,42 @@ cart_productsPrices-Cong {
     color: rgb(80, 80, 80);
     font-size: 13px;
 }
+
+/* Style của Hòa*/
+
+.shoes-img2 {
+    width: 100%;
+    float: left;
+    text-align: center;
+    padding-top: 100px;
+    padding-bottom: 40px;
+    margin: 0px
+}
+
+.best_shoes {
+    width: 100%;
+    float: left;
+    background-color: #ffffff;
+    height: auto;
+    padding: 20px 20px 20px 0px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.shoes_icon {
+    width: 100%;
+    float: left;
+    text-align: center;
+    min-height: 220px;
+}
+
+/* ------------------------- GDadmin của Hòa ------------------------- */
+
+* {
+    padding: 0;
+    margin: 0;
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+}
 /*Dat*/
 
 
@@ -1464,6 +1500,8 @@ form.example::after {
 
     .display_right .ThongtinTK {
     }
+
+
 /*a*/ 
 
 .from_row {

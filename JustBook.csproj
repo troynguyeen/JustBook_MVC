@@ -110,6 +110,8 @@
     <Content Include="icon\credit-card.svg" />
     <Content Include="icon\debit-card.svg" />
     <Content Include="images\about-img2.png" />
+    <Content Include="images\adv.png" />
+    <Content Include="images\al.png" />
     <Content Include="images\banner.png" />
     <Content Include="images\book.png" />
     <Content Include="images\book_2000-tu-vung-tieng-anh.jpg" />
@@ -127,18 +129,28 @@
     <Content Include="images\book_reactjs.jpg" />
     <Content Include="images\cart_dungluachonannhan.jpg" />
     <Content Include="images\cart_tuoitredanggia.jpg" />
+    <Content Include="images\cb.png" />
+    <Content Include="images\cc.png" />
+    <Content Include="images\cd.png" />
+    <Content Include="images\css.png" />
     <Content Include="images\email-icon.png" />
     <Content Include="images\fb-icon.png" />
     <Content Include="images\footer-logo.png" />
     <Content Include="images\google-icon.png" />
     <Content Include="images\in-icon.png" />
+    <Content Include="images\lc.png" />
     <Content Include="images\logo.png" />
     <Content Include="images\map-icon.png" />
+    <Content Include="images\mm.png" />
+    <Content Include="images\oc.png" />
     <Content Include="images\phone-icon.png" />
+    <Content Include="images\ps.png" />
     <Content Include="images\search_icon.png" />
     <Content Include="images\shop_icon.png" />
     <Content Include="images\star-icon.png" />
+    <Content Include="images\td.png" />
     <Content Include="images\twitter-icon.png" />
+    <Content Include="images\wcl.png" />
     <Content Include="js\bootstrap.bundle.min.js" />
     <Content Include="js\custom.js" />
     <Content Include="js\jquery-3.0.0.min.js" />
@@ -159,7 +171,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\BooksController.cs" />
     <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\GDadminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PaymentController.cs" />
@@ -188,6 +202,8 @@
     <Content Include="Views\Cart\Index.cshtml" />
     <Content Include="Views\Payment\Index.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Books\Index.cshtml" />
+    <Content Include="Views\GDadmin\Index.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
