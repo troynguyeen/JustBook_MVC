@@ -1,0 +1,150 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/_LayoutPage1.cshtml";
+}
+<div class="display">
+    <!--Giao diện chính bên trái-->
+    <div class="display_left">
+        <h3 class="title_column">Danh sách chức năng</h3>
+        <div class="column">
+            <div class="column_left fa fa-user-alt"></div>
+            <div class="column_right"><a href=""></a>Thông tin tài khoản</div>
+        </div>
+        <div class="column">
+            <div class="column_left fa fa-address-card"></div>
+            <div class="column_right"><a href=""></a>Thông báo của tôi</div>
+        </div>
+        <div class="column">
+            <div class="column_left fa fa-pen-square"></div>
+            <div class="column_right"><a href=""></a>Cập nhật sản phẩm</div>
+        </div>
+        <div class="column">
+            <div class="column_left fa fa-address-card"></div>
+            <div class="column_right"><a href=""></a>Quản lý đơn hàng</div>
+        </div>
+        <div class="column">
+            <div class="column_left fa fa-address-book"></div>
+            <div class="column_right"><a href=""></a>Quản lý khuyến mãi</div>
+        </div>
+        <div class="column">
+            <div class="column_left fa fa-dollar-sign"></div>
+            <div class="column_right"><a href=""></a>Sản phẩm bán chạy</div>
+        </div>
+        <div class="column">
+            <div class="column_left fa fa-crown"></div>
+            <div class="column_right"><a href=""></a>Nhận xét của khách hàng</div>
+        </div>
+        <div class="column">
+            <div class="column_left fa fa-chalkboard-teacher"></div>
+            <div class="column_right"><a href=""></a>Hỏi đáp</div>
+        </div>
+    </div>
+
+    <!--Giao diện chính bên phải-->
+    <div class="display_right">
+        <h2>Quản Lý Đơn Hàng</h2>
+        <div class="ThongtinTK">
+            <div class="tab">
+                <button class="tablinks" onclick="openCity(event, 'Tab1')">Tất cả</button>
+                <button class="tablinks" onclick="openCity(event, 'Tab2')">Chờ xác nhận</button>
+                <button class="tablinks" onclick="openCity(event, 'Tab3')">Chờ lấy hàng</button>
+                <button class="tablinks" onclick="openCity(event, 'Tab4')">Đang giao</button>
+                <button class="tablinks" onclick="openCity(event, 'Tab5')">Đã giao</button>
+                <button class="tablinks" onclick="openCity(event, 'Tab6')">Đơn hủy</button>
+            </div>
+            <form class="example" action="/action_page.php" style="background: #f1f1f1 ; position: absolute;right: 0;">
+                <input type="text" placeholder="Search.." name="search2">
+                <button type="submit"><i class="fa fa-search"></i></button>
+            </form>
+
+            <br><br>
+
+            <div id="Tab1" class="tabcontent" style="display:block">
+                <h3>Tất cả</h3>
+                <table id="customers">
+                    <tr>
+                        <th>ID Khách Hàng</th>
+                        <th>Đơn hàng</th>
+                        <th>Trạng thái</th>
+                        <th>Ngày giao</th>
+                    </tr>
+                    <tr>
+                        <td>10001</td>
+                        <td>DH001</th>
+                        <td>Đã giao</td>
+                        <td>1/1/2021</td>
+                    </tr>
+                    <tr>
+                        <td>10003</td>
+                        <td>DH002</th>
+                        <td>Đã giao</td>
+                        <td>1/1/2021</td>
+                    </tr>
+                    <tr>
+                        <td>10001</td>
+                        <td>DH003</th>
+                        <td>Đã giao</td>
+                        <td>1/1/2021</td>
+                    </tr>
+                    <tr>
+                        <td>10011</td>
+                        <td>DH004</th>
+                        <td>Chờ lấy hàng</td>
+                        <td>1/1/2021</td>
+                    </tr>
+                    <tr>
+                        <td>10023</td>
+                        <td>DH005</th>
+                        <td>Chờ xác nhận</td>
+                        <td>1/1/2021</td>
+                    </tr>
+                    <tr>
+                        <td>10032</td>
+                        <td>DH006</th>
+                        <td>Đang giao</td>
+                        <td>1/1/2021</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div id="Tab2" class="tabcontent">
+                <h3>Chờ xác nhận</h3>
+
+            </div>
+
+            <div id="Tab3" class="tabcontent">
+                <h3>Chờ lấy hàng</h3>
+
+            </div>
+
+            <div id="Tab4" class="tabcontent">
+                <h3>Đang giao</h3>
+
+            </div>
+            <div id="Tab5" class="tabcontent">
+                <h3>Đã giao</h3>
+
+            </div>
+            <div id="Tab6" class="tabcontent">
+                <h3>Đơn hủy</h3>
+
+            </div>
+
+            <script>
+function openCity(evt, cityName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+
+}
+            </script>
+
