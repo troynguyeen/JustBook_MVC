@@ -1000,6 +1000,11 @@ a:hover {
 
 .cart_productsPrices {
     margin-right: 25px;
+   
+}
+
+cart_productsPrices-Cong {
+    margin-right: 60px;
 }
 
 .cart_TotalPrices {
