@@ -1,7 +1,7 @@
 ﻿
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/_LayoutPage1.cshtml";
+    Layout = "~/Views/Header.cshtml";
 }
 <div class="display">
     <!--Giao diện chính bên trái-->
@@ -130,21 +130,3 @@
                 <h3>Đơn hủy</h3>
 
             </div>
-
-            <script>
-function openCity(evt, cityName) {
-  var i, tabcontent, tablinks;
-  tabcontent = document.getElementsByClassName("tabcontent");
-  for (i = 0; i < tabcontent.length; i++) {
-    tabcontent[i].style.display = "none";
-  }
-  tablinks = document.getElementsByClassName("tablinks");
-  for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" active", "");
-  }
-  document.getElementById(cityName).style.display = "block";
-  evt.currentTarget.className += " active";
-
-}
-            </script>
-
