@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="362b9993fd15431e85ffeec78cef6e0f" Name="Diagram1">
+        <EntityTypeShape EntityType="JustBook_CT25Team23Model.DonHang" Width="1.5" PointX="0.75" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="JustBook_CT25Team23Model.GioHang" Width="1.5" PointX="3" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="JustBook_CT25Team23Model.LichSuGD" Width="1.5" PointX="3" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="JustBook_CT25Team23Model.SanPham" Width="1.5" PointX="3" PointY="16.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="JustBook_CT25Team23Model.sysdiagram" Width="1.5" PointX="5.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="JustBook_CT25Team23Model.TaiKhoanKH" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="JustBook_CT25Team23Model.TaiKhoanQT" Width="1.5" PointX="5.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="JustBook_CT25Team23Model.ChiTietDonHang" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="JustBook_CT25Team23Model.ChiTietGioHang" Width="1.5" PointX="5.25" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="JustBook_CT25Team23Model.TrangThaiDonHang" Width="1.5" PointX="3" PointY="9.75" IsExpanded="true" />
+        <AssociationConnector Association="JustBook_CT25Team23Model.FK_ChiTietDonHang_DonHang" ManuallyRouted="false" />
+        <AssociationConnector Association="JustBook_CT25Team23Model.FK_LichSuGD_DonHang" ManuallyRouted="false" />
+        <AssociationConnector Association="JustBook_CT25Team23Model.FK_TrangThaiDonHang_DonHang" ManuallyRouted="false" />
+        <AssociationConnector Association="JustBook_CT25Team23Model.FK_ChiTietGioHang_GioHang" ManuallyRouted="false" />
+        <AssociationConnector Association="JustBook_CT25Team23Model.FK_GioHang_TaiKhoanKH" ManuallyRouted="false" />
+        <AssociationConnector Association="JustBook_CT25Team23Model.FK_LichSuGD_TaiKhoanKH" ManuallyRouted="false" />
+        <AssociationConnector Association="JustBook_CT25Team23Model.FK_ChiTietGioHang_SanPham" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

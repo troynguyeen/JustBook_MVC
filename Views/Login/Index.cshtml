@@ -1,6 +1,6 @@
-﻿
+﻿@model JustBook.Models.TaiKhoanKH
 @{
-    ViewBag.Title = "Login";
+    ViewBag.Title = "Đăng nhập tài khoản";
     Layout = "~/Views/Header.cshtml";
 }
 
@@ -10,12 +10,16 @@
         <div class="collection_section_2">
             <div class="row">
                 <div class="login_box" style="margin-left: 350px">
+                    @using (Html.BeginForm("Verify", "Login", FormMethod.Post))
+                    {
                     <form>
-                        <input class="center-block" type="email" id="email" name="email" placeholder="Enter Email" style="width: 500px ; height: 50px;"><br><br>
-                        <input class="center-block" type="password" id="pass" name="pass" placeholder="Enter Password" style="width: 500px; height: 50px;"><br>
+                        <input class="center-block" type="email" id="email" name="Email" placeholder="Enter Email" required style="width: 500px ; height: 50px;"><br><br>
+                        <input class="center-block" type="password" id="pass" name="MatKhau" placeholder="Enter Password" required style="width: 500px; height: 50px;"><br>
+                        <label style="color: red; padding-bottom: 20px;">@Html.DisplayFor(model => model.LoginErrorMessage)</label>
                         <p> Don't have an account?<a href="../Register"> Click here</a></p><br>
                         <button class="subscribr_bt" style="width: 100%;">Sign In</button><br><br><br><br>
                     </form>
+                    }
                 </div>
             </div>
         </div>
