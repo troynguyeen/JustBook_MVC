@@ -95,6 +95,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="css\animate.min.css" />
     <Content Include="css\bootstrap.min.css" />
+    <Content Include="css\detail.css" />
     <Content Include="css\jquery-ui.css" />
     <Content Include="css\jquery.mCustomScrollbar.min.css" />
     <Content Include="css\meanmenu.css" />
@@ -104,6 +105,7 @@
     <Content Include="css\responsive.css" />
     <Content Include="css\slick.css" />
     <Content Include="css\styles.css" />
+    <Content Include="css\tracking.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="icon\cash_payment.svg" />
@@ -133,6 +135,8 @@
     <Content Include="images\cc.png" />
     <Content Include="images\cd.png" />
     <Content Include="images\css.png" />
+    <Content Include="images\doc_thu_2_1.jpg" />
+    <Content Include="images\doc_thu_3_1.jpg" />
     <Content Include="images\email-icon.png" />
     <Content Include="images\fb-icon.png" />
     <Content Include="images\footer-logo.png" />
@@ -142,6 +146,7 @@
     <Content Include="images\logo.png" />
     <Content Include="images\map-icon.png" />
     <Content Include="images\mm.png" />
+    <Content Include="images\muonkiepnhansinh-biacung1.jpg" />
     <Content Include="images\oc.png" />
     <Content Include="images\phone-icon.png" />
     <Content Include="images\ps.png" />
@@ -215,6 +220,8 @@
     <Content Include="Views\QuanLyDonHang\Index.cshtml" />
     <Content Include="Views\AdminHome\Index.cshtml" />
     <Content Include="Views\GDadmin\Index.cshtml" />
+    <Content Include="Views\Books\Detail.cshtml" />
+    <Content Include="Views\QuanLyDonHang\CustomerTrack.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

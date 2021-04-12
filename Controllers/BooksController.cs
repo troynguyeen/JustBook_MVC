@@ -13,5 +13,9 @@ namespace JustBook.Controllers
         {
             return View();
         }
+        public ActionResult Detail()
+        {
+            return View();
+        }
     }
 }
