@@ -1,6 +1,8 @@
-﻿
+﻿@model JustBook.Models.TaiKhoanKH
+@using System.Web.Optimization
+
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Đăng ký tài khoản";
     Layout = "~/Views/Header.cshtml";
 }
 
@@ -10,25 +12,37 @@
         <div class="collection_section_2">
             <div class="row">
                 <div class="login_box" style="margin-left: 350px">
+                    @using (Html.BeginForm("Index", "Register", FormMethod.Post))
+                    {
+                    <label style="color: red; margin-bottom: 15px;">
+                        @ViewBag.DuplicateMessage
+                    </label>
                     <form>
-                        <input class="center-block" type="email" id="email" name="email" placeholder="Enter Email" style="width: 500px; height: 50px;"><br>
-                        <input class="center-block" type="password" id="passReg" name="passReg" placeholder="Password" style="width: 500px; height: 50px;"><br>
-                        <input class="center-block" type="password" id="passReg" name="passRegDup" placeholder="Repeat your password" style="width: 500px; height: 50px;"><br>
-                        <input class="center-block" type="text" id="accountName" name="accountName" placeholder="Enter Account Name" style="width: 500px; height: 50px;"><br>
-                        <input class="center-block" type="text" id="Address" name="Address" placeholder="Enter Your Address" style="width: 500px; height: 50px;"><br>
-                        <input class="center-block" type="number" id="phoneNumber" name="phoneNumber" placeholder="Enter Your Phone Number" style="width: 500px; height: 50px;"><br>
-                        <input type="radio" id="male" name="gender" value="male">
+                        <input class="center-block" type="email" id="email" name="Email" placeholder="Enter Email" required style="width: 500px; height: 50px;"><br>
+                        @Html.ValidationMessageFor(model => model.MatKhau, "", new { @class = "text-danger" })
+                        @Html.EditorFor(model => model.MatKhau, new { htmlAttributes = new { @class = "center-block", placeholder = "Enter Password", @style = "width: 500px; height: 50px; margin-bottom: 20px;" } })
+                        @Html.ValidationMessageFor(model => model.XacNhanMatKhau, "", new { @class = "text-danger" })
+                        @Html.EditorFor(model => model.XacNhanMatKhau, new { htmlAttributes = new { @class = "center-block", placeholder = "Enter Confirm Password", @style = "width: 500px; height: 50px; margin-bottom: 20px;" } })
+                        <input class="center-block" type="text" id="accountName" name="TenKH" placeholder="Enter Account Name" required style="width: 500px; height: 50px;"><br>
+                        <input class="center-block" type="text" id="Address" name="DiaChi" placeholder="Enter Your Address" required style="width: 500px; height: 50px;"><br>
+                        <input class="center-block" type="number" id="phoneNumber" name="Phone" placeholder="Enter Your Phone Number" required style="width: 500px; height: 50px;"><br>
+                        <input type="radio" id="male" name="GioiTinh" value="Nam" required>
                         <label for="male">Male</label><br>
-                        <input type="radio" id="female" name="gender" value="female">
+                        <input type="radio" id="female" name="GioiTinh" value="Nữ" required>
                         <label for="female">Female</label><br>
                         <label for="birthday">Birthday:</label>
-                        <input type="date" id="birthday" name="birthday"><br><br>
-                        <input type="checkbox" id="agreeTerm" name="agreeTerm" value="acceptTerm">  <label for="agreeTerm"> I agree all statements in <a href="https://support.google.com/chrome/?p=incognito"> Terms of service</a></label><br><br>
+                        <input type="date" id="birthday" name="NgaySinh" required><br><br>
+                        <input type="checkbox" id="agreeTerm" name="agreeTerm" value="acceptTerm" required>  <label for="agreeTerm"> I agree all statements in <a href="https://support.google.com/chrome/?p=incognito"> Terms of service</a></label><br><br>
                         <button class="subscribr_bt" style="width: 100%;">Sign Up</button><br>
                         <p> Have already an account? <a href="../Login"> Login here</a></p><br><br><br><br>
                     </form>
+                    }
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
