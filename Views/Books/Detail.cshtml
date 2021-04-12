@@ -1,0 +1,133 @@
+﻿
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Header.cshtml";
+}
+<link href="~/css/detail.css" rel="stylesheet" />
+<div class="about_main layout_padding">
+    <div class="container">
+        <div class="card">
+            <div class="container-fluid">
+                <div class="wrapper row">
+                    <div class="preview col-md-5">
+                        <div class="preview-pic tab-content">
+                            <div class="tab-pane active" id="pic-1">
+                                <img class="image-preview"
+                                     src="~/images/muonkiepnhansinh-biacung1.jpg" />
+                            </div>
+                            <div class="tab-pane" id="pic-2">
+                                <img class="image-preview" src="~/images/doc_thu_2_1.jpg" />
+                            </div>
+                            <div class="tab-pane" id="pic-3">
+                                <img class="image-preview" src="~/images/doc_thu_3_1.jpg" />
+                            </div>
+                        </div>
+                        <ul class="preview-thumbnail nav nav-tabs">
+                            <li class="active">
+                                <a data-target="#pic-1" data-toggle="tab">
+                                    <img src="~/images/muonkiepnhansinh-biacung1.jpg" />
+                                </a>
+                            </li>
+                            <li>
+                                <a data-target="#pic-2" data-toggle="tab">
+                                    <img src="~/images/doc_thu_2_1.jpg" />
+                                </a>
+                            </li>
+                            <li>
+                                <a data-target="#pic-3" data-toggle="tab">
+                                    <img src="~/images/doc_thu_3_1.jpg" />
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="details col-md-7">
+                        <h3 class="product-title">Muôn Kiếp Nhân Sinh</h3>
+                        <div class="info">
+                            <div class="row">
+                                <div class="col-md-7">
+                                    Nhà cung cấp: <a href="#">FIRST NEWS</a>
+                                </div>
+                                <div class="col-md-5">Tác giả: <b>Nguyên Phong</b></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-7">
+                                    Nhà xuất bản: <b>NXB Tổng Hợp TPHCM</b>
+                                </div>
+                                <div class="col-md-5">Hình thức bìa: <b>Bìa Cứng</b></div>
+                            </div>
+                        </div>
+                        <div class="rating">
+                            <div class="stars">
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                            </div>
+                            <span class="review-no">41 đánh giá</span>
+                        </div>
+
+                        <h1 class="price"><span>223.000đ</span></h1>
+                        <!-- <p class="vote">
+                          <strong>91%</strong> of buyers enjoyed this product!
+                          <strong>(87 votes)</strong>
+                        </p> -->
+                        <div class="delivery row">
+                            <label class="col-md-3">Thời gian giao hàng</label>
+                            <div class="col-md-9">
+                                <span>
+                                    Địa điểm giao hàng: Lê Quang Định, phường 5, quận Bình
+                                    Thạnh <a href="#">Thay đổi</a>
+                                </span>
+                                <span>Dự kiến giao: Thứ ba (12/03)</span>
+                            </div>
+                        </div>
+                        <div class="refund-policy row">
+                            <label class="col-md-3">Chính sách đổi trả</label>
+                            <div class="col-md-9">
+                                <span>
+                                    Đổi trả trong vòng 30 ngày. <a href="#">Xem thêm</a>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="quantity row">
+                            <div class="input-group col-md-4">
+                                <span class="input-group-btn">
+                                    <button type="button"
+                                            class="quantity-left-minus btn btn-danger btn-number"
+                                            data-type="minus"
+                                            data-field="">
+                                        <i class="fas fa-minus" aria-hidden="true"></i>
+                                    </button>
+                                </span>
+                                <input type="text"
+                                       id="quantity"
+                                       name="quantity"
+                                       class="form-control input-number"
+                                       value="1"
+                                       min="1"
+                                       max="100" />
+                                <span class="input-group-btn">
+                                    <button type="button"
+                                            class="quantity-right-plus btn btn-success btn-number"
+                                            data-type="plus"
+                                            data-field="">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </span>
+                            </div>
+                            <div class="input-group col-md-8">
+                                <button class="add-to-cart btn btn-default" type="button">
+                                    Thêm vào giỏ hàng
+                                </button>
+                                <button class="like btn btn-default" type="button">
+                                    <span class="fa fa-heart"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
