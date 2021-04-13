@@ -1,9 +1,12 @@
-﻿<!DOCTYPE html>
+﻿@using System.Web.Optimization
+
+<!DOCTYPE html>
 
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
+    @Scripts.Render("~/bundles/modernizr")
     <!-- basic -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,7 +23,10 @@
     <!-- style css -->
     <link href="~/css/StyleAdd.css" rel="stylesheet" />
     <link href="~/css/styles.css" rel="stylesheet" />
-    <link href="~/css/Style_GDadmin.css" rel="stylesheet" />
+    <link href="~/css/StyleAD.css" rel="stylesheet" />
+    <link href="~/css/tracking.css" rel="stylesheet" />
+    <link href="~/css/slick.css" rel="stylesheet" />
+    <link href="~/css/detail.css" rel="stylesheet" />
     <!-- Responsive-->
     <link rel="stylesheet" href="~/css/responsive.css">
     <!-- Scrollbar Custom CSS -->
@@ -92,28 +98,49 @@
                                         <span class="cartText">Giỏ Hàng</span>
                                     </a>
                                 </div>
-                                <div class="col-sm-4 login dropdown">
-                                    <div id="loginMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <span class="glyphicon glyphicon-user" style="font-size: 25px; align-self: center;"></span>
-                                        <div style="padding-left: 10px;">
-                                            <span style="font-size: 11px;">Đăng nhập / Đăng ký</span>
-                                            <div class="dropdown-toggle">Tài khoản</div>
+                                @if (Session["MaKH"] == null)
+                                {
+                                    <div class="col-sm-4 login dropdown">
+                                        <div id="loginMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <span class="glyphicon glyphicon-user" style="font-size: 25px; align-self: center;"></span>
+                                            <div style="padding-left: 10px;">
+                                                <span style="font-size: 11px;">Đăng nhập / Đăng ký</span>
+                                                <div class="dropdown-toggle">Tài khoản</div>
+                                            </div>
+                                        </div>
+                                        <div class="dropdownMenuLogin dropdown-menu" aria-labelledby="loginMenu">
+                                            <a href="../Login" class="itemLogin dropdown-item">
+                                                Đăng nhập
+                                            </a>
+                                            <a href="../Register" class="itemLogin dropdown-item">
+                                                Tạo tài khoản
+                                            </a>                                                           
                                         </div>
                                     </div>
-                                    <div class="dropdownMenuLogin dropdown-menu" aria-labelledby="loginMenu">
-                                        <a href="../Login" button class="itemLogin dropdown-item">
-                                            Đăng nhập</button>
-                                            <a href="../Register" button class="itemLogin dropdown-item">
-                                                Tạo tài khoản
+                                }
+                                else
+                                {
+                                    <div class="col-sm-4 login dropdown">
+                                        <div id="loginMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <span class="glyphicon glyphicon-user" style="font-size: 25px; align-self: center;"></span>
+                                            <div style="padding-left: 10px;">
+                                                <span style="font-size: 11px;">Tài khoản</span>
+                                                <div class="dropdown-toggle">@Session["TenKH"].ToString()</div>
+                                            </div>
+                                        </div>
+                                        <div class="dropdown-menu" aria-labelledby="loginMenu">
+                                            <a href="#" class="dropdown-item">
+                                                Đơn hàng của tôi
                                             </a>
-                                            <button class="itemLogin dropdown-item">
-                                                <span class="custom-icon">
-                                                    <i class="fa fa-facebook"></i>
-                                                </span>
-                                                Đăng nhập bằng Facebook
-                                            </button>
+                                            <a href="#" class="dropdown-item">
+                                                Thông tin tài khoản
+                                            </a>
+                                            <a href="@Url.Action("LogOut", "Login")" class="dropdown-item">
+                                                Đăng xuất
+                                            </a>
+                                        </div>
                                     </div>
-                                </div>
+                                }
                                 <div class="col-sm-2" style="padding-top: 5px;">
                                     <a href="../AdminHome">
                                         <button class="custom-btn-admin custom-btn btn btn-outline-danger">
@@ -188,49 +215,54 @@
 
 
     <!-- Javascript files-->
-    <script src="js/jquery.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/jquery-3.0.0.min.js"></script>
-    <script src="js/plugin.js"></script>
+    <script src="~/js/jquery.validate.js"></script>
+    <script src="~/js/jquery.min.js"></script>
+    <script src="~/js/popper.min.js"></script>
+    <script src="~/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/jquery-3.0.0.min.js"></script>
+    <script src="~/js/plugin.js"></script>
     <!-- sidebar -->
-    <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
-    <script src="js/custom.js"></script>
+    <script src="~/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="~/js/custom.js"></script>
     <!-- javascript -->
-    <script src="js/owl.carousel.js"></script>
+    <script src="~/js/owl.carousel.js"></script>
     <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
     <script>
-         $(document).ready(function(){
-         $(".fancybox").fancybox({
-         openEffect: "none",
-         closeEffect: "none"
-         });
-
-
-         $('#myCarousel').carousel({
-            interval: false
-         });
-
-         //scroll slides on swipe for touch enabled devices
-
-         $("#myCarousel").on("touchstart", function(event){
-
-            var yClick = event.originalEvent.touches[0].pageY;
-            $(this).one("touchmove", function(event){
-
-                var yMove = event.originalEvent.touches[0].pageY;
-                if( Math.floor(yClick - yMove) > 1 ){
-                    $(".carousel").carousel('next');
-                }
-                else if( Math.floor(yClick - yMove) < -1 ){
-                    $(".carousel").carousel('prev');
-                }
+        $(document).ready(function () {
+            $(".fancybox").fancybox({
+                openEffect: "none",
+                closeEffect: "none"
             });
-            $(".carousel").on("touchend", function(){
-                $(this).off("touchmove");
+
+
+            $('#myCarousel').carousel({
+                interval: false
             });
-        	});
-		 });
+
+            //scroll slides on swipe for touch enabled devices
+
+            $("#myCarousel").on("touchstart", function (event) {
+
+                var yClick = event.originalEvent.touches[0].pageY;
+                $(this).one("touchmove", function (event) {
+
+                    var yMove = event.originalEvent.touches[0].pageY;
+                    if (Math.floor(yClick - yMove) > 1) {
+                        $(".carousel").carousel('next');
+                    }
+                    else if (Math.floor(yClick - yMove) < -1) {
+                        $(".carousel").carousel('prev');
+                    }
+                });
+                $(".carousel").on("touchend", function () {
+                    $(this).off("touchmove");
+                });
+            });
+        });
     </script>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
 </body>
 </html>

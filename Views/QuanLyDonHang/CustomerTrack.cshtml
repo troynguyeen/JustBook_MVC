@@ -1,0 +1,143 @@
+﻿
+@{
+    ViewBag.Title = "CustomerTracking";
+    Layout = "~/Views/Header.cshtml";
+}
+
+<link href="~/css/tracking.css" rel="stylesheet" />
+<div class="container-fluid">
+    <div class="card status-package">
+        <div class="card-header">
+            <h4 class="status-header">Trạng thái đơn hàng</h4>
+        </div>
+        <div class="card-body">
+            <ul class="timeline" id="timeline">
+                <li class="li complete">
+                    <div class="timestamp">
+                        <span class="date">11/15/2014</span>
+                    </div>
+                    <div class="status">
+                        <h4>Đơn hàng đã đặt</h4>
+                    </div>
+                </li>
+                <li class="li complete">
+                    <div class="timestamp">
+                        <span class="date">11/15/2014</span>
+                    </div>
+                    <div class="status">
+                        <h4>Đơn hàng đã thanh toán</h4>
+                    </div>
+                </li>
+                <li class="li complete">
+                    <div class="timestamp">
+                        <span class="date">11/15/2014</span>
+                    </div>
+                    <div class="status">
+                        <h4>Đã giao cho ĐVVC</h4>
+                    </div>
+                </li>
+                <li class="li complete">
+                    <div class="timestamp">
+                        <span class="date">TBD </span>
+                    </div>
+                    <div class="status">
+                        <h4>Đang giao</h4>
+                    </div>
+                </li>
+                <li class="li">
+                    <div class="timestamp">
+                        <span class="date">TBD</span>
+                    </div>
+                    <div class="status">
+                        <h4>Đánh giá</h4>
+                    </div>
+                </li>
+            </ul>
+            <div class="card-footer confirm-received">
+                <div class="col-md-9">
+                    <p>
+                        Người bán đã gửi hàng. Bạn sẽ nhận được sản phẩm dự kiến vào
+                        09-03-2021.
+                    </p>
+                </div>
+                <div class="col-md-3">
+                    <button class="btn confirm-button">Đã nhận hàng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end card -->
+    <div class="card address-package">
+        <div class="card-header">
+            <h4 class="status-header">Địa Chỉ Nhận Hàng</h4>
+        </div>
+        <div class="card-body">
+            <ul class="address">
+                <li class="name">Nguyễn Đình Bảo</li>
+                <li>(+84)0938832442</li>
+                <li>19 Nguyễn Duy, phường 2, quận Bình Thạnh, Hồ Chí Minh</li>
+            </ul>
+        </div>
+    </div>
+    <div class="card infor-package">
+        <div class="card-header row">
+            <h4 class="status-header col-md-9">Kiện hàng 1</h4>
+            <h4 class="col-md-2" style="color: #fc6969;text-transform: uppercase;">Đã giao</h4>
+        </div>
+        <div class="card-body row">
+            <div class="col-md-6 delivery-name">
+                Ninja Van <br />SPEVN215502360721S
+            </div>
+            <div class="col-md-6">
+                <ul class="sessions" id="sessions">
+                    <li>
+                        <div class="time">09:00 09-03-2021</div>
+                        <p>Đã giao hàng</p>
+                    </li>
+                    <li>
+                        <div class="time">09:05 09-03-2021</div>
+                        <p>Đang giao hàng</p>
+                    </li>
+                    <li>
+                        <div class="time">09:30 08-03-2021</div>
+                        <p>Đã nhập kho</p>
+                    </li>
+                    <li>
+                        <div class="time">13:00 08-03-2021</div>
+                        <p>Đã lấy hàng</p>
+                    </li>
+                    <li>
+                        <div class="time">13:30 08-03-2021</div>
+                        <p>Đã lấy hàng (Ninja Van:SPEVN215502360721S)</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="card items-list">
+        <div class="card-body">
+            <div class="header-items">
+                <strong>ngbdao8899</strong>
+                <button class="btn" style="margin:10px">chat</button>
+                <button type="button" class="btn btn-primary">xem shop</button>
+            </div>
+            <ul>
+                <li class="infor-item row">
+                    <img src="https://via.placeholder.com/60" alt="" class="thumbnail-product col-md-2">
+                    <label class="label-product col-md-7">Cục sạc dự phòng Xiaomi 10.000mah <br /> Màu trắng</label>
+                    <p class="item-quantity col-md-2">x2</p>
+                </li>
+                <li class="infor-item row">
+                    <img src="https://via.placeholder.com/60" alt="" class="thumbnail-product col-md-2">
+                    <label class="label-product col-md-7">Củ sạc Xiaomi 30W <br /> Màu đen</label>
+                    <p class="item-quantity col-md-2">x2</p>
+                </li>
+                <li class="infor-item row">
+                    <img src="https://via.placeholder.com/60" alt="" class="thumbnail-product col-md-2">
+                    <label class="label-product col-md-7">Dây sạc Type-c 15m<br /> Màu trắng</label>
+                    <p class="item-quantity col-md-2">x2</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

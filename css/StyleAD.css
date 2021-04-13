@@ -1,0 +1,499 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* *, ::before, ::after {
+    box-sizing: border-box;
+} */
+
+/* ------------------------- Menu ------------------------- */
+
+.menu {
+    background-color: rgb(194, 177, 177);
+    width: 100%;
+    height: 120px;
+    line-height: 20px;
+}
+
+    .menu > ul {
+        display: flex;
+        list-style: none;
+    }
+
+    /* Menu One */
+    .menu .menu1 {
+        position: relative;
+        height: 20px;
+    }
+
+        .menu .menu1 a.m1_layer1 {
+            color: rgb(39, 37, 37);
+            padding: 1px 20px;
+            text-decoration: none;
+        }
+
+        .menu .menu1:hover a.m1_layer1 {
+            color: wheat;
+            background-color: rgb(160, 170, 160);
+        }
+
+        .menu .menu1 .m1_layer1 {
+            position: relative;
+            height: 20px;
+            line-height: 20px;
+        }
+
+        .menu .menu1:hover .m1_layer1 {
+        }
+
+        .menu .menu1 .m1_layer2 {
+            position: absolute;
+            top: 50px;
+            left: 0px;
+            visibility: hidden;
+            opacity: 0;
+            transition: 0.4s;
+            background: rgb(170, 169, 164);
+        }
+
+        .menu .menu1:hover .m1_layer2 {
+            visibility: visible;
+            opacity: 1;
+            top: 20px;
+        }
+
+        .menu .menu1 .m1_layer2 > ul {
+            list-style: none;
+        }
+
+            .menu .menu1 .m1_layer2 > ul > li {
+            }
+
+                .menu .menu1 .m1_layer2 > ul > li > a {
+                    display: block;
+                    width: 200px;
+                    text-decoration: none;
+                    padding: 5px 10px;
+                    /* font-family: segoe ui light; */
+                    color: rgb(67, 57, 77);
+                }
+
+                    .menu .menu1 .m1_layer2 > ul > li > a:hover {
+                        background-color: aliceblue;
+                        color: black;
+                    }
+
+    /* Menu Two */
+    .menu .menu2 {
+        position: relative;
+        height: 20px;
+    }
+
+        .menu .menu2 a.m2_layer1 {
+            color: rgb(39, 37, 37);
+            padding: 1px 20px;
+            text-decoration: none;
+        }
+
+        .menu .menu2:hover a.m2_layer1 {
+            color: wheat;
+            background-color: rgb(160, 170, 160);
+        }
+
+        .menu .menu2 .m2_layer1 {
+            position: relative;
+            height: 20px;
+            line-height: 20px;
+        }
+
+        .menu .menu2:hover .m2_layer1 {
+        }
+
+        .menu .menu2 .m2_layer2 {
+            position: absolute;
+            top: 50px;
+            left: 0px;
+            visibility: hidden;
+            opacity: 0;
+            transition: 0.4s;
+            background: rgb(170, 169, 164);
+        }
+
+        .menu .menu2:hover .m2_layer2 {
+            visibility: visible;
+            opacity: 1;
+            top: 20px;
+        }
+
+        .menu .menu2 .m2_layer2 > ul {
+            list-style: none;
+        }
+
+            .menu .menu2 .m2_layer2 > ul > li {
+            }
+
+                .menu .menu2 .m2_layer2 > ul > li > a {
+                    display: block;
+                    width: 200px;
+                    text-decoration: none;
+                    padding: 5px 10px;
+                    /* font-family: segoe ui light; */
+                    color: rgb(67, 57, 77);
+                }
+
+                    .menu .menu2 .m2_layer2 > ul > li > a:hover {
+                        background-color: aliceblue;
+                        color: black;
+                    }
+
+    /* Menu Three */
+    .menu .menu3 {
+        position: relative;
+        height: 20px;
+    }
+
+        .menu .menu3 a.m3_layer1 {
+            color: rgb(39, 37, 37);
+            padding: 1px 20px;
+            text-decoration: none;
+        }
+
+        .menu .menu3:hover a.m3_layer1 {
+            color: wheat;
+            background-color: rgb(160, 170, 160);
+        }
+
+        .menu .menu3 .m3_layer1 {
+            position: relative;
+            height: 20px;
+            line-height: 20px;
+        }
+
+        .menu .menu3:hover .m3_layer1 {
+        }
+
+        .menu .menu3 .m3_layer2 {
+            position: absolute;
+            top: 50px;
+            left: 0px;
+            visibility: hidden;
+            opacity: 0;
+            transition: 0.4s;
+            background: rgb(170, 169, 164);
+        }
+
+        .menu .menu3:hover .m3_layer2 {
+            visibility: visible;
+            opacity: 1;
+            top: 20px;
+        }
+
+        .menu .menu3 .m3_layer2 > ul {
+            list-style: none;
+        }
+
+            .menu .menu3 .m3_layer2 > ul > li {
+            }
+
+                .menu .menu3 .m3_layer2 > ul > li > a {
+                    display: block;
+                    width: 200px;
+                    text-decoration: none;
+                    padding: 5px 10px;
+                    /* font-family: segoe ui light; */
+                    color: rgb(67, 57, 77);
+                }
+
+                    .menu .menu3 .m3_layer2 > ul > li > a:hover {
+                        background-color: aliceblue;
+                        color: black;
+                    }
+
+    /* Menu Four */
+    .menu .menu4 {
+        position: relative;
+        height: 20px;
+    }
+
+        .menu .menu4 a.m4_layer1 {
+            color: rgb(39, 37, 37);
+            padding: 1px 20px;
+            text-decoration: none;
+        }
+
+        .menu .menu4:hover a.m4_layer1 {
+            color: wheat;
+            background-color: rgb(160, 170, 160);
+        }
+
+        .menu .menu4 .m4_layer1 {
+            position: relative;
+            height: 20px;
+            line-height: 20px;
+        }
+
+        .menu .menu4:hover .m4_layer1 {
+        }
+
+        .menu .menu4 .m4_layer2 {
+            position: absolute;
+            top: 50px;
+            left: 0px;
+            visibility: hidden;
+            opacity: 0;
+            transition: 0.4s;
+            background: rgb(170, 169, 164);
+        }
+
+        .menu .menu4:hover .m4_layer2 {
+            visibility: visible;
+            opacity: 1;
+            top: 20px;
+        }
+
+        .menu .menu4 .m4_layer2 > ul {
+            list-style: none;
+        }
+
+            .menu .menu4 .m4_layer2 > ul > li {
+            }
+
+                .menu .menu4 .m4_layer2 > ul > li > a {
+                    display: block;
+                    width: 200px;
+                    text-decoration: none;
+                    padding: 5px 10px;
+                    /* font-family: segoe ui light; */
+                    color: rgb(67, 57, 77);
+                }
+
+                    .menu .menu4 .m4_layer2 > ul > li > a:hover {
+                        background-color: aliceblue;
+                        color: black;
+                    }
+
+    /* Menu Five */
+    .menu .menu5 {
+        position: relative;
+        height: 20px;
+    }
+
+        .menu .menu5 a.m5_layer1 {
+            color: rgb(39, 37, 37);
+            padding: 1px 20px;
+            text-decoration: none;
+        }
+
+        .menu .menu5:hover a.m5_layer1 {
+            color: wheat;
+            background-color: rgb(160, 170, 160);
+        }
+
+        .menu .menu5 .m5_layer1 {
+            position: relative;
+            height: 20px;
+            line-height: 20px;
+        }
+
+        .menu .menu5:hover .m5_layer1 {
+        }
+
+        .menu .menu5 .m5_layer2 {
+            position: absolute;
+            top: 50px;
+            left: 0px;
+            visibility: hidden;
+            opacity: 0;
+            transition: 0.4s;
+            background: rgb(170, 169, 164);
+        }
+
+        .menu .menu5:hover .m5_layer2 {
+            visibility: visible;
+            opacity: 1;
+            top: 20px;
+        }
+
+        .menu .menu5 .m5_layer2 > ul {
+            list-style: none;
+        }
+
+            .menu .menu5 .m5_layer2 > ul > li {
+            }
+
+                .menu .menu5 .m5_layer2 > ul > li > a {
+                    display: block;
+                    width: 200px;
+                    text-decoration: none;
+                    padding: 5px 10px;
+                    /* font-family: segoe ui light; */
+                    color: rgb(67, 57, 77);
+                }
+
+                    .menu .menu5 .m5_layer2 > ul > li > a:hover {
+                        background-color: aliceblue;
+                        color: black;
+                    }
+
+/* ------------------------- Main ------------------------- */
+
+.display {
+    width: 100%;
+    height: 1000px;
+    display: flex;
+}
+
+/* -------------------------Main Left------------------------- */
+
+.display_left {
+    width: 35%;
+    padding-top: 30px;
+    background-color: rgb(239, 239, 239);
+}
+
+    .display_left .title_column {
+        display: inline;
+        text-transform: uppercase;
+        /* font-family: sans-serif; */
+        font-size: 25px;
+        color: rgba(12, 12, 12, 0.884);
+        margin-left: 10px;
+    }
+
+    .display_left .column {
+        display: flex;
+        /* font-family: Tahoma; */
+        font-size: 18px;
+        margin-left: 10px;
+    }
+
+    .display_left .column_left {
+        padding-top: 25px;
+        margin-top: 0px;
+    }
+
+    .display_left .column_right {
+        display: block;
+        text-indent: 15px;
+        padding-top: 25px;
+        margin-top: 0px;
+    }
+
+/* -------------------------Main right------------------------- */
+
+.display_right {
+    width: 100%;
+    height: 100%;
+    background-color: rgb(239, 239, 239);
+}
+
+    .display_right h2 {
+        /* font-family: sans-serif; */
+        font-size: 22px;
+        margin-top: 10px;
+        margin-left: 30px;
+        height: 50px;
+    }
+
+    .display_right .ThongtinTK {
+    }
+
+
+.from_row {
+    padding: 10px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    margin: 0px 0px 15px;
+}
+
+label {
+    display: inline-flex;
+    min-width: 100px;
+}
+
+.from__input {
+    border-radius: 8px;
+}
+
+select {
+    width: 105px;
+    border: 1px solid rgb(204, 204, 204);
+    height: 40px;
+    padding: 6px 12px;
+    line-height: 34px;
+    outline: none;
+    border-radius: 6px;
+    margin: 0px 12px 0px 5px;
+    background: 0px center;
+    box-shadow: none;
+}
+
+input {
+    border: 1px solid rgb(204, 204, 204);
+    line-height: 34px !important;
+    font-size: 100%;
+    margin: 0px;
+    padding-left: 10px;
+    border-style: inset;
+    background-color: -internal-light-dark(rgb(255, 255, 255), rgb(59, 59, 59));
+    appearance: auto;
+    text-rendering: auto;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: start;
+    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s, -webkit-box-shadow 0.15s ease-in-out 0s;
+}
+
+.from_row .btn__submit {
+    border: 0px;
+    width: 176px;
+    height: 40px;
+    border-radius: 4px;
+    color: rgb(74, 74, 74);
+    font-size: 20px;
+    background-color: rgb(253, 216, 53);
+    cursor: pointer;
+}
+
+button, input, select {
+    font-size: 100%;
+    font-family: inherit;
+}
+
+/* ------------------------- section_footer ------------------------- */
+
+/* .section_footer{
+    background-color: burlywood;
+    width: 100%;
+    height: 250px;
+} */
+
+/* ------------------------- copyright ------------------------- */
+
+/* .copyright{
+    background-color: cadetblue;
+    width: 100%;
+    height: 50px;
+} */
+
+/* ---------------------------------------------- Fix: Hòa ------------------------------------------------------------ */
+.display_right .h2_name {
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.lb_giotinh {
+    display: block;
+    padding: 6px 6px 0;
+}
+
+.select_ns {
+    margin-left: 20px;
+}
