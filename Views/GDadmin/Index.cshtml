@@ -44,7 +44,7 @@
     </div>
     <!--Giao diện chính bên phải-->
     <div class="display_right">
-        <h2>Thông tin tài khoản</h2><br>
+        <h2 class="h2_name">Thông tin tài khoản</h2><br>
         <div class="ThongtinTK">
             <form action="/action_page.php">
                 <div class="from_row">
@@ -62,9 +62,9 @@
                 <div class="from_row">
                     <label for="gioitinh">Giới tính</label>
                     <input type="radio" id="nam" name="gender" value="nam">
-                    <label class="nam" for="nam">Nam</label>
+                    <label class="lb_giotinh" for="nam">Nam</label>
                     <input type="radio" id="nu" name="gender" value="nu">
-                    <label class="nu" for="nu">Nữ</label><br><br>
+                    <label class="lb_giotinh" for="nu">Nữ</label><br><br>
                 </div>
                 <div class="from_row">
                     <label for="ngaysinh">Ngày sinh</label>
@@ -102,7 +102,7 @@
                         <option value="30">30</option>
                         <option value="31">31</option>
                     </select>
-                    <select name="month" id="">
+                    <select name="month" id="" class="select_ns">
                         <option value="0">Tháng</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -117,7 +117,7 @@
                         <option value="11">11</option>
                         <option value="12">12</option>
                     </select>
-                    <select name="year" id="">
+                    <select name="year" id="" class="select_ns">
                         <option value="0">Năm</option>
                         <option value="2021">2021</option>
                         <option value="2020">2020</option>

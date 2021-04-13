@@ -1,9 +1,12 @@
-﻿<!DOCTYPE html>
+﻿@using System.Web.Optimization
+
+<!DOCTYPE html>
 
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
+    @Scripts.Render("~/bundles/modernizr")
     <!-- basic -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,8 +21,11 @@
     <!-- bootstrap css -->
     <link rel="stylesheet" href="~/css/bootstrap.min.css">
     <!-- style css -->
-    <link rel="stylesheet" href="~/css/style.css">
-    <link href="~/css/Style_GDadmin.css" rel="stylesheet" />
+    <link href="~/css/styles.css" rel="stylesheet" />
+    <link href="~/css/detail.css" rel="stylesheet" />
+    <link href="~/css/slick.css" rel="stylesheet" />
+    <link href="~/css/tracking.css" rel="stylesheet" />
+    <link href="~/css/StyleAD.css" rel="stylesheet" />
     <!-- Responsive-->
     <link rel="stylesheet" href="~/css/responsive.css">
     <!-- Scrollbar Custom CSS -->
@@ -38,34 +44,13 @@
     <!--Link Icon-->
     <!--Link ICON giao dien quan tri-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
-    <style>
-        @@font-face {
-            font-family: Futura;
-            src: url(~/font/Futura.otf);
-        }
-
-        .logo {
-            font-family: Futura, Arial, Helvetica, sans-serif;
-            color: rgb(184, 183, 183);
-            font-style: italic;
-            font-size: 35px;
-        }
-
-            .logo:hover {
-                color: #FFF;
-            }
-
-            .logo:focus {
-                color: #FFF;
-            }
-    </style>
 </head>
 <body>
-    <div class="header_section">
+    <div class="header-bar">
         <div class="container">
             <div class="row">
                 <div class="col-sm-2">
-                    <div><a href="~/Home/" class="logo" href="#">JUSTBOOK</a></div>
+                    <div><a href="../Home" class="logo" href="#">JUSTBOOK</a></div>
                 </div>
                 <div class="col-sm-10">
                     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -90,7 +75,7 @@
                                         </div>
                                     </a>
                                     <div class="bookCollection dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a class="bookItem dropdown-item" href="~/Books/">Sách Lập Trình</a>
+                                        <a class="bookItem dropdown-item" href="../Books">Sách Lập Trình</a>
                                         <a class="bookItem dropdown-item" href="#">Sách Văn Học</a>
                                         <a class="bookItem dropdown-item" href="#">Sách Tiếng Anh</a>
                                         <div class="dropdown-divider"></div>
@@ -106,32 +91,62 @@
                                     </form>
                                 </nav>
                                 <div class="col-sm-2 cart">
-                                    <a href="#">
+                                    <a href="../Cart">
                                         <i class="fa fa-shopping-cart"></i>
                                         <span class='badge badge-warning' id='cartCount'>0</span>
                                         <span class="cartText">Giỏ Hàng</span>
                                     </a>
                                 </div>
-                                <div class="col-sm-3 login dropdown">
-                                    <div id="loginMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <span class="glyphicon glyphicon-user" style="font-size: 25px; align-self: center;"></span>
-                                        <div style="padding-left: 10px;">
-                                            <span style="font-size: 11px;">Đăng nhập / Đăng ký</span>
-                                            <div class="dropdown-toggle">Tài khoản</div>
+                                @if (Session["MaKH"] == null)
+                                {
+                                    <div class="col-sm-4 login dropdown">
+                                        <div id="loginMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <span class="glyphicon glyphicon-user" style="font-size: 25px; align-self: center;"></span>
+                                            <div style="padding-left: 10px;">
+                                                <span style="font-size: 11px;">Đăng nhập / Đăng ký</span>
+                                                <div class="dropdown-toggle">Tài khoản</div>
+                                            </div>
+                                        </div>
+                                        <div class="dropdownMenuLogin dropdown-menu" aria-labelledby="loginMenu">
+                                            <a href="../Login" class="itemLogin dropdown-item">
+                                                Đăng nhập
+                                            </a>
+                                            <a href="../Register" class="itemLogin dropdown-item">
+                                                Tạo tài khoản
+                                            </a>                                                           
                                         </div>
                                     </div>
-                                    <div class="dropdownMenuLogin dropdown-menu" aria-labelledby="loginMenu">
-                                        <a href="~/Login/" button class="itemLogin dropdown-item" >Đăng nhập</button>
-                                        <a href="~/Register/" button class="itemLogin dropdown-item">
-                                            Tạo tài khoản
-                                        </a>
-                                        <button class="itemLogin dropdown-item">
-                                            <span class="custom-icon">
-                                                <i class="fa fa-facebook"></i>
-                                            </span>
-                                            Đăng nhập bằng Facebook
-                                        </button>
+                                }
+                                else
+                                {
+                                    <div class="col-sm-4 login dropdown">
+                                        <div id="loginMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <span class="glyphicon glyphicon-user" style="font-size: 25px; align-self: center;"></span>
+                                            <div style="padding-left: 10px;">
+                                                <span style="font-size: 11px;">Tài khoản</span>
+                                                <div class="dropdown-toggle">@Session["TenKH"].ToString()</div>
+                                            </div>
+                                        </div>
+                                        <div class="dropdown-menu" aria-labelledby="loginMenu">
+                                            <a href="#" class="dropdown-item">
+                                                Đơn hàng của tôi
+                                            </a>
+                                            <a href="#" class="dropdown-item">
+                                                Thông tin tài khoản
+                                            </a>
+                                            <a href="@Url.Action("LogOut", "Login")" class="dropdown-item">
+                                                Đăng xuất
+                                            </a>
+                                        </div>
                                     </div>
+                                }
+                                <div class="col-sm-2" style="padding-top: 5px;">
+                                    <a href="../AdminHome">
+                                        <button class="custom-btn-admin custom-btn btn btn-outline-danger">
+                                            <span class="fas fa-user-lock" style="font-size: 15px;"></span>
+                                            <span style="padding-left: 5px;">Kênh Admin</span>
+                                        </button>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -140,7 +155,113 @@
             </div>
         </div>
     </div>
-    
+
     @RenderBody()
+
+    <!-- section footer start -->
+    <div class="section_footer">
+        <div class="container">
+            <div class="mail_section">
+                <div class="row">
+                    <div class="col-sm-6 col-lg-2">
+                        <div><a class="logo" href="#">JUSTBOOK</a></a></div>
+                    </div>
+                    <div class="col-sm-6 col-lg-12">
+                        <div class="social_icon">
+                            <ul>
+                                <li><a href="#"><img src="~/images/fb-icon.png"></a></li>
+                                <li><a href="#"><img src="~/images/twitter-icon.png"></a></li>
+                                <li><a href="#"><img src="~/images/in-icon.png"></a></li>
+                                <li><a href="#"><img src="~/images/google-icon.png"></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-2"></div>
+                </div>
+            </div>
+            <div class="footer_section_2">
+                <div class="row">
+                    <div class="col-sm-4 col-lg-3">
+                        <h2 class="shop_text">Address</h2>
+                        <div class="image-icon"><img src="~/images/map-icon.png"><span class="pet_text">69/68 Đặng Thùy Trâm, P. 13, Q. Bình Thạnh, TP. HCM</span></div>
+                    </div>
+                    <div class="col-sm-4 col-md-6 col-lg-5">
+                        <h2 class="shop_text">Our Company </h2>
+                        <div class="delivery_text">
+                            <ul>
+                                <li>Delivery</li>
+                                <li>Legal Notice</li>
+                                <li>About us</li>
+                                <li>Secure payment</li>
+                                <li>Contact us</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-4">
+                        <h2 class="adderess_text" style="font-size: 17px;">Đăng ký nhận thông báo về sách</h2>
+                        <div class="form-group">
+                            <input type="text" class="enter_email" placeholder="Enter Your email" name="Name">
+                        </div>
+                        <button class="subscribr_bt">Đăng ký</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- section footer end -->
+    <div class="copyright">&copy 2021 - Bản quyền của JustBook - <a style="color: #FFF;" href="#">JustBook.vn</a></div>
+
+
+    <!-- Javascript files-->
+    <script src="~/js/jquery.validate.js"></script>
+    <script src="~/js/jquery.min.js"></script>
+    <script src="~/js/popper.min.js"></script>
+    <script src="~/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/jquery-3.0.0.min.js"></script>
+    <script src="~/js/plugin.js"></script>
+    <!-- sidebar -->
+    <script src="~/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="~/js/custom.js"></script>
+    <!-- javascript -->
+    <script src="~/js/owl.carousel.js"></script>
+    <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".fancybox").fancybox({
+                openEffect: "none",
+                closeEffect: "none"
+            });
+
+
+            $('#myCarousel').carousel({
+                interval: false
+            });
+
+            //scroll slides on swipe for touch enabled devices
+
+            $("#myCarousel").on("touchstart", function (event) {
+
+                var yClick = event.originalEvent.touches[0].pageY;
+                $(this).one("touchmove", function (event) {
+
+                    var yMove = event.originalEvent.touches[0].pageY;
+                    if (Math.floor(yClick - yMove) > 1) {
+                        $(".carousel").carousel('next');
+                    }
+                    else if (Math.floor(yClick - yMove) < -1) {
+                        $(".carousel").carousel('prev');
+                    }
+                });
+                $(".carousel").on("touchend", function () {
+                    $(this).off("touchmove");
+                });
+            });
+        });
+    </script>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
 </body>
 </html>
