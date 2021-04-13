@@ -116,6 +116,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="css\animate.min.css" />
     <Content Include="css\bootstrap.min.css" />
+    <Content Include="css\detail.css" />
     <Content Include="css\jquery-ui.css" />
     <Content Include="css\jquery.mCustomScrollbar.min.css" />
     <Content Include="css\meanmenu.css" />
@@ -124,7 +125,9 @@
     <Content Include="css\owl.carousel.min.css" />
     <Content Include="css\responsive.css" />
     <Content Include="css\slick.css" />
+    <Content Include="css\StyleAD.css" />
     <Content Include="css\styles.css" />
+    <Content Include="css\tracking.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="icon\cash_payment.svg" />
@@ -305,6 +308,8 @@
     <Content Include="Views\AdminHome\Index.cshtml" />
     <Content Include="Views\GDadmin\Index.cshtml" />
     <Content Include="Views\Register\Index.cshtml" />
+    <Content Include="Views\Books\Detail.cshtml" />
+    <Content Include="Views\QuanLyDonHang\CustomerTrack.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
