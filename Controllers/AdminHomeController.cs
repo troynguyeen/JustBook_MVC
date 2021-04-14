@@ -13,5 +13,10 @@ namespace JustBook.Controllers
         {
             return View();
         }
+
+        public ActionResult ThongTinAdmin()
+        {
+            return View();
+        }
     }
 }
