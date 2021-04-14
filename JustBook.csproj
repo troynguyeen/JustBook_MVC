@@ -132,6 +132,7 @@
     <Content Include="css\styles.css" />
     <Content Include="css\style_JustBook.css" />
     <Content Include="css\tracking.css" />
+    <Content Include="css\user_home.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="icon\cash_payment.svg" />
@@ -232,6 +233,7 @@
     <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="Controllers\QuanLyDonHangController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
+    <Compile Include="Controllers\UserHomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -313,6 +315,7 @@
     <Content Include="Views\Books\Detail.cshtml" />
     <Content Include="Views\QuanLyDonHang\CustomerTrack.cshtml" />
     <Content Include="Views\AdminHome\ThongTinAdmin.cshtml" />
+    <Content Include="Views\UserHome\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
