@@ -78,7 +78,7 @@
                                         </div>
                                     </a>
                                     <div class="bookCollection dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a class="bookItem dropdown-item" href="../Books">Sách Lập Trình</a>
+                                        <a class="bookItem dropdown-item" href="@Url.Action("Index", "Books")">Sách Lập Trình</a>
                                         <a class="bookItem dropdown-item" href="#">Sách Văn Học</a>
                                         <a class="bookItem dropdown-item" href="#">Sách Tiếng Anh</a>
                                         <div class="dropdown-divider"></div>
@@ -94,7 +94,7 @@
                                     </form>
                                 </nav>
                                 <div class="col-sm-2 cart">
-                                    <a href="../Cart">
+                                    <a href="@Url.Action("Index", "Cart")">
                                         <i class="fa fa-shopping-cart"></i>
                                         <span class='badge badge-warning' id='cartCount'>0</span>
                                         <span class="cartText">Giỏ Hàng</span>
@@ -111,10 +111,10 @@
                                             </div>
                                         </div>
                                         <div class="dropdownMenuLogin dropdown-menu" aria-labelledby="loginMenu">
-                                            <a href="../Login" class="itemLogin dropdown-item">
+                                            <a href="@Url.Action("Index", "Login")" class="itemLogin dropdown-item">
                                                 Đăng nhập
                                             </a>
-                                            <a href="../Register" class="itemLogin dropdown-item">
+                                            <a href="@Url.Action("Index", "Register")" class="itemLogin dropdown-item">
                                                 Tạo tài khoản
                                             </a>                                                           
                                         </div>
@@ -131,10 +131,10 @@
                                             </div>
                                         </div>
                                         <div class="dropdown-menu" aria-labelledby="loginMenu">
-                                            <a href="#" class="dropdown-item">
+                                            <a href="@Url.Action("Index", "QuanLyDonHang")" class="dropdown-item">
                                                 Đơn hàng của tôi
                                             </a>
-                                            <a href="#" class="dropdown-item">
+                                            <a href="@Url.Action("Index", "UserHome")" class="dropdown-item">
                                                 Thông tin tài khoản
                                             </a>
                                             <a href="@Url.Action("LogOut", "Login")" class="dropdown-item">

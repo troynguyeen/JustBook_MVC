@@ -16,7 +16,7 @@
                         <input class="center-block" type="email" id="email" name="Email" placeholder="Enter Email" required style="width: 500px ; height: 50px;"><br><br>
                         <input class="center-block" type="password" id="pass" name="MatKhau" placeholder="Enter Password" required style="width: 500px; height: 50px;"><br>
                         <label style="color: red; padding-bottom: 20px;">@Html.DisplayFor(model => model.LoginErrorMessage)</label>
-                        <p> Don't have an account?<a href="../Register"> Click here</a></p><br>
+                        <p> Don't have an account?<a href="@Url.Action("Index", "Register")"> Click here</a></p><br>
                         <button class="subscribr_bt" style="width: 100%;">Sign In</button><br><br><br><br>
                     </form>
                     }
