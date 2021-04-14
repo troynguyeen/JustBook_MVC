@@ -114,6 +114,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="css\user_home.css" />
     <Content Include="css\admin_home.css" />
     <Content Include="css\animate.min.css" />
     <Content Include="css\bootstrap.min.css" />
@@ -234,6 +235,7 @@
     <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="Controllers\QuanLyDonHangController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
+    <Compile Include="Controllers\UserHomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -316,6 +318,7 @@
     <Content Include="Views\Books\Detail.cshtml" />
     <Content Include="Views\QuanLyDonHang\CustomerTrack.cshtml" />
     <Content Include="Views\ManageProduct\Index.cshtml" />
+    <Content Include="Views\UserHome\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
