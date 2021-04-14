@@ -124,13 +124,11 @@
     <Content Include="css\nice-select.css" />
     <Content Include="css\normalize.css" />
     <Content Include="css\owl.carousel.min.css" />
-    <Content Include="css\quanlydonhang.css" />
     <Content Include="css\responsive.css" />
     <Content Include="css\slick.css" />
     <Content Include="css\StyleAD.css" />
     <Content Include="css\StyleAdd.css" />
     <Content Include="css\styles.css" />
-    <Content Include="css\style_JustBook.css" />
     <Content Include="css\tracking.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
