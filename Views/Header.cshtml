@@ -27,8 +27,10 @@
     <link href="~/css/detail.css" rel="stylesheet" />
     <link href="~/css/slick.css" rel="stylesheet" />
     <link href="~/css/tracking.css" rel="stylesheet" />
-    <link href="~/css/admin_home.css" rel="stylesheet" />
-    <link href="~/css/user_home.css" rel="stylesheet" />
+    <link href="~/css/admin_account.css" rel="stylesheet" />
+    <link href="~/css/user_account.css" rel="stylesheet" />
+    <link href="~/css/user_order_history.css" rel="stylesheet" />
+    <link href="~/css/admin_order_manage.css" rel="stylesheet" />
     <!-- Responsive-->
     <link rel="stylesheet" href="~/css/responsive.css">
     <!-- Scrollbar Custom CSS -->
@@ -116,7 +118,7 @@
                                             </a>
                                             <a href="@Url.Action("Index", "Register")" class="itemLogin dropdown-item">
                                                 Tạo tài khoản
-                                            </a>                                                           
+                                            </a>
                                         </div>
                                     </div>
                                 }
@@ -131,8 +133,12 @@
                                             </div>
                                         </div>
                                         <div class="dropdown-menu" aria-labelledby="loginMenu">
-                                            <a href="@Url.Action("Index", "QuanLyDonHang")" class="dropdown-item">
+                                            <a href="@Url.Action("OrderHistory", "UserHome")" class="dropdown-item">
                                                 Đơn hàng của tôi
+                                            </a>
+                                            <a href="@Url.Action("Notification", "UserHome")" class="dropdown-item">
+                                                Thông báo của tôi
+                                                <span class="badge" style="background-color: red;">11</span>
                                             </a>
                                             <a href="@Url.Action("Index", "UserHome")" class="dropdown-item">
                                                 Thông tin tài khoản

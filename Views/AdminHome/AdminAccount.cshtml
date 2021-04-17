@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Thông tin tài khoản | Admin";
     Layout = "~/Views/Header.cshtml";
 }
 
@@ -11,26 +11,26 @@
             <span class="fa fa-home"></span>
             <span class="sidebar-item-title">Trang chủ</span>
         </a>
-        <a class="sidebar-item" href="@Url.Action("ThongTinAdmin", "AdminHome")">
+        <a class="sidebar-item" href="@Url.Action("AdminAccount", "AdminHome")">
             <span class="fa fa-user-alt"></span>
             <span class="sidebar-item-title">Thông tin tài khoản</span>
         </a>
-        <a class="sidebar-item" href="#">
+        <a class="sidebar-item" href="@Url.Action("AdminNotification", "AdminHome")">
             <span class="fas fa-bell"></span>
             <span class="sidebar-item-title">Thông báo của tôi</span>
         </a>
-        <a class="sidebar-item" href="#">
+        <a class="sidebar-item" href="@Url.Action("OrderManagement", "AdminHome")">
             <span class="fa fa-address-card"></span>
             <span class="sidebar-item-title">Quản lý đơn hàng</span>
         </a>
-        <a class="sidebar-item" href="#">
+        <a class="sidebar-item" href="ProductManagement">
             <span class="fas fa-tags"></span>
             <span class="sidebar-item-title">Quản lý sản phẩm</span>
         </a>
     </div>
-    <div class="content-user">
-        <div class="user-accont">
-            <div class="user-title-accont">THÔNG TIN TÀI KHOẢN</div>
+    <div class="content-admin">
+        <div class="admin-account">
+            <div class="admin-title-account">THÔNG TIN TÀI KHOẢN</div>
             <div class="from_row">
                 <label style="margin-right: 50px;">Họ tên</label>
                 <input class="from__input" type="text" id="hoten" name="hoten" size="38" placeholder="Họ Tên" style="width: 300px;">
