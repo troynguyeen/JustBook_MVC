@@ -6,9 +6,9 @@ using System.Web.Mvc;
 
 namespace JustBook.Controllers
 {
-    public class GDadminController : Controller
+    public class UserHomeController : Controller
     {
-        // GET: GDadmin
+        // GET: UserHome
         public ActionResult Index()
         {
             return View();
