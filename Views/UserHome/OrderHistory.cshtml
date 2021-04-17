@@ -29,6 +29,7 @@
         <a class="sidebar-item" href="@Url.Action("Notification", "UserHome")">
             <span class="fas fa-bell"></span>
             <span class="sidebar-item-title">Thông báo của tôi</span>
+            <span class="badge" style="background-color: red;">11</span>
         </a>
         <a class="sidebar-item" href="@Url.Action("OrderHistory", "UserHome")">
             <span class="fa fa-address-card"></span>
@@ -41,7 +42,7 @@
             <div class="top-state">
                 <span class="column-state">
                     <div class="title-column-state">Mã đơn hàng</div>
-                    <div><a href="#">DH001</a></div>
+                    <div><a href="@Url.Action("TrackingState", "UserHome")">DH001</a></div>
                 </span>
                 <span class="column-state" style="padding-left: 10px;">
                     <div class="title-column-state">Ngày mua</div>
@@ -92,7 +93,7 @@
                         MaDH += i;
                         GiaTien *= i;
                         <tr class="order-rows">
-                            <td><a href="#">@MaDH</a></td>
+                            <td><a href="@Url.Action("Index", "Payment")">@MaDH</a></td>
                             <td>@DateTime.Now.ToString("d")</td>
                             <td>Sản phẩm @i</td>
                             <td>@GiaTien VND</td>

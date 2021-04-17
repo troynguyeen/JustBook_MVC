@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace JustBook.Controllers
 {
-    public class ManageProductController : Controller
+    public class AddProductController : Controller
     {
         // GET: ManageProduct
         public ActionResult Index()

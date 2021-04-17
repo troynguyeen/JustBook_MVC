@@ -33,5 +33,11 @@ namespace JustBook.Controllers
         {
             return View();
         }
+
+        public ActionResult AddProduct()
+        {
+            return View();
+        }
+
     }
 }
