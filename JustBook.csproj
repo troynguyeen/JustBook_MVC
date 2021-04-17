@@ -114,6 +114,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="css\add_product.css" />
     <Content Include="css\admin_account.css" />
     <Content Include="css\admin_order_manage.css" />
     <Content Include="css\animate.min.css" />
@@ -231,7 +232,7 @@
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
-    <Compile Include="Controllers\ManageProductController.cs" />
+    <Compile Include="Controllers\AddProductController.cs" />
     <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Controllers\UserHomeController.cs" />
@@ -314,13 +315,14 @@
     <Content Include="Views\Books\Detail.cshtml" />
     <Content Include="Views\AdminHome\AdminAccount.cshtml" />
     <Content Include="Views\UserHome\Index.cshtml" />
-    <Content Include="Views\ManageProduct\Index.cshtml" />
+    <Content Include="Views\AddProduct\Index.cshtml" />
     <Content Include="Views\UserHome\OrderHistory.cshtml" />
     <Content Include="Views\UserHome\TrackingState.cshtml" />
     <Content Include="Views\AdminHome\OrderManagement.cshtml" />
     <Content Include="Views\AdminHome\ProductManagement.cshtml" />
     <Content Include="Views\AdminHome\AdminNotification.cshtml" />
     <Content Include="Views\UserHome\Notification.cshtml" />
+    <Content Include="Views\AdminHome\AddProduct.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

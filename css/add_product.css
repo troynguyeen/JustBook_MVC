@@ -1,0 +1,7 @@
+.content-add-product {
+    display: flex;
+    height: auto;
+    background-color: rgb(239, 239, 239);
+    margin: 50px 0;
+    justify-content: center;
+}
