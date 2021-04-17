@@ -4,6 +4,16 @@
     Layout = "~/Views/Header.cshtml";
 }
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./StyleAdd.css">
+    <link rel="stylesheet" href="./admin_home.css">
+</head>
 <body>
 
     <div class="page-admin">
@@ -29,68 +39,53 @@
         <div class="content-admin">
             <div class="card-todolist">
                 <h2 class="hending">Thêm sản phẩm</h2>
-                <form action="" class="fromadd">
-                    <div class="rowsp">
-                        <div class="col">
-                            <label class="text_label ">Mã sản phẩm</label>
+                <form action="" class="fromadd_01">
+                    <div class="rowsp_01">
+                        <div class="col_01">
+                            <label class="text_label_01 ">Mã sản phẩm</label>
                             <input type="text" placeholder="Nhập mã sản phẩm" class="text_input "><span>(*)</span>
                         </div>
 
                     </div>
 
-                    <div class="rowsp">
-                        <div class="col">
-                            <label class="text_label mt">Tên sản phẩm</label>
+                    <div class="rowsp_01">
+                        <div class="col_01">
+                            <label class="text_label_01 mt_01">Tên sản phẩm</label>
                             <input type="text" placeholder="Nhập tên sản phẩm" class="text_input "><span>(*)</span>
                         </div>
 
                     </div>
-                    <div class="rowsp">
-                        <div class="col">
-                            <label class="text_label mt">Danh mục</label>
+                    <div class="rowsp_01">
+                        <div class="col_01">
+                            <label class="text_label_01 mt_01">Danh mục</label>
                             <input type="text" placeholder="Nhập loại sách" class="text_input">
                         </div>
 
                     </div>
-                    <div class="rowsp">
-                        <div class="col">
-                            <label class="text_label mt">Tác giả</label>
+                    <div class="rowsp_01">
+                        <div class="col_01">
+                            <label class="text_label_01 mt_01">Tác giả</label>
                             <input type="text" placeholder="Nhập tên tác giả" class="text_input">
                         </div>
 
                     </div>
-                    <div class="rowsp">
-                        <div class="col">
-                            <label class="text_label mt">Đơn giá</label>
+                    <div class="rowsp_01">
+                        <div class="col_01">
+                            <label class="text_label_01 mt_01">Ngày xuất bảng</label>
+                            <input type="date" placeholder="dd/mm/yy" size="10" class="text_input_01">
+                        </div>
+
+                    </div>
+                    <div class="rowsp_01">
+                        <div class="col_01">
+                            <label class="text_label_01 mt_01">Đơn giá</label>
                             <input type="text" size="10" class="text_input_01"><samp>(VNđ)</samp>
                         </div>
 
                     </div>
-                    <div class="rowsp">
-                        <div class="col">
-                            <label class="text_label mt">Số lượng</label>
-                            <input type="text" size="3" class="text_input_01">
-                        </div>
-
-                    </div>
-                    <div class="rowsp">
-                        <div class="col">
-                            <label class="text_label mt">Kích thước</label>
-                            <input type="text" size="3" class="text_input_01"><samp>(cm)</samp>
-                        </div>
-
-                    </div>
-                    <div class="rowsp">
-                        <div class="col">
-                            <label class="text_label mt">Trọng lượng</label>
-                            <input type="text" size="3" class="text_input_01"><samp>(kg)</samp>
-                        </div>
-
-                    </div>
-
-                    <div class="rowsp ">
-                        <div class="col col_left">
-                            <label class="text_label mt">Loại bìa</label>
+                    <div class="rowsp_01 ">
+                        <div class="col_01 col_left">
+                            <label class="text_label_01 mt_01">Loại bìa</label>
                             <select name="lb" class="Lbia">
                                 <option value="1">Bìa cứng</option>
                                 <option value="2">Bìa mềm</option>
@@ -99,16 +94,10 @@
                         </div>
 
                     </div>
-                    <div class="rowsp">
-                        <div class="col">
-                            <label class="text_label mt">Ngày xuất bảng</label>
-                            <input type="date" placeholder="dd/mm/yy" size="10" class="text_input_01">
-                        </div>
 
-                    </div>
-                    <div class="rowsp ">
-                        <div class="col col_left">
-                            <label class="text_label mt">Trạng thái</label>
+                    <div class="rowsp_01 ">
+                        <div class="col_01 col_left">
+                            <label class="text_label_01 mt_01">Trạng thái</label>
                             <select name="lb" class="Lbia">
                                 <option value="1">Còn hàng</option>
                                 <option value="2">Hết hàng</option>
@@ -116,16 +105,43 @@
 
                         </div>
                     </div>
-                    <div class="rowsp">
-                        <div class="col ">
-                            <label class="text_label mt" >Hình ảnh</label>
-                            <input type="file" name="image" class="input_img" style="display:inline-block">
+                    <div class="rowsp_01">
+                        <div class="col_01">
+                            <label class="text_label_01 mt_01">Số lượng</label>
+                            <input type="text" size="5" class="text_input_01">
                         </div>
 
                     </div>
-                    <div class="rowsp">
-                        <div class="col col_left">
-                            <label class="text_label mt">Mô tả</label>
+                    <div class="rowsp_01">
+                        <div class="col_01">
+                            <label class="text_label_01 mt_01">Kích thước</label>
+                            <input type="text" size="5" class="text_input_01"><samp>(cm)</samp>
+                        </div>
+
+                    </div>
+                    <div class="rowsp_01">
+                        <div class="col_01">
+                            <label class="text_label_01 mt_01">Trọng lượng</label>
+                            <input type="text" size="5" class="text_input_01"><samp>(kg)</samp>
+                        </div>
+
+                    </div>
+
+
+                    <div class="rowsp_01">
+                        <div class="col_01 ">
+                            <label class="text_label_01 mt_01">Hình ảnh</label>
+                            <input type="file" name="image" class="input_img_01" id="image">
+                            <div class="image_aria " id="image_aria">
+                                <img src="" alt="anhSP" class="anh">
+                                <span class="them_image">Hình đại diện sách</span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="rowsp_01">
+                        <div class="col_01 col_len">
+                            <label class="text_label_01 mt_01">Mô tả</label>
                             <textarea name="" placeholder="Tóm tắt nội dung sách" cols="70" rows="10" class="aria"></textarea>
                         </div>
 
@@ -135,12 +151,39 @@
 
                     <div class="kcach">
                         <input type="submit" value="Thêm sản phẩm" class="add_btn">
-                        <input type="reset" value="Nhập lại" class="xoa_btn" style="text-align:center">
-                        <a href="" class="DS_btn">Danh sách</a>
+                        <input type="reset" value="Nhập lại" class="xoa_btn">
+                        <a href="" class="DS_btn_01">Danh sách</a>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-</body>
 
+    <script>
+    const image = document.getElementById("image");
+    const vunganh = document.getElementById("image_aria");
+    const anh = vunganh.querySelector(".anh");
+    const anhtext = vunganh.querySelector(".them_image");
+
+    image.addEventListener("change",function(){
+        const file = this.files[0];
+
+        if(file){
+            const reader =new FileReader();
+
+            anhtext.style.display ="none";
+            anh.style.display ="block";
+
+            reader.addEventListener("load",function(){
+                console.log(this);
+                anh.setAttribute("src",this.result);
+            });
+
+            reader.readAsDataURL(file);
+
+        }
+    });
+    </script>
+
+</body>
+</html>
