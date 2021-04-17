@@ -8,7 +8,7 @@ namespace JustBook.Controllers
 {
     public class ManageProductController : Controller
     {
-        // GET: AddProduct
+        // GET: ManageProduct
         public ActionResult Index()
         {
             return View();
