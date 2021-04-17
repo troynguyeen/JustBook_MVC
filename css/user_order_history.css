@@ -7,6 +7,7 @@
 
 .content-user {
     display: flex;
+    flex-direction: column;
     height: auto;
     background-color: rgb(239, 239, 239);
     margin: 50px 0;
@@ -94,16 +95,45 @@
     padding-bottom: 10px;
 }
 
-.user-title-accont {
+.user-title-account {
     text-align: center;
     padding: 20px;
     font-size: 20px;
     font-weight: bold;
 }
 
-.user-accont {
+.user-table {
     background-color: #FFF;
     width: auto;
     margin: 20px 0;
-    padding: 20px 150px;
+}
+
+.user-state-order {
+    background-color: #FFF;
+    width: auto;
+    padding: 20px;
+}
+
+.progress-state {
+    display: flex;
+    align-items: baseline;
+}
+
+.column-state {
+    border-right: 1px solid rgb(244, 244, 244);
+    padding-right: 10px;
+}
+
+.top-state {
+    display: flex;
+    padding-bottom: 20px;
+}
+
+.title-column-state {
+    font-size: 17px;
+    color: rgb(102, 102, 102);
+}
+
+.order-rows:hover {
+    background-color: rgb(240, 240, 240);
 }

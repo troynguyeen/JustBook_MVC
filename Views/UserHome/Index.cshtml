@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Thông tin tài khoản | JustBook";
     Layout = "~/Views/Header.cshtml";
 }
 
@@ -11,18 +11,18 @@
             <span class="fa fa-user-alt"></span>
             <span class="sidebar-item-title">Thông tin tài khoản</span>
         </a>
-        <a class="sidebar-item" href="#">
+        <a class="sidebar-item" href="@Url.Action("Notification", "UserHome")">
             <span class="fas fa-bell"></span>
             <span class="sidebar-item-title">Thông báo của tôi</span>
         </a>
-        <a class="sidebar-item" href="#">
+        <a class="sidebar-item" href="@Url.Action("OrderHistory", "UserHome")">
             <span class="fa fa-address-card"></span>
             <span class="sidebar-item-title">Quản lý đơn hàng</span>
         </a>
     </div>
     <div class="content-user">
-        <div class="user-accont">
-            <div class="user-title-accont">THÔNG TIN TÀI KHOẢN</div>
+        <div class="user-account">
+            <div class="user-title-account">THÔNG TIN TÀI KHOẢN</div>
             <div class="from_row">
                 <label style="margin-right: 50px;">Họ tên</label>
                 <input class="from__input" type="text" id="hoten" name="hoten" size="38" placeholder="Họ Tên" style="width: 300px;">

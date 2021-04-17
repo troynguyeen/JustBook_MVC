@@ -114,7 +114,8 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
-    <Content Include="css\admin_home.css" />
+    <Content Include="css\admin_account.css" />
+    <Content Include="css\admin_order_manage.css" />
     <Content Include="css\animate.min.css" />
     <Content Include="css\bootstrap.min.css" />
     <Content Include="css\detail.css" />
@@ -132,7 +133,8 @@
     <Content Include="css\style_JustBook.css" />
     <Content Include="css\ThongTin_AD.css" />
     <Content Include="css\tracking.css" />
-    <Content Include="css\user_home.css" />
+    <Content Include="css\user_account.css" />
+    <Content Include="css\user_order_history.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="icon\cash_payment.svg" />
@@ -230,10 +232,9 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ManageProductController.cs" />
-    <Compile Include="Controllers\OrderHistoryController.cs" />
     <Compile Include="Controllers\PaymentController.cs" />
-    <Compile Include="Controllers\QuanLyDonHangController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
+    <Compile Include="Controllers\UserHomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -307,15 +308,19 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
-    <Content Include="Views\OrderHistory\Index.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
-    <Content Include="Views\QuanLyDonHang\Index.cshtml" />
     <Content Include="Views\AdminHome\Index.cshtml" />
-    <Content Include="Views\GDadmin\Index.cshtml" />
     <Content Include="Views\Register\Index.cshtml" />
     <Content Include="Views\Books\Detail.cshtml" />
-    <Content Include="Views\QuanLyDonHang\CustomerTrack.cshtml" />
+    <Content Include="Views\AdminHome\AdminAccount.cshtml" />
+    <Content Include="Views\UserHome\Index.cshtml" />
     <Content Include="Views\ManageProduct\Index.cshtml" />
+    <Content Include="Views\UserHome\OrderHistory.cshtml" />
+    <Content Include="Views\UserHome\TrackingState.cshtml" />
+    <Content Include="Views\AdminHome\OrderManagement.cshtml" />
+    <Content Include="Views\AdminHome\ProductManagement.cshtml" />
+    <Content Include="Views\AdminHome\AdminNotification.cshtml" />
+    <Content Include="Views\UserHome\Notification.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

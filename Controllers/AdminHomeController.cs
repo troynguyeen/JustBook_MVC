@@ -14,7 +14,22 @@ namespace JustBook.Controllers
             return View();
         }
 
-        public ActionResult ThongTinAdmin()
+        public ActionResult AdminAccount()
+        {
+            return View();
+        }
+
+        public ActionResult AdminNotification()
+        {
+            return View();
+        }
+
+        public ActionResult OrderManagement()
+        {
+            return View();
+        }
+
+        public ActionResult ProductManagement()
         {
             return View();
         }

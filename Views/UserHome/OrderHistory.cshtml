@@ -1,0 +1,134 @@
+﻿
+@{
+    ViewBag.Title = "Đơn hàng của tôi | JustBook";
+    Layout = "~/Views/Header.cshtml";
+}
+
+<style>
+    table, td, th {
+        border-bottom: 1px solid rgb(244, 244, 244);
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 20px;
+    }
+</style>
+
+<div class="page-admin">
+    <div class="sidebar-admin">
+        <div class="sidebar-title">DANH SÁCH CHỨC NĂNG</div>
+        <a class="sidebar-item" href="@Url.Action("Index", "UserHome")">
+            <span class="fa fa-user-alt"></span>
+            <span class="sidebar-item-title">Thông tin tài khoản</span>
+        </a>
+        <a class="sidebar-item" href="@Url.Action("Notification", "UserHome")">
+            <span class="fas fa-bell"></span>
+            <span class="sidebar-item-title">Thông báo của tôi</span>
+        </a>
+        <a class="sidebar-item" href="@Url.Action("OrderHistory", "UserHome")">
+            <span class="fa fa-address-card"></span>
+            <span class="sidebar-item-title">Quản lý đơn hàng</span>
+        </a>
+    </div>
+    <div class="content-user">
+        <div class="admin-title-account" style="font-size: 18px;">ĐƠN HÀNG CỦA TÔI</div>
+        <div class="user-state-order">
+            <div class="top-state">
+                <span class="column-state">
+                    <div class="title-column-state">Mã đơn hàng</div>
+                    <div><a href="#">DH001</a></div>
+                </span>
+                <span class="column-state" style="padding-left: 10px;">
+                    <div class="title-column-state">Ngày mua</div>
+                    <div>@DateTime.Now.ToString("d")</div>
+                </span>
+                <span class="column-state" style="padding-left: 10px; border: none;">
+                    <div class="title-column-state">Tổng tiền</div>
+                    <div>79.000đ</div>
+                </span>
+            </div>
+            <div>
+                <div style="font-size: 23px; color: rgb(102, 102, 102); padding-bottom: 10px;">Dự kiến giao vào Thứ Ba, @DateTime.Now.ToString("d")</div>
+                <div class="progress-state">
+                    <div class="progress" style="width: 650px; height: 10px; margin-bottom: 5px;">
+                        <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <a href="@Url.Action("TrackingState", "UserHome")">
+                        <button class="btn btn-warning" style="font-weight: bold; color: #000; margin-left: 50px">Theo dõi chi tiết</button>
+                    </a>
+                </div>
+                <div style="color: #28a745; padding-bottom: 20px;">Đặt hàng thành công</div>
+            </div>
+            <div style="display: flex; width: 400px; padding-bottom: 10px;">
+                <img src="~/images/cart_dungluachonannhan.jpg" alt="dungluachonannhan" width="100" height="100">
+                <div>
+                    <p style="font-size: 16px; color: rgb(102, 102, 102);">Đừng Lựa Chọn An Nhàn Khi Còn Trẻ và 2 sản phẩm khác</p>
+                    <div>57.200đ</div>
+                    <div>Số lượng: 1</div>
+                </div>
+            </div>
+        </div>
+        <div class="user-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Mã đơn hàng</th>
+                        <th>Ngày mua</th>
+                        <th>Sản phẩm</th>
+                        <th>Giá tiền</th>
+                        <th>Trạng thái đơn hàng</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 1; i < 12; i++)
+                    {
+                        string MaDH = "DH0";
+                        int GiaTien = 10000;
+                        MaDH += i;
+                        GiaTien *= i;
+                        <tr class="order-rows">
+                            <td><a href="#">@MaDH</a></td>
+                            <td>@DateTime.Now.ToString("d")</td>
+                            <td>Sản phẩm @i</td>
+                            <td>@GiaTien VND</td>
+
+                            @if (i % 2 == 0)
+                            {
+                                <td>Đang giao hàng</td>
+                            }
+                            else
+                            {
+                                <td>Đã giao hàng thành công</td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+

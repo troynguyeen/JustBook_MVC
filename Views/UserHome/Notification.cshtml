@@ -1,0 +1,91 @@
+﻿
+@{
+    ViewBag.Title = "Thông báo của tôi | JustBook";
+    Layout = "~/Views/Header.cshtml";
+}
+
+<style>
+    table, td, th {
+        border-bottom: 1px solid #dcdcdc;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 15px;
+    }
+</style>
+
+<div class="page-admin">
+    <div class="sidebar-admin">
+        <div class="sidebar-title">DANH SÁCH CHỨC NĂNG</div>
+        <a class="sidebar-item" href="@Url.Action("Index", "UserHome")">
+            <span class="fa fa-user-alt"></span>
+            <span class="sidebar-item-title">Thông tin tài khoản</span>
+        </a>
+        <a class="sidebar-item" href="@Url.Action("Notification", "UserHome")">
+            <span class="fas fa-bell"></span>
+            <span class="sidebar-item-title">Thông báo của tôi</span>
+            <span class="badge" style="background-color: red;">11</span>
+        </a>
+        <a class="sidebar-item" href="@Url.Action("OrderHistory", "UserHome")">
+            <span class="fa fa-address-card"></span>
+            <span class="sidebar-item-title">Quản lý đơn hàng</span>
+        </a>
+    </div>
+    <div class="content-admin-order" style="width: 40%;">
+        <div style="font-size: 18px; font-weight: bold; text-align: center">THÔNG BÁO CỦA TÔI</div>
+        <div class="admin-orderlist">
+            <div class="orderlist-table">
+                <table>
+                    <thead>
+                    </thead>
+                    <tbody>
+                        @for (int i = 1; i < 12; i++)
+                        {
+                            string MaDH = "DH0";
+                            int GiaTien = 10000;
+                            MaDH += i;
+                            GiaTien *= i;
+                            <tr class="order-rows">
+                                <td>@DateTime.Now.ToString("d")</td>
+                                <td style="font-size: 12px">
+                                    Đơn hàng <a href="#">#@MaDH</a>
+                                    đã sẵn sàng để giao đến quý khách.
+                                    Đơn hàng sẽ được giao trước 23:59 ngày @DateTime.Now.ToString("d")
+                                    <a href="@Url.Action("OrderHistory", "UserHome")"> Chi tiết</a>
+                                </td>
+                                <td style="width: 150px;"><a href="#">Đánh dấu đã đọc</a></td>
+                                <td style="width: 100px;"><a href="#" style="color: rgb(255, 66, 78);">Xóa</a></td>
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div>
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+

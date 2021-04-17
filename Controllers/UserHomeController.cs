@@ -13,5 +13,21 @@ namespace JustBook.Controllers
         {
             return View();
         }
+
+        public ActionResult Notification()
+        {
+            return View();
+        }
+
+        public ActionResult OrderHistory()
+        {
+            return View();
+        }
+
+        public ActionResult TrackingState()
+        {
+            return View();
+        }
+
     }
 }
