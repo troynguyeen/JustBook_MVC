@@ -5,7 +5,7 @@
 }
 
 <!--Giao diện chính-->
-<div class="display">
+<div class="page-admin">
     <!--Giao diện chính bên trái-->
     <div class="sidebar-admin">
         <div class="sidebar-title">DANH SÁCH CHỨC NĂNG</div>
@@ -28,31 +28,31 @@
     </div>
     <!--Giao diện chính bên phải-->
     <div class="display_right">
-        <h2 class="h2_name">Thông tin tài khoản</h2><br>
+        <h2 class="h2_name">Thông tin tài khoản</h2>
         <div class="ThongtinTK">
             <form action="/action_page.php">
                 <div class="from_row">
-                    <label for="hoten">Họ tên</label>
-                    <input class="from__input" type="text" id="hoten" name="hoten" size="38" placeholder="Họ Tên"><br><br>
+                    <label class="lb__name" for="hoten" d>Họ tên</label>
+                    <input class="from__input" type="text" id="hoten" name="hoten" size="40" placeholder="Họ Tên"><br><br>
                 </div>
                 <div class="from_row">
-                    <label for="sdt">Số điện thoại</label>
-                    <input class="from__input" type="text" id="sdt" name="sdt" size="38" placeholder="Hãy nhập số điện thoại để trải nghiệm tốt hơn"><br><br>
+                    <label class="lb__name" for="sdt">Số điện thoại</label>
+                    <input class="from__input" type="text" id="sdt" name="sdt" size="40" placeholder="Hãy nhập số điện thoại để trải nghiệm tốt hơn"><br><br>
                 </div>
                 <div class="from_row">
-                    <label for="email">Email</label>
-                    <input class="from__input" type="email" id="email" name="email" size="38" placeholder="Nhập địa chỉ email của bạn"><br><br>
+                    <label class="lb__name" for="email">Email</label>
+                    <input class="from__input" type="email" id="email" name="email" size="40   " placeholder="Nhập địa chỉ email của bạn"><br><br>
                 </div>
                 <div class="from_row">
-                    <label for="gioitinh">Giới tính</label>
+                    <label class="lb__name" for="gioitinh">Giới tính</label>
                     <input type="radio" id="nam" name="gender" value="nam">
-                    <label class="lb_giotinh" for="nam">Nam</label>
+                    <label class="lb_giotinh lb__name" for="nam">Nam</label>
                     <input type="radio" id="nu" name="gender" value="nu">
-                    <label class="lb_giotinh" for="nu">Nữ</label><br><br>
+                    <label class="lb_giotinh lb__name" for="nu">Nữ</label><br><br>
                 </div>
                 <div class="from_row">
-                    <label for="ngaysinh">Ngày sinh</label>
-                    <select name="day" id="">
+                    <label class="lb__name" for="ngaysinh">Ngày sinh</label>
+                    <select name="day" id="" class="lb__ng lb__name">
                         <option value="0">Ngày</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -86,7 +86,7 @@
                         <option value="30">30</option>
                         <option value="31">31</option>
                     </select>
-                    <select name="month" id="" class="select_ns">
+                    <select name="month" id="" class="select_ns lb__name">
                         <option value="0">Tháng</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -101,7 +101,7 @@
                         <option value="11">11</option>
                         <option value="12">12</option>
                     </select>
-                    <select name="year" id="" class="select_ns">
+                    <select name="year" id="" class="select_ns lb__name">
                         <option value="0">Năm</option>
                         <option value="2021">2021</option>
                         <option value="2020">2020</option>

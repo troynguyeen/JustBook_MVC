@@ -1,0 +1,570 @@
+﻿
+@{
+    ViewBag.Title = "Books_Page3";
+    Layout = "~/Views/Header.cshtml";
+}
+
+<div class="app__container">
+    <div class="grid">
+        <div class="grid__row app__content">
+            <div class="grid__column-2">
+                <nav class="category">
+                    <h3 class="category__heading">
+                        <i class="category__heading-icon fas fa-list"></i>
+                        Danh mục
+                    </h3>
+
+                    <ul class="category-list">
+                        <li class="category-item category-item--active">
+                            <a href="#" class="category-item__link">Sách Lập Trình</a>
+                        </li>
+                        <li class="category-item">
+                            <a href="#" class="category-item__link">Sách Văn Học</a>
+                        </li>
+                        <li class="category-item">
+                            <a href="#" class="category-item__link">Sách Tiếng Anh</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="grid__column-10">
+                <div class="home-filter">
+                    <span class="home-filter__label">Sắp xếp theo</span>
+                    <button class="home-filter__btn btn">Phổ biến</button>
+                    <button class="home-filter__btn btn btn--primary">Mới nhất</button>
+                    <button class="home-filter__btn btn">Bán chạy</button>
+
+                    <div class="select-input">
+                        <span class="select-input__label">Giá</span>
+                        <i class="select-input__icon fas fa-angle-down"></i>
+
+                        <!-- List options -->
+                        <ul class="select-input__list">
+                            <li class="select-input__item">
+                                <a href="" class="select-input__link">Giá: Thấp đến cao</a>
+                            </li>
+                            <li class="select-input__item">
+                                <a href="" class="select-input__link">Giá: Cao đến thấp</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="home-filter__page">
+                        <span class="home-filter__page-num">
+                            <span class="home-filter__page-current">1</span>
+                            /7
+                        </span>
+
+                        <div class="home-filter__page-control">
+                            <a href="" class="home-filter__page-btn home-filter__page-btn--disabled">
+                                <i class="home-filter__page-icon fas fa-angle-left"></i>
+                            </a>
+                            <a href="" class="home-filter__page-btn">
+                                <i class="home-filter__page-icon fas fa-angle-right"></i>
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="home-product">
+                    <div class="grid__row">
+                        <div class="grid__column-2-4">
+                            <!-- Product item -->
+                            <a class="home-product-item" href="#">
+                                <div class="home-product-item__img" style="background-image: url(//product.hstatic.net/200000211451/product/ac98dc18-cb09-4166-97ec-dd19e96d75e5_3a3a679fd11f41238f62828b0e815db0_large.jpg);"></div>
+                                <h4 class="home-product-item__name">Python Crash Course (2nd Edition)</h4>
+                                <div class="home-product-item__price">
+                                    <span class="home-product-item__price-old">1.690.000đ</span>
+                                    <span class="home-product-item__price-current">1.521.000đ</span>
+                                </div>
+                                <div class="home-product-item__action">
+                                    <span class="home-product-item__link home-product-item__link--linked">
+                                        <i class="home-product-item__link-icon-empty far fa-heart"></i>
+                                        <i class="home-product-item__link-icon-fill fas fa-heart"></i>
+                                    </span>
+                                    <div class="home-product-item__rating">
+                                        <i class="home-product-item__star--gold fas fa-star"></i>
+                                        <i class="home-product-item__star--gold fas fa-star"></i>
+                                        <i class="home-product-item__star--gold fas fa-star"></i>
+                                        <i class="home-product-item__star--gold fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <span class="home-product-item__sold">11 đã bán</span>
+                                </div>
+                                <div class="home-product-item__origin">
+                                    <span class="home-product-item__brand">Whoo</span>
+                                    <span class="home-product-item__origin-name">Nhật Bản</span>
+                                </div>
+                                <div class="home-product-item__favourite">
+                                    <i class="fas fa-check"></i>
+                                    <span>Yêu thích</span>
+                                </div>
+                                <div class="home-product-item__sale-off">
+                                    <span class="home-product-item__sale-off-percent">10%</span>
+                                    <span class="home-product-item__sale-off-label">GIẢM</span>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="grid__column-2-4">
+                            <!-- Product item -->
+                            <a class="home-product-item" href="#">
+                                <div class="home-product-item__img" style="background-image: url(//product.hstatic.net/200000211451/product/56ce2de3-ddca-4614-86e2-46913f3676b7_c5e7652d471248fba262b3e731d29ff1_large.jpg);"></div>
+                                <h4 class="home-product-item__name">Python Crash Course (2nd Edition)</h4>
+                                <div class="home-product-item__price">
+                                    <span class="home-product-item__price-old">1.690.000đ</span>
+                                    <span class="home-product-item__price-current">1.521.000đ</span>
+                                </div>
+                                <div class="home-product-item__action">
+                                    <span class="home-product-item__link home-product-item__link--linked">
+                                        <i class="home-product-item__link-icon-empty far fa-heart"></i>
+                                        <i class="home-product-item__link-icon-fill fas fa-heart"></i>
+                                    </span>
+                                    <div class="home-product-item__rating">
+                                        <i class="home-product-item__star--gold fas fa-star"></i>
+                                        <i class="home-product-item__star--gold fas fa-star"></i>
+                                        <i class="home-product-item__star--gold fas fa-star"></i>
+                                        <i class="home-product-item__star--gold fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <span class="home-product-item__sold">11 đã bán</span>
+                                </div>
+                                <div class="home-product-item__origin">
+                                    <span class="home-product-item__brand">Whoo</span>
+                                    <span class="home-product-item__origin-name">Nhật Bản</span>
+                                </div>
+                                <div class="home-product-item__favourite">
+                                    <i class="fas fa-check"></i>
+                                    <span>Yêu thích</span>
+                                </div>
+                                <div class="home-product-item__sale-off">
+                                    <span class="home-product-item__sale-off-percent">10%</span>
+                                    <span class="home-product-item__sale-off-label">GIẢM</span>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="grid__column-2-4">
+                            <!-- Product item -->
+                            <a class="home-product-item" href="#">
+                                <div class="home-product-item__img" style="background-image: url(//product.hstatic.net/200000211451/product/0fcd07d5-5876-4fe5-8d5b-a1274dbfc731_0abdcac3020b4d38b0452d993a584f56_large.jpg);"></div>
+                                <h4 class="home-product-item__name">Python Crash Course (2nd Edition)</h4>
+                                <div class="home-product-item__price">
+                                    <span class="home-product-item__price-old">1.690.000đ</span>
+                                    <span class="home-product-item__price-current">1.521.000đ</span>
+                                </div>
+                                <div class="home-product-item__action">
+                                    <span class="home-product-item__link home-product-item__link--linked">
+                                        <i class="home-product-item__link-icon-empty far fa-heart"></i>
+                                        <i class="home-product-item__link-icon-fill fas fa-heart"></i>
+                                    </span>
+                                    <div class="home-product-item__rating">
+                                        <i class="home-product-item__star--gold fas fa-star"></i>
+                                        <i class="home-product-item__star--gold fas fa-star"></i>
+                                        <i class="home-product-item__star--gold fas fa-star"></i>
+                                        <i class="home-product-item__star--gold fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <span class="home-product-item__sold">11 đã bán</span>
+                                </div>
+                                <div class="home-product-item__origin">
+                                    <span class="home-product-item__brand">Whoo</span>
+                                    <span class="home-product-item__origin-name">Nhật Bản</span>
+                                </div>
+                                <div class="home-product-item__favourite">
+                                    <i class="fas fa-check"></i>
+                                    <span>Yêu thích</span>
+                                </div>
+                                <div class="home-product-item__sale-off">
+                                    <span class="home-product-item__sale-off-percent">10%</span>
+                                    <span class="home-product-item__sale-off-label">GIẢM</span>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="grid__column-2-4">
+                            <!-- Product item -->
+                            <a class="home-product-item" href="#">
+                                <div class="home-product-item__img" style="background-image: url(//product.hstatic.net/200000211451/product/48e16a5d-b90d-4146-aab3-bdb549e48222_96ba318aa500481fbffd8cf2c72c0419_large.jpg);"></div>
+                                <h4 class="home-product-item__name">Python Crash Course (2nd Edition)</h4>
+                                <div class="home-product-item__price">
+                                    <span class="home-product-item__price-old">1.690.000đ</span>
+                                    <span class="home-product-item__price-current">1.521.000đ</span>
+                                </div>
+                                <div class="home-product-item__action">
+                                    <span class="home-product-item__link home-product-item__link--linked">
+                                        <i class="home-product-item__link-icon-empty far fa-heart"></i>
+                                        <i class="home-product-item__link-icon-fill fas fa-heart"></i>
+                                    </span>
+                                    <div class="home-product-item__rating">
+                                        <i class="home-product-item__star--gold fas fa-star"></i>
+                                        <i class="home-product-item__star--gold fas fa-star"></i>
+                                        <i class="home-product-item__star--gold fas fa-star"></i>
+                                        <i class="home-product-item__star--gold fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <span class="home-product-item__sold">11 đã bán</span>
+                                </div>
+                                <div class="home-product-item__origin">
+                                    <span class="home-product-item__brand">Whoo</span>
+                                    <span class="home-product-item__origin-name">Nhật Bản</span>
+                                </div>
+                                <div class="home-product-item__favourite">
+                                    <i class="fas fa-check"></i>
+                                    <span>Yêu thích</span>
+                                </div>
+                                <div class="home-product-item__sale-off">
+                                    <span class="home-product-item__sale-off-percent">10%</span>
+                                    <span class="home-product-item__sale-off-label">GIẢM</span>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="grid__column-2-4">
+                            <!-- Product item -->
+                            <a class="home-product-item" href="#">
+                                <div class="home-product-item__img" style="background-image: url(//product.hstatic.net/200000211451/product/ecf6fb6f-8142-4e1a-a5b4-26d56cf3cfeb_fb1c028681424c7e9bafd51d0c4f8872_large.jpg);"></div>
+                                <h4 class="home-product-item__name">Python Crash Course (2nd Edition)</h4>
+                                <div class="home-product-item__price">
+                                    <span class="home-product-item__price-old">1.690.000đ</span>
+                                    <span class="home-product-item__price-current">1.521.000đ</span>
+                                </div>
+                                <div class="home-product-item__action">
+                                    <span class="home-product-item__link home-product-item__link--linked">
+                                        <i class="home-product-item__link-icon-empty far fa-heart"></i>
+                                        <i class="home-product-item__link-icon-fill fas fa-heart"></i>
+                                    </span>
+                                    <div class="home-product-item__rating">
+                                        <i class="home-product-item__star--gold fas fa-star"></i>
+                                        <i class="home-product-item__star--gold fas fa-star"></i>
+                                        <i class="home-product-item__star--gold fas fa-star"></i>
+                                        <i class="home-product-item__star--gold fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <span class="home-product-item__sold">11 đã bán</span>
+                                </div>
+                                <div class="home-product-item__origin">
+                                    <span class="home-product-item__brand">Whoo</span>
+                                    <span class="home-product-item__origin-name">Nhật Bản</span>
+                                </div>
+                                <div class="home-product-item__favourite">
+                                    <i class="fas fa-check"></i>
+                                    <span>Yêu thích</span>
+                                </div>
+                                <div class="home-product-item__sale-off">
+                                    <span class="home-product-item__sale-off-percent">10%</span>
+                                    <span class="home-product-item__sale-off-label">GIẢM</span>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="grid__column-2-4">
+                            <!-- Product item -->
+                            <a class="home-product-item" href="#">
+                                <div class="home-product-item__img" style="background-image: url(//product.hstatic.net/200000211451/product/bfe7ac00-3db8-4207-938c-b1a386ea1d3a_f874369bd1434bd3ab1e31fdea01f21a_large.jpg);"></div>
+                                <h4 class="home-product-item__name">Python Crash Course (2nd Edition)</h4>
+                                <div class="home-product-item__price">
+                                    <span class="home-product-item__price-old">1.690.000đ</span>
+                                    <span class="home-product-item__price-current">1.521.000đ</span>
+                                </div>
+                                <div class="home-product-item__action">
+                                    <span class="home-product-item__link home-product-item__link--linked">
+                                        <i class="home-product-item__link-icon-empty far fa-heart"></i>
+                                        <i class="home-product-item__link-icon-fill fas fa-heart"></i>
+                                    </span>
+                                    <div class="home-product-item__rating">
+                                        <i class="home-product-item__star--gold fas fa-star"></i>
+                                        <i class="home-product-item__star--gold fas fa-star"></i>
+                                        <i class="home-product-item__star--gold fas fa-star"></i>
+                                        <i class="home-product-item__star--gold fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <span class="home-product-item__sold">11 đã bán</span>
+                                </div>
+                                <div class="home-product-item__origin">
+                                    <span class="home-product-item__brand">Whoo</span>
+                                    <span class="home-product-item__origin-name">Nhật Bản</span>
+                                </div>
+                                <div class="home-product-item__favourite">
+                                    <i class="fas fa-check"></i>
+                                    <span>Yêu thích</span>
+                                </div>
+                                <div class="home-product-item__sale-off">
+                                    <span class="home-product-item__sale-off-percent">10%</span>
+                                    <span class="home-product-item__sale-off-label">GIẢM</span>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="grid__column-2-4">
+                            <!-- Product item -->
+                            <a class="home-product-item" href="#">
+                                <div class="home-product-item__img" style="background-image: url(//product.hstatic.net/200000211451/product/745a29ac-2ab5-431c-9829-d92581914655_5c8a910dff1a499db3f39e4edb4da067_large.jpg);"></div>
+                                <h4 class="home-product-item__name">Python Crash Course (2nd Edition)</h4>
+                                <div class="home-product-item__price">
+                                    <span class="home-product-item__price-old">1.690.000đ</span>
+                                    <span class="home-product-item__price-current">1.521.000đ</span>
+                                </div>
+                                <div class="home-product-item__action">
+                                    <span class="home-product-item__link home-product-item__link--linked">
+                                        <i class="home-product-item__link-icon-empty far fa-heart"></i>
+                                        <i class="home-product-item__link-icon-fill fas fa-heart"></i>
+                                    </span>
+                                    <div class="home-product-item__rating">
+                                        <i class="home-product-item__star--gold fas fa-star"></i>
+                                        <i class="home-product-item__star--gold fas fa-star"></i>
+                                        <i class="home-product-item__star--gold fas fa-star"></i>
+                                        <i class="home-product-item__star--gold fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <span class="home-product-item__sold">11 đã bán</span>
+                                </div>
+                                <div class="home-product-item__origin">
+                                    <span class="home-product-item__brand">Whoo</span>
+                                    <span class="home-product-item__origin-name">Nhật Bản</span>
+                                </div>
+                                <div class="home-product-item__favourite">
+                                    <i class="fas fa-check"></i>
+                                    <span>Yêu thích</span>
+                                </div>
+                                <div class="home-product-item__sale-off">
+                                    <span class="home-product-item__sale-off-percent">10%</span>
+                                    <span class="home-product-item__sale-off-label">GIẢM</span>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="grid__column-2-4">
+                            <!-- Product item -->
+                            <a class="home-product-item" href="#">
+                                <div class="home-product-item__img" style="background-image: url(//product.hstatic.net/200000211451/product/2626a0b1-7d87-4694-82fd-aa25e6b88861_785b8db1deed444096866e5e2b26a296_large.jpg);"></div>
+                                <h4 class="home-product-item__name">Python Crash Course (2nd Edition)</h4>
+                                <div class="home-product-item__price">
+                                    <span class="home-product-item__price-old">1.690.000đ</span>
+                                    <span class="home-product-item__price-current">1.521.000đ</span>
+                                </div>
+                                <div class="home-product-item__action">
+                                    <span class="home-product-item__link home-product-item__link--linked">
+                                        <i class="home-product-item__link-icon-empty far fa-heart"></i>
+                                        <i class="home-product-item__link-icon-fill fas fa-heart"></i>
+                                    </span>
+                                    <div class="home-product-item__rating">
+                                        <i class="home-product-item__star--gold fas fa-star"></i>
+                                        <i class="home-product-item__star--gold fas fa-star"></i>
+                                        <i class="home-product-item__star--gold fas fa-star"></i>
+                                        <i class="home-product-item__star--gold fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <span class="home-product-item__sold">11 đã bán</span>
+                                </div>
+                                <div class="home-product-item__origin">
+                                    <span class="home-product-item__brand">Whoo</span>
+                                    <span class="home-product-item__origin-name">Nhật Bản</span>
+                                </div>
+                                <div class="home-product-item__favourite">
+                                    <i class="fas fa-check"></i>
+                                    <span>Yêu thích</span>
+                                </div>
+                                <div class="home-product-item__sale-off">
+                                    <span class="home-product-item__sale-off-percent">10%</span>
+                                    <span class="home-product-item__sale-off-label">GIẢM</span>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="grid__column-2-4">
+                            <!-- Product item -->
+                            <a class="home-product-item" href="#">
+                                <div class="home-product-item__img" style="background-image: url(//product.hstatic.net/200000211451/product/fb06f2b1-f238-4458-8703-c9e4d5d83be7_e538c6cde6e54172b4dc1ad2dee51f99_large.jpg);"></div>
+                                <h4 class="home-product-item__name">Python Crash Course (2nd Edition)</h4>
+                                <div class="home-product-item__price">
+                                    <span class="home-product-item__price-old">1.690.000đ</span>
+                                    <span class="home-product-item__price-current">1.521.000đ</span>
+                                </div>
+                                <div class="home-product-item__action">
+                                    <span class="home-product-item__link home-product-item__link--linked">
+                                        <i class="home-product-item__link-icon-empty far fa-heart"></i>
+                                        <i class="home-product-item__link-icon-fill fas fa-heart"></i>
+                                    </span>
+                                    <div class="home-product-item__rating">
+                                        <i class="home-product-item__star--gold fas fa-star"></i>
+                                        <i class="home-product-item__star--gold fas fa-star"></i>
+                                        <i class="home-product-item__star--gold fas fa-star"></i>
+                                        <i class="home-product-item__star--gold fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <span class="home-product-item__sold">11 đã bán</span>
+                                </div>
+                                <div class="home-product-item__origin">
+                                    <span class="home-product-item__brand">Whoo</span>
+                                    <span class="home-product-item__origin-name">Nhật Bản</span>
+                                </div>
+                                <div class="home-product-item__favourite">
+                                    <i class="fas fa-check"></i>
+                                    <span>Yêu thích</span>
+                                </div>
+                                <div class="home-product-item__sale-off">
+                                    <span class="home-product-item__sale-off-percent">10%</span>
+                                    <span class="home-product-item__sale-off-label">GIẢM</span>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="grid__column-2-4">
+                            <!-- Product item -->
+                            <a class="home-product-item" href="#">
+                                <div class="home-product-item__img" style="background-image: url(//product.hstatic.net/200000211451/product/e412de2c-f357-435c-8053-94cb58ff53e5_a77b9c4e24dd4ba6b4b76510fde3deff_large.jpg);"></div>
+                                <h4 class="home-product-item__name">Python Crash Course (2nd Edition)</h4>
+                                <div class="home-product-item__price">
+                                    <span class="home-product-item__price-old">1.690.000đ</span>
+                                    <span class="home-product-item__price-current">1.521.000đ</span>
+                                </div>
+                                <div class="home-product-item__action">
+                                    <span class="home-product-item__link home-product-item__link--linked">
+                                        <i class="home-product-item__link-icon-empty far fa-heart"></i>
+                                        <i class="home-product-item__link-icon-fill fas fa-heart"></i>
+                                    </span>
+                                    <div class="home-product-item__rating">
+                                        <i class="home-product-item__star--gold fas fa-star"></i>
+                                        <i class="home-product-item__star--gold fas fa-star"></i>
+                                        <i class="home-product-item__star--gold fas fa-star"></i>
+                                        <i class="home-product-item__star--gold fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <span class="home-product-item__sold">11 đã bán</span>
+                                </div>
+                                <div class="home-product-item__origin">
+                                    <span class="home-product-item__brand">Whoo</span>
+                                    <span class="home-product-item__origin-name">Nhật Bản</span>
+                                </div>
+                                <div class="home-product-item__favourite">
+                                    <i class="fas fa-check"></i>
+                                    <span>Yêu thích</span>
+                                </div>
+                                <div class="home-product-item__sale-off">
+                                    <span class="home-product-item__sale-off-percent">10%</span>
+                                    <span class="home-product-item__sale-off-label">GIẢM</span>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="grid__column-2-4">
+                            <!-- Product item -->
+                            <a class="home-product-item" href="#">
+                                <div class="home-product-item__img" style="background-image: url(//product.hstatic.net/200000211451/product/2f4dd06e-8bfc-4e8a-9072-6e04955a0ae9_e86146c15f294b4c8771ccfe9aed6ca5_large.jpg);"></div>
+                                <h4 class="home-product-item__name">Python Crash Course (2nd Edition)</h4>
+                                <div class="home-product-item__price">
+                                    <span class="home-product-item__price-old">1.690.000đ</span>
+                                    <span class="home-product-item__price-current">1.521.000đ</span>
+                                </div>
+                                <div class="home-product-item__action">
+                                    <span class="home-product-item__link home-product-item__link--linked">
+                                        <i class="home-product-item__link-icon-empty far fa-heart"></i>
+                                        <i class="home-product-item__link-icon-fill fas fa-heart"></i>
+                                    </span>
+                                    <div class="home-product-item__rating">
+                                        <i class="home-product-item__star--gold fas fa-star"></i>
+                                        <i class="home-product-item__star--gold fas fa-star"></i>
+                                        <i class="home-product-item__star--gold fas fa-star"></i>
+                                        <i class="home-product-item__star--gold fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <span class="home-product-item__sold">11 đã bán</span>
+                                </div>
+                                <div class="home-product-item__origin">
+                                    <span class="home-product-item__brand">Whoo</span>
+                                    <span class="home-product-item__origin-name">Nhật Bản</span>
+                                </div>
+                                <div class="home-product-item__favourite">
+                                    <i class="fas fa-check"></i>
+                                    <span>Yêu thích</span>
+                                </div>
+                                <div class="home-product-item__sale-off">
+                                    <span class="home-product-item__sale-off-percent">10%</span>
+                                    <span class="home-product-item__sale-off-label">GIẢM</span>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="grid__column-2-4">
+                            <!-- Product item -->
+                            <a class="home-product-item" href="#">
+                                <div class="home-product-item__img" style="background-image: url(//product.hstatic.net/200000211451/product/f7df2e51-7874-43a3-a1fe-1c7663132476_69ff3e134ef045d684e1d66e52587f25_large.jpg);"></div>
+                                <h4 class="home-product-item__name">Python Crash Course (2nd Edition)</h4>
+                                <div class="home-product-item__price">
+                                    <span class="home-product-item__price-old">1.690.000đ</span>
+                                    <span class="home-product-item__price-current">1.521.000đ</span>
+                                </div>
+                                <div class="home-product-item__action">
+                                    <span class="home-product-item__link home-product-item__link--linked">
+                                        <i class="home-product-item__link-icon-empty far fa-heart"></i>
+                                        <i class="home-product-item__link-icon-fill fas fa-heart"></i>
+                                    </span>
+                                    <div class="home-product-item__rating">
+                                        <i class="home-product-item__star--gold fas fa-star"></i>
+                                        <i class="home-product-item__star--gold fas fa-star"></i>
+                                        <i class="home-product-item__star--gold fas fa-star"></i>
+                                        <i class="home-product-item__star--gold fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <span class="home-product-item__sold">11 đã bán</span>
+                                </div>
+                                <div class="home-product-item__origin">
+                                    <span class="home-product-item__brand">Whoo</span>
+                                    <span class="home-product-item__origin-name">Nhật Bản</span>
+                                </div>
+                                <div class="home-product-item__favourite">
+                                    <i class="fas fa-check"></i>
+                                    <span>Yêu thích</span>
+                                </div>
+                                <div class="home-product-item__sale-off">
+                                    <span class="home-product-item__sale-off-percent">10%</span>
+                                    <span class="home-product-item__sale-off-label">GIẢM</span>
+                                </div>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+
+                <ul class="pagination home-product__pagination">
+                    <li class="pagination-item">
+                        <a href="" class="pagination-item__link">
+                            <i class="pagination-item__icon fas fa-angle-left"></i>
+                        </a>
+                    </li>
+                    <li class="pagination-item pagination-item--active">
+                        <a href="@Url.Action("Books_Page1", "Books")" class="pagination-item__link">1</a>
+                    </li>
+                    <li class="pagination-item">
+                        <a href="@Url.Action("Books_Page2", "Books")" class="pagination-item__link">2</a>
+                    </li>
+                    <li class="pagination-item">
+                        <a href="@Url.Action("Books_Page3", "Books")" class="pagination-item__link">3</a>
+                    </li>
+                    <li class="pagination-item">
+                        <a href="@Url.Action("Books_Page4", "Books")" class="pagination-item__link">4</a>
+                    </li>
+                    <li class="pagination-item">
+                        <a href="@Url.Action("Books_Page5", "Books")" class="pagination-item__link">5</a>
+                    </li>
+                    <li class="pagination-item">
+                        <a href="" class="pagination-item__link">...</a>
+                    </li>
+                    <li class="pagination-item">
+                        <a href="@Url.Action("Books_Page7", "Books")" class="pagination-item__link">7</a>
+                    </li>
+
+                    <li class="pagination-item">
+                        <a href="" class="pagination-item__link">
+                            <i class="pagination-item__icon fas fa-angle-right"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
