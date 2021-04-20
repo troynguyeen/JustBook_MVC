@@ -1,11 +1,15 @@
 ﻿
 @{
-    ViewBag.Title = "CustomerTracking";
+    ViewBag.Title = "Trạng thái đơn hàng | JustBook";
     Layout = "~/Views/Header.cshtml";
 }
 
 <div class="container-fluid">
     <div class="card status-package">
+        <a href="@Url.Action("OrderHistory", "UserHome")" style="color: #337ab7; padding-right: 30px; font-size: 20px">
+            <span class="fas fa-arrow-left" style="font-size: 18px;"></span>
+            Trở về
+        </a>
         <div class="card-header">
             <h4 class="status-header">Trạng thái đơn hàng</h4>
         </div>
@@ -140,3 +144,4 @@
         </div>
     </div>
 </div>
+

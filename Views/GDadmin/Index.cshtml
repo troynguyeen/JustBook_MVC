@@ -5,54 +5,70 @@
 }
 
 <!--Giao diện chính-->
-<div class="page-admin">
+<div class="display">
     <!--Giao diện chính bên trái-->
-    <div class="sidebar-admin">
-        <div class="sidebar-title">DANH SÁCH CHỨC NĂNG</div>
-        <a class="sidebar-item" href="#">
-            <span class="fa fa-user-alt"></span>
-            <span class="sidebar-item-title">Thông tin tài khoản</span>
-        </a>
-        <a class="sidebar-item" href="#">
-            <span class="fas fa-bell"></span>
-            <span class="sidebar-item-title">Thông báo của tôi</span>
-        </a>
-        <a class="sidebar-item" href="#">
-            <span class="fa fa-address-card"></span>
-            <span class="sidebar-item-title">Quản lý đơn hàng</span>
-        </a>
-        <a class="sidebar-item" href="#">
-            <span class="fas fa-tags"></span>
-            <span class="sidebar-item-title">Quản lý sản phẩm</span>
-        </a>
+    <div class="display_left">
+        <h3 class="title_column">Danh sách chức năng</h3>
+        <div class="column">
+            <div class="column_left fa fa-user-alt"></div>
+            <div class="column_right"><a href=""></a>Thông tin tài khoản</div>
+        </div>
+        <div class="column">
+            <div class="column_left fa fa-address-card"></div>
+            <div class="column_right"><a href=""></a>Thông báo của tôi</div>
+        </div>
+        <div class="column">
+            <div class="column_left fa fa-pen-square"></div>
+            <div class="column_right"><a href=""></a>Cập nhật sản phẩm</div>
+        </div>
+        <div class="column">
+            <div class="column_left fa fa-address-card"></div>
+            <div class="column_right"><a href=""></a>Quản lý đơn hàng</div>
+        </div>
+        <div class="column">
+            <div class="column_left fa fa-address-book"></div>
+            <div class="column_right"><a href=""></a>Quản lý khuyến mãi</div>
+        </div>
+        <div class="column">
+            <div class="column_left fa fa-dollar-sign"></div>
+            <div class="column_right"><a href=""></a>Sản phẩm bán chạy</div>
+        </div>
+        <div class="column">
+            <div class="column_left fa fa-crown"></div>
+            <div class="column_right"><a href=""></a>Nhận xét của khách hàng</div>
+        </div>
+        <div class="column">
+            <div class="column_left fa fa-chalkboard-teacher"></div>
+            <div class="column_right"><a href=""></a>Hỏi đáp</div>
+        </div>
     </div>
     <!--Giao diện chính bên phải-->
     <div class="display_right">
-        <h2 class="h2_name">Thông tin tài khoản</h2>
+        <h2 class="h2_name">Thông tin tài khoản</h2><br>
         <div class="ThongtinTK">
             <form action="/action_page.php">
                 <div class="from_row">
-                    <label class="lb__name" for="hoten" d>Họ tên</label>
-                    <input class="from__input" type="text" id="hoten" name="hoten" size="40" placeholder="Họ Tên"><br><br>
+                    <label for="hoten">Họ tên</label>
+                    <input class="from__input" type="text" id="hoten" name="hoten" size="38" placeholder="Họ Tên"><br><br>
                 </div>
                 <div class="from_row">
-                    <label class="lb__name" for="sdt">Số điện thoại</label>
-                    <input class="from__input" type="text" id="sdt" name="sdt" size="40" placeholder="Hãy nhập số điện thoại để trải nghiệm tốt hơn"><br><br>
+                    <label for="sdt">Số điện thoại</label>
+                    <input class="from__input" type="text" id="sdt" name="sdt" size="38" placeholder="Hãy nhập số điện thoại để trải nghiệm tốt hơn"><br><br>
                 </div>
                 <div class="from_row">
-                    <label class="lb__name" for="email">Email</label>
-                    <input class="from__input" type="email" id="email" name="email" size="40   " placeholder="Nhập địa chỉ email của bạn"><br><br>
+                    <label for="email">Email</label>
+                    <input class="from__input" type="email" id="email" name="email" size="38" placeholder="Nhập địa chỉ email của bạn"><br><br>
                 </div>
                 <div class="from_row">
-                    <label class="lb__name" for="gioitinh">Giới tính</label>
+                    <label for="gioitinh">Giới tính</label>
                     <input type="radio" id="nam" name="gender" value="nam">
-                    <label class="lb_giotinh lb__name" for="nam">Nam</label>
+                    <label class="lb_giotinh" for="nam">Nam</label>
                     <input type="radio" id="nu" name="gender" value="nu">
-                    <label class="lb_giotinh lb__name" for="nu">Nữ</label><br><br>
+                    <label class="lb_giotinh" for="nu">Nữ</label><br><br>
                 </div>
                 <div class="from_row">
-                    <label class="lb__name" for="ngaysinh">Ngày sinh</label>
-                    <select name="day" id="" class="lb__ng lb__name">
+                    <label for="ngaysinh">Ngày sinh</label>
+                    <select name="day" id="">
                         <option value="0">Ngày</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -86,7 +102,7 @@
                         <option value="30">30</option>
                         <option value="31">31</option>
                     </select>
-                    <select name="month" id="" class="select_ns lb__name">
+                    <select name="month" id="" class="select_ns">
                         <option value="0">Tháng</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -101,7 +117,7 @@
                         <option value="11">11</option>
                         <option value="12">12</option>
                     </select>
-                    <select name="year" id="" class="select_ns lb__name">
+                    <select name="year" id="" class="select_ns">
                         <option value="0">Năm</option>
                         <option value="2021">2021</option>
                         <option value="2020">2020</option>
@@ -179,6 +195,5 @@
             </form>
         </div>
     </div>
-
 </div>
 

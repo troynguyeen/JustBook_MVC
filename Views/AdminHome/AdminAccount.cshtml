@@ -1,29 +1,37 @@
 ﻿
 @{
-    ViewBag.Title = "Thông tin tài khoản | JustBook";
+    ViewBag.Title = "Thông tin tài khoản | Admin";
     Layout = "~/Views/Header.cshtml";
 }
 
 <div class="page-admin">
     <div class="sidebar-admin">
         <div class="sidebar-title">DANH SÁCH CHỨC NĂNG</div>
-        <a class="sidebar-item" href="@Url.Action("Index", "UserHome")">
+        <a class="sidebar-item" href="@Url.Action("Index", "AdminHome")">
+            <span class="fa fa-home"></span>
+            <span class="sidebar-item-title">Trang chủ</span>
+        </a>
+        <a class="sidebar-item" href="@Url.Action("AdminAccount", "AdminHome")">
             <span class="fa fa-user-alt"></span>
             <span class="sidebar-item-title">Thông tin tài khoản</span>
         </a>
-        <a class="sidebar-item" href="@Url.Action("Notification", "UserHome")">
+        <a class="sidebar-item" href="@Url.Action("AdminNotification", "AdminHome")">
             <span class="fas fa-bell"></span>
             <span class="sidebar-item-title">Thông báo của tôi</span>
-            <span class="badge" style="background-color: red;">11</span>
+            <span class="badge" style="background-color: red;">5</span>
         </a>
-        <a class="sidebar-item" href="@Url.Action("OrderHistory", "UserHome")">
+        <a class="sidebar-item" href="@Url.Action("OrderManagement", "AdminHome")">
             <span class="fa fa-address-card"></span>
             <span class="sidebar-item-title">Quản lý đơn hàng</span>
         </a>
+        <a class="sidebar-item" href="ProductManagement">
+            <span class="fas fa-tags"></span>
+            <span class="sidebar-item-title">Quản lý sản phẩm</span>
+        </a>
     </div>
-    <div class="content-user">
-        <div class="user-account">
-            <div class="user-title-account">THÔNG TIN TÀI KHOẢN</div>
+    <div class="content-admin">
+        <div class="admin-account">
+            <div class="admin-title-account">THÔNG TIN TÀI KHOẢN</div>
             <div class="from_row">
                 <label style="margin-right: 50px;">Họ tên</label>
                 <input class="from__input" type="text" id="hoten" name="hoten" size="38" placeholder="Họ Tên" style="width: 300px;">
@@ -31,10 +39,6 @@
             <div class="from_row">
                 <label style="margin-right: 50px;" for="email">Email</label>
                 <input class="from__input" type="email" id="email" name="email" size="38" placeholder="Nhập địa chỉ email của bạn" style="width: 300px;">
-            </div>
-            <div class="from_row">
-                <label style="margin-right: 50px;" for="sdt">Địa chỉ</label>
-                <input class="from__input" type="text" id="diachi" name="diachi" size="38" placeholder="Nhập địa chỉ của bạn" style="width: 300px;">
             </div>
             <div class="from_row">
                 <label style="margin-right: 50px;" for="sdt">Số điện thoại</label>

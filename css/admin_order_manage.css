@@ -1,0 +1,13 @@
+.content-admin-order {
+    display: flex;
+    height: auto;
+    background-color: rgb(239, 239, 239);
+    margin: 50px 0;
+    flex-direction: column;
+}
+
+.admin-orderlist {
+    background-color: #FFF;
+    width: auto;
+    margin: 20px 0;
+}
