@@ -19,7 +19,7 @@ namespace JustBook.Models
         public int MaKH { get; set; }
         public System.DateTime ThoiGianGD { get; set; }
     
-        public virtual DonHang DonHang { get; set; }
         public virtual TaiKhoanKH TaiKhoanKH { get; set; }
+        public virtual DonHang DonHang { get; set; }
     }
 }

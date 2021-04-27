@@ -32,6 +32,8 @@
     <link href="~/css/user_order_history.css" rel="stylesheet" />
     <link href="~/css/admin_order_manage.css" rel="stylesheet" />
     <link href="~/css/add_product.css" rel="stylesheet" />
+    <link href="~/css/shopping.css" rel="stylesheet" />
+    <link href="~/css/quantity_counter.css" rel="stylesheet" />
     <!-- Responsive-->
     <link rel="stylesheet" href="~/css/responsive.css">
     <!-- Scrollbar Custom CSS -->
@@ -56,7 +58,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-2">
-                    <div><a href="../Home" class="logo" href="#">JUSTBOOK</a></div>
+                    <div><a href="@Url.Action("Index", "Home")" class="logo">JUSTBOOK</a></div>
                 </div>
                 <div class="col-sm-10">
                     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -81,27 +83,38 @@
                                         </div>
                                     </a>
                                     <div class="bookCollection dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a class="bookItem dropdown-item" href="@Url.Action("Index", "Books")">Sách Lập Trình</a>
+                                        <a class="bookItem dropdown-item" href="@Url.Action("Index", "Shopping")">Sách Lập Trình</a>
                                         <a class="bookItem dropdown-item" href="#">Sách Văn Học</a>
                                         <a class="bookItem dropdown-item" href="#">Sách Tiếng Anh</a>
                                         <div class="dropdown-divider"></div>
                                         <a class="bookItem dropdown-item" href="#">Sách Giảm Giá</a>
                                     </div>
                                 </div>
-                                <nav class="col-lg-8 navbar navbar-light bg-light">
+                                <nav class="col-lg-7 navbar navbar-light bg-light">
                                     <form class="form-inline">
                                         <div class="custom-search">
-                                            <input class="form-control mr-sm-2" type="search" placeholder="Search..." aria-label="Search">
+                                            <input class="form-control mr-sm-2" style="width: 350px !important;" type="search" placeholder="Search..." aria-label="Search">
                                         </div>
                                         <button class="custom-btn btn btn-outline-danger my-2 my-sm-0" type="submit">Search</button>
                                     </form>
                                 </nav>
-                                <div class="col-sm-2 cart">
-                                    <a href="@Url.Action("Index", "Cart")">
-                                        <i class="fa fa-shopping-cart"></i>
-                                        <span class='badge badge-warning' id='cartCount'>0</span>
-                                        <span class="cartText">Giỏ Hàng</span>
-                                    </a>
+                                <div class="col-sm-3 cart">
+                                    @if (Session["CartCounter"] == null)
+                                    {
+                                        <a href="@Url.Action("Index", "Cart")">
+                                            <i class="fa fa-shopping-cart"></i>
+                                            <span class='badge badge-warning' id="cartCount">0</span>
+                                            <span class="cartText">Giỏ Hàng</span>
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <a href="@Url.Action("Index", "Cart")">
+                                            <i class="fa fa-shopping-cart"></i>
+                                            <span class='badge badge-warning' id="cartCount">@Session["CartCounter"]</span>
+                                            <span class="cartText">Giỏ Hàng</span>
+                                        </a>
+                                    }
                                 </div>
                                 @if (Session["MaKH"] == null)
                                 {
@@ -133,7 +146,7 @@
                                                 <div class="dropdown-toggle">@Session["TenKH"].ToString()</div>
                                             </div>
                                         </div>
-                                        <div class="dropdown-menu" aria-labelledby="loginMenu">
+                                        <div class="dropdown-menu" style="left: 0px;" aria-labelledby="loginMenu">
                                             <a href="@Url.Action("OrderHistory", "UserHome")" class="dropdown-item">
                                                 Đơn hàng của tôi
                                             </a>
@@ -224,12 +237,14 @@
 
 
     <!-- Javascript files-->
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
     <script src="~/js/jquery.validate.js"></script>
     <script src="~/js/jquery.min.js"></script>
     <script src="~/js/popper.min.js"></script>
     <script src="~/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/jquery-3.0.0.min.js"></script>
     <script src="~/js/plugin.js"></script>
+    <script src="~/js/quantity_counter.js"></script>
     <!-- sidebar -->
     <script src="~/js/jquery.mCustomScrollbar.concat.min.js"></script>
     <script src="~/js/custom.js"></script>
