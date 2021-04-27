@@ -18,6 +18,7 @@ namespace JustBook.Controllers
             listOfshoppingCartModels = new List<ShoppingCartModel>();
         }
         // GET: Home
+
         public ActionResult Index()
         {
             if(Session["MaKH"] != null)

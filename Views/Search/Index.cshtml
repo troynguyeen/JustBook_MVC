@@ -1,0 +1,137 @@
+﻿@model IEnumerable<JustBook.Models.SanPham>
+@{
+    ViewBag.Title = "Danh sách sản phẩm | JustBook";
+    Layout = "~/Views/Header.cshtml";
+}
+
+<div class="container">
+    <div class="app__container">
+        <div class="grid">
+            <div class="grid__row app__content">
+                <div class="grid__column-2">
+                    <nav class="category">
+                        <h3 class="category__heading">
+                            <i class="category__heading-icon fas fa-list"></i>
+                            Danh mục
+                        </h3>
+
+                        <ul class="category-list">
+                            <li class="category-item category-item--active">
+                                <a href="#" class="category-item__link">Sách Lập Trình</a>
+                            </li>
+                            <li class="category-item">
+                                <a href="#" class="category-item__link">Sách Văn Học</a>
+                            </li>
+                            <li class="category-item">
+                                <a href="#" class="category-item__link">Sách Tiếng Anh</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <div class="grid__column-10">
+                    <div class="home-filter">
+                        <span class="home-filter__label">Sắp xếp theo</span>
+                        <button class="home-filter__btn btn">Phổ biến</button>
+                        <button class="home-filter__btn btn btn--primary">Mới nhất</button>
+                        <button class="home-filter__btn btn">Bán chạy</button>
+                        <div class="select-input">
+                            <span class="select-input__label">Giá</span>
+                            <i class="select-input__icon fas fa-angle-down"></i>
+
+                            <!-- List options -->
+                            <ul class="select-input__list">
+                                <li class="select-input__item">
+                                    <a href="" class="select-input__link">Giá: Thấp đến cao</a>
+                                </li>
+                                <li class="select-input__item">
+                                    <a href="" class="select-input__link">Giá: Cao đến thấp</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="home-filter__page">
+                            <span class="home-filter__page-num">
+                                <span class="home-filter__page-current">1</span>
+                                /7
+                            </span>
+
+                            <div class="home-filter__page-control">
+                                <a href="" class="home-filter__page-btn home-filter__page-btn--disabled">
+                                    <i class="home-filter__page-icon fas fa-angle-left"></i>
+                                </a>
+                                <a href="" class="home-filter__page-btn">
+                                    <i class="home-filter__page-icon fas fa-angle-right"></i>
+                                </a>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="home-product">
+                        <div class="grid__row">
+                            @foreach (var sanpham in Model)
+                            {
+                                var price_old = string.Format("{0:#,##0 VND}", sanpham.DonGia);
+                                var price_new = string.Format("{0:#,##0 VND}", sanpham.DonGia - sanpham.DonGia * 0.15);
+                                <div class="grid__column-2-4">
+                                    <!-- Product item -->
+                                    <a class="home-product-item" href="@Url.Action("Detail", "Shopping", new {id = @sanpham.MaSP})" style="height: 390px;">
+                                        <img class="home-product-item__img" src="@Url.Content(@sanpham.ImagePath)" style="margin-left: 20px;" width="150px" />
+                                        <h4 class="home-product-item__name">@sanpham.TenSP</h4>
+                                        <div class="home-product-item__price">
+                                            <span class="home-product-item__price-old">@price_old</span>
+                                            <span class="home-product-item__price-current">@price_new</span>
+                                        </div>
+                                        <div class="home-product-item__action">
+                                            <span class="home-product-item__link home-product-item__link--linked">
+                                                <i class="home-product-item__link-icon-empty far fa-heart"></i>
+                                                <i class="home-product-item__link-icon-fill fas fa-heart"></i>
+                                            </span>
+                                            <div class="home-product-item__rating">
+                                                <i class="home-product-item__star--gold fas fa-star"></i>
+                                                <i class="home-product-item__star--gold fas fa-star"></i>
+                                                <i class="home-product-item__star--gold fas fa-star"></i>
+                                                <i class="home-product-item__star--gold fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                            </div>
+                                            <span class="home-product-item__sold">@sanpham.SoLuong đã bán</span>
+                                        </div>
+                                        <div class="home-product-item__origin">
+                                            <span class="home-product-item__brand">Whoo</span>
+                                            <span class="home-product-item__origin-name">Nhật Bản</span>
+                                        </div>
+                                        <div class="home-product-item__favourite">
+                                            <i class="fas fa-check"></i>
+                                            <span>Yêu thích</span>
+                                        </div>
+                                        <div class="home-product-item__sale-off">
+                                            <span class="home-product-item__sale-off-percent">15%</span>
+                                            <span class="home-product-item__sale-off-label">GIẢM</span>
+                                        </div>
+                                    </a>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <ul class="pagination">
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
