@@ -1,7 +1,6 @@
 ﻿@using System.Web.Optimization
 
 <!DOCTYPE html>
-
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -53,6 +52,7 @@
     <!--Link ICON giao dien quan tri-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
 </head>
+
 <body>
     <div class="header-bar">
         <div class="container">
@@ -91,11 +91,14 @@
                                     </div>
                                 </div>
                                 <nav class="col-lg-7 navbar navbar-light bg-light">
+
                                     <form class="form-inline">
-                                        <div class="custom-search">
-                                            <input class="form-control mr-sm-2" style="width: 350px !important;" type="search" placeholder="Search..." aria-label="Search">
-                                        </div>
-                                        <button class="custom-btn btn btn-outline-danger my-2 my-sm-0" type="submit">Search</button>
+                                        @using (Html.BeginForm("Index", "Search", FormMethod.Get))
+                                        {
+                                            @Html.TextBox("searching", null, new { @style = " width: 345px !important; " });                                         
+                                            <button class="custom-btn btn btn-outline-danger my-2 my-sm-0" type="submit" value="Search" formaction="@Url.Action("Index", "Search")" Search">Search</button>
+                                        }
+
                                     </form>
                                 </nav>
                                 <div class="col-sm-3 cart">
