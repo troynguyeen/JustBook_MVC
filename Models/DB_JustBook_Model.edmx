@@ -4,36 +4,33 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="JustBook_CT25Team23Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'CT25Team23.dbo.ChiTietDonHang' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+    <Schema Namespace="JustBook_CT25Team23Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ChiTietDonHang">
           <Key>
-            <PropertyRef Name="MaDH" />
-            <PropertyRef Name="MaSP" />
-            <PropertyRef Name="SoLuong" />
-            <PropertyRef Name="DonGia" />
-            <PropertyRef Name="ChietKhau" />
+            <PropertyRef Name="MaChiTietDH" />
           </Key>
-          <Property Name="MaDH" Type="int" Nullable="false" />
-          <Property Name="MaSP" Type="varchar" MaxLength="7" Nullable="false" />
+          <Property Name="MaChiTietDH" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MaDonHang" Type="int" Nullable="false" />
+          <Property Name="MaSP" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="SoLuong" Type="int" Nullable="false" />
           <Property Name="DonGia" Type="float" Nullable="false" />
           <Property Name="ChietKhau" Type="float" Nullable="false" />
+          <Property Name="TongTien" Type="float" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'CT25Team23.dbo.ChiTietGioHang' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ChiTietGioHang">
           <Key>
-            <PropertyRef Name="MaGioHang" />
-            <PropertyRef Name="MaSP" />
-            <PropertyRef Name="SoLuong" />
-            <PropertyRef Name="DonGia" />
+            <PropertyRef Name="MaChiTietGH" />
           </Key>
+          <Property Name="MaChiTietGH" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MaGioHang" Type="int" Nullable="false" />
-          <Property Name="MaSP" Type="varchar" MaxLength="7" Nullable="false" />
+          <Property Name="MaSP" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="TenSP" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="TacGia" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="SoLuongMua" Type="int" Nullable="false" />
           <Property Name="SoLuong" Type="int" Nullable="false" />
           <Property Name="DonGia" Type="float" Nullable="false" />
+          <Property Name="TongCong" Type="float" Nullable="false" />
+          <Property Name="ImagePath" Type="nvarchar" MaxLength="1000" Nullable="false" />
         </EntityType>
         <EntityType Name="DonHang">
           <Key>
@@ -41,12 +38,12 @@ warning 6002: The table/view 'CT25Team23.dbo.ChiTietGioHang' does not have a pri
           </Key>
           <Property Name="MaDH" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MaKH" Type="int" Nullable="false" />
-          <Property Name="MaGH" Type="int" Nullable="false" />
-          <Property Name="DiaChiGiaoHang" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="TenNguoiNhan" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="PhoneNguoiNhan" Type="int" Nullable="false" />
+          <Property Name="DiaChiNguoiNhan" Type="nvarchar" MaxLength="500" Nullable="false" />
           <Property Name="ThoiGianTao" Type="date" Nullable="false" />
-          <Property Name="NguoiTao" Type="nvarchar" MaxLength="40" Nullable="false" />
-          <Property Name="TongTien" Type="float" Nullable="false" />
-          <Property Name="PhuongThucThanhToan" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="PhuongThucThanhToan" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="TongGiaTriDonHang" Type="float" Nullable="false" />
         </EntityType>
         <EntityType Name="GioHang">
           <Key>
@@ -65,23 +62,32 @@ warning 6002: The table/view 'CT25Team23.dbo.ChiTietGioHang' does not have a pri
           <Property Name="MaKH" Type="int" Nullable="false" />
           <Property Name="ThoiGianGD" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="LoaiSanPham">
+          <Key>
+            <PropertyRef Name="MaLoaiSP" />
+          </Key>
+          <Property Name="MaLoaiSP" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CodeLoaiSP" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="TenLoaiSP" Type="nvarchar" MaxLength="150" Nullable="false" />
+        </EntityType>
         <EntityType Name="SanPham">
           <Key>
             <PropertyRef Name="MaSP" />
           </Key>
-          <Property Name="MaSP" Type="varchar" MaxLength="7" Nullable="false" />
-          <Property Name="TenSP" Type="nvarchar" MaxLength="40" Nullable="false" />
-          <Property Name="DanhMuc" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="TacGia" Type="nvarchar" MaxLength="40" Nullable="false" />
-          <Property Name="NXB" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="MaSP" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="TenSP" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="MaLoaiSP" Type="int" Nullable="false" />
+          <Property Name="TacGia" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="NXB" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="DonGia" Type="float" Nullable="false" />
-          <Property Name="MoTa" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="MoTa" Type="nvarchar" MaxLength="4000" Nullable="false" />
           <Property Name="SoLuong" Type="int" Nullable="false" />
           <Property Name="SoTrang" Type="int" Nullable="false" />
           <Property Name="TrongLuong" Type="nvarchar" MaxLength="30" Nullable="false" />
-          <Property Name="KichThuoc" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="LoaiBia" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="TrangThai" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="KichThuoc" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="LoaiBia" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="TrangThai" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="ImagePath" Type="nvarchar" MaxLength="1000" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -139,7 +145,7 @@ warning 6002: The table/view 'CT25Team23.dbo.TrangThaiDonHang' does not have a p
               <PropertyRef Name="MaDH" />
             </Principal>
             <Dependent Role="ChiTietDonHang">
-              <PropertyRef Name="MaDH" />
+              <PropertyRef Name="MaDonHang" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -152,18 +158,6 @@ warning 6002: The table/view 'CT25Team23.dbo.TrangThaiDonHang' does not have a p
             </Principal>
             <Dependent Role="ChiTietGioHang">
               <PropertyRef Name="MaGioHang" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ChiTietGioHang_SanPham">
-          <End Role="SanPham" Type="Self.SanPham" Multiplicity="1" />
-          <End Role="ChiTietGioHang" Type="Self.ChiTietGioHang" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SanPham">
-              <PropertyRef Name="MaSP" />
-            </Principal>
-            <Dependent Role="ChiTietGioHang">
-              <PropertyRef Name="MaSP" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -215,31 +209,48 @@ warning 6002: The table/view 'CT25Team23.dbo.TrangThaiDonHang' does not have a p
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="JustBook_CT25Team23ModelStoreContainer">
+          <EntitySet Name="ChiTietDonHang" EntityType="Self.ChiTietDonHang" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChiTietGioHang" EntityType="Self.ChiTietGioHang" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DonHang" EntityType="Self.DonHang" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GioHang" EntityType="Self.GioHang" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LichSuGD" EntityType="Self.LichSuGD" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoaiSanPham" EntityType="Self.LoaiSanPham" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SanPham" EntityType="Self.SanPham" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TaiKhoanKH" EntityType="Self.TaiKhoanKH" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TaiKhoanQT" EntityType="Self.TaiKhoanQT" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ChiTietDonHang" EntityType="Self.ChiTietDonHang" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [ChiTietDonHang].[MaDH] AS [MaDH], 
-    [ChiTietDonHang].[MaSP] AS [MaSP], 
-    [ChiTietDonHang].[SoLuong] AS [SoLuong], 
-    [ChiTietDonHang].[DonGia] AS [DonGia], 
-    [ChiTietDonHang].[ChietKhau] AS [ChietKhau]
-    FROM [dbo].[ChiTietDonHang] AS [ChiTietDonHang]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="ChiTietGioHang" EntityType="Self.ChiTietGioHang" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [ChiTietGioHang].[MaGioHang] AS [MaGioHang], 
-    [ChiTietGioHang].[MaSP] AS [MaSP], 
-    [ChiTietGioHang].[SoLuong] AS [SoLuong], 
-    [ChiTietGioHang].[DonGia] AS [DonGia]
-    FROM [dbo].[ChiTietGioHang] AS [ChiTietGioHang]</DefiningQuery>
-          </EntitySet>
           <EntitySet Name="TrangThaiDonHang" EntityType="Self.TrangThaiDonHang" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [TrangThaiDonHang].[MaDH] AS [MaDH], 
@@ -253,10 +264,6 @@ warning 6002: The table/view 'CT25Team23.dbo.TrangThaiDonHang' does not have a p
           </AssociationSet>
           <AssociationSet Name="FK_ChiTietGioHang_GioHang" Association="Self.FK_ChiTietGioHang_GioHang">
             <End Role="GioHang" EntitySet="GioHang" />
-            <End Role="ChiTietGioHang" EntitySet="ChiTietGioHang" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ChiTietGioHang_SanPham" Association="Self.FK_ChiTietGioHang_SanPham">
-            <End Role="SanPham" EntitySet="SanPham" />
             <End Role="ChiTietGioHang" EntitySet="ChiTietGioHang" />
           </AssociationSet>
           <AssociationSet Name="FK_GioHang_TaiKhoanKH" Association="Self.FK_GioHang_TaiKhoanKH">
@@ -276,37 +283,10 @@ warning 6002: The table/view 'CT25Team23.dbo.TrangThaiDonHang' does not have a p
             <End Role="TrangThaiDonHang" EntitySet="TrangThaiDonHang" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="JustBook_CT25Team23Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="DonHang">
-          <Key>
-            <PropertyRef Name="MaDH" />
-          </Key>
-          <Property Name="MaDH" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MaKH" Type="Int32" Nullable="false" />
-          <Property Name="MaGH" Type="Int32" Nullable="false" />
-          <Property Name="DiaChiGiaoHang" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ThoiGianTao" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="NguoiTao" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="TongTien" Type="Double" Nullable="false" />
-          <Property Name="PhuongThucThanhToan" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="ChiTietDonHangs" Relationship="Self.FK_ChiTietDonHang_DonHang" FromRole="DonHang" ToRole="ChiTietDonHang" />
-          <NavigationProperty Name="LichSuGDs" Relationship="Self.FK_LichSuGD_DonHang" FromRole="DonHang" ToRole="LichSuGD" />
-          <NavigationProperty Name="TrangThaiDonHangs" Relationship="Self.FK_TrangThaiDonHang_DonHang" FromRole="DonHang" ToRole="TrangThaiDonHang" />
-        </EntityType>
-        <EntityType Name="GioHang">
-          <Key>
-            <PropertyRef Name="MaGH" />
-          </Key>
-          <Property Name="MaGH" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MaKH" Type="Int32" Nullable="false" />
-          <Property Name="TongTien" Type="Double" Nullable="false" />
-          <NavigationProperty Name="ChiTietGioHangs" Relationship="Self.FK_ChiTietGioHang_GioHang" FromRole="GioHang" ToRole="ChiTietGioHang" />
-          <NavigationProperty Name="TaiKhoanKH" Relationship="Self.FK_GioHang_TaiKhoanKH" FromRole="GioHang" ToRole="TaiKhoanKH" />
-        </EntityType>
         <EntityType Name="LichSuGD">
           <Key>
             <PropertyRef Name="MaGD" />
@@ -315,27 +295,27 @@ warning 6002: The table/view 'CT25Team23.dbo.TrangThaiDonHang' does not have a p
           <Property Name="MaDH" Type="Int32" Nullable="false" />
           <Property Name="MaKH" Type="Int32" Nullable="false" />
           <Property Name="ThoiGianGD" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="DonHang" Relationship="Self.FK_LichSuGD_DonHang" FromRole="LichSuGD" ToRole="DonHang" />
           <NavigationProperty Name="TaiKhoanKH" Relationship="Self.FK_LichSuGD_TaiKhoanKH" FromRole="LichSuGD" ToRole="TaiKhoanKH" />
+          <NavigationProperty Name="DonHang" Relationship="JustBook_CT25Team23Model.FK_LichSuGD_DonHang" FromRole="LichSuGD" ToRole="DonHang" />
         </EntityType>
         <EntityType Name="SanPham">
           <Key>
             <PropertyRef Name="MaSP" />
           </Key>
-          <Property Name="MaSP" Type="String" MaxLength="7" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="TenSP" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="DanhMuc" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="TacGia" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="NXB" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MaSP" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TenSP" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TacGia" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NXB" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="DonGia" Type="Double" Nullable="false" />
-          <Property Name="MoTa" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MoTa" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="SoLuong" Type="Int32" Nullable="false" />
           <Property Name="SoTrang" Type="Int32" Nullable="false" />
           <Property Name="TrongLuong" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="KichThuoc" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="LoaiBia" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="TrangThai" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="ChiTietGioHangs" Relationship="Self.FK_ChiTietGioHang_SanPham" FromRole="SanPham" ToRole="ChiTietGioHang" />
+          <Property Name="KichThuoc" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LoaiBia" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TrangThai" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ImagePath" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="MaLoaiSP" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -359,8 +339,8 @@ warning 6002: The table/view 'CT25Team23.dbo.TrangThaiDonHang' does not have a p
           <Property Name="NgaySinh" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="MatKhau" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="DiaChi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="GioHangs" Relationship="Self.FK_GioHang_TaiKhoanKH" FromRole="TaiKhoanKH" ToRole="GioHang" />
           <NavigationProperty Name="LichSuGDs" Relationship="Self.FK_LichSuGD_TaiKhoanKH" FromRole="TaiKhoanKH" ToRole="LichSuGD" />
+          <NavigationProperty Name="GioHangs" Relationship="JustBook_CT25Team23Model.FK_GioHang_TaiKhoanKH" FromRole="TaiKhoanKH" ToRole="GioHang" />
         </EntityType>
         <EntityType Name="TaiKhoanQT">
           <Key>
@@ -375,35 +355,6 @@ warning 6002: The table/view 'CT25Team23.dbo.TrangThaiDonHang' does not have a p
           <Property Name="MatKhau" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="DiaChi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
-        <EntityType Name="ChiTietDonHang">
-          <Key>
-            <PropertyRef Name="MaDH" />
-            <PropertyRef Name="MaSP" />
-            <PropertyRef Name="SoLuong" />
-            <PropertyRef Name="DonGia" />
-            <PropertyRef Name="ChietKhau" />
-          </Key>
-          <Property Name="MaDH" Type="Int32" Nullable="false" />
-          <Property Name="MaSP" Type="String" MaxLength="7" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="SoLuong" Type="Int32" Nullable="false" />
-          <Property Name="DonGia" Type="Double" Nullable="false" />
-          <Property Name="ChietKhau" Type="Double" Nullable="false" />
-          <NavigationProperty Name="DonHang" Relationship="Self.FK_ChiTietDonHang_DonHang" FromRole="ChiTietDonHang" ToRole="DonHang" />
-        </EntityType>
-        <EntityType Name="ChiTietGioHang">
-          <Key>
-            <PropertyRef Name="MaGioHang" />
-            <PropertyRef Name="MaSP" />
-            <PropertyRef Name="SoLuong" />
-            <PropertyRef Name="DonGia" />
-          </Key>
-          <Property Name="MaGioHang" Type="Int32" Nullable="false" />
-          <Property Name="MaSP" Type="String" MaxLength="7" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="SoLuong" Type="Int32" Nullable="false" />
-          <Property Name="DonGia" Type="Double" Nullable="false" />
-          <NavigationProperty Name="GioHang" Relationship="Self.FK_ChiTietGioHang_GioHang" FromRole="ChiTietGioHang" ToRole="GioHang" />
-          <NavigationProperty Name="SanPham" Relationship="Self.FK_ChiTietGioHang_SanPham" FromRole="ChiTietGioHang" ToRole="SanPham" />
-        </EntityType>
         <EntityType Name="TrangThaiDonHang">
           <Key>
             <PropertyRef Name="MaDH" />
@@ -413,68 +364,8 @@ warning 6002: The table/view 'CT25Team23.dbo.TrangThaiDonHang' does not have a p
           <Property Name="MaDH" Type="Int32" Nullable="false" />
           <Property Name="ThoiGian" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="TrangThai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="DonHang" Relationship="Self.FK_TrangThaiDonHang_DonHang" FromRole="TrangThaiDonHang" ToRole="DonHang" />
+          <NavigationProperty Name="DonHang" Relationship="JustBook_CT25Team23Model.FK_TrangThaiDonHang_DonHang" FromRole="TrangThaiDonHang" ToRole="DonHang" />
         </EntityType>
-        <Association Name="FK_ChiTietDonHang_DonHang">
-          <End Role="DonHang" Type="Self.DonHang" Multiplicity="1" />
-          <End Role="ChiTietDonHang" Type="Self.ChiTietDonHang" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DonHang">
-              <PropertyRef Name="MaDH" />
-            </Principal>
-            <Dependent Role="ChiTietDonHang">
-              <PropertyRef Name="MaDH" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_LichSuGD_DonHang">
-          <End Role="DonHang" Type="Self.DonHang" Multiplicity="1" />
-          <End Role="LichSuGD" Type="Self.LichSuGD" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DonHang">
-              <PropertyRef Name="MaDH" />
-            </Principal>
-            <Dependent Role="LichSuGD">
-              <PropertyRef Name="MaDH" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TrangThaiDonHang_DonHang">
-          <End Role="DonHang" Type="Self.DonHang" Multiplicity="1" />
-          <End Role="TrangThaiDonHang" Type="Self.TrangThaiDonHang" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DonHang">
-              <PropertyRef Name="MaDH" />
-            </Principal>
-            <Dependent Role="TrangThaiDonHang">
-              <PropertyRef Name="MaDH" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ChiTietGioHang_GioHang">
-          <End Role="GioHang" Type="Self.GioHang" Multiplicity="1" />
-          <End Role="ChiTietGioHang" Type="Self.ChiTietGioHang" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="GioHang">
-              <PropertyRef Name="MaGH" />
-            </Principal>
-            <Dependent Role="ChiTietGioHang">
-              <PropertyRef Name="MaGioHang" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_GioHang_TaiKhoanKH">
-          <End Role="TaiKhoanKH" Type="Self.TaiKhoanKH" Multiplicity="1" />
-          <End Role="GioHang" Type="Self.GioHang" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TaiKhoanKH">
-              <PropertyRef Name="MaKH" />
-            </Principal>
-            <Dependent Role="GioHang">
-              <PropertyRef Name="MaKH" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_LichSuGD_TaiKhoanKH">
           <End Role="TaiKhoanKH" Type="Self.TaiKhoanKH" Multiplicity="1" />
           <End Role="LichSuGD" Type="Self.LichSuGD" Multiplicity="*" />
@@ -487,87 +378,213 @@ warning 6002: The table/view 'CT25Team23.dbo.TrangThaiDonHang' does not have a p
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ChiTietGioHang_SanPham">
-          <End Role="SanPham" Type="Self.SanPham" Multiplicity="1" />
-          <End Role="ChiTietGioHang" Type="Self.ChiTietGioHang" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SanPham">
-              <PropertyRef Name="MaSP" />
-            </Principal>
-            <Dependent Role="ChiTietGioHang">
-              <PropertyRef Name="MaSP" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="DB_CT25Team23Entities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="DonHangs" EntityType="Self.DonHang" />
-          <EntitySet Name="GioHangs" EntityType="Self.GioHang" />
           <EntitySet Name="LichSuGDs" EntityType="Self.LichSuGD" />
           <EntitySet Name="SanPhams" EntityType="Self.SanPham" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="TaiKhoanKHs" EntityType="Self.TaiKhoanKH" />
           <EntitySet Name="TaiKhoanQTs" EntityType="Self.TaiKhoanQT" />
-          <EntitySet Name="ChiTietDonHangs" EntityType="Self.ChiTietDonHang" />
-          <EntitySet Name="ChiTietGioHangs" EntityType="Self.ChiTietGioHang" />
           <EntitySet Name="TrangThaiDonHangs" EntityType="Self.TrangThaiDonHang" />
-          <AssociationSet Name="FK_ChiTietDonHang_DonHang" Association="Self.FK_ChiTietDonHang_DonHang">
-            <End Role="DonHang" EntitySet="DonHangs" />
-            <End Role="ChiTietDonHang" EntitySet="ChiTietDonHangs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_LichSuGD_DonHang" Association="Self.FK_LichSuGD_DonHang">
-            <End Role="DonHang" EntitySet="DonHangs" />
-            <End Role="LichSuGD" EntitySet="LichSuGDs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TrangThaiDonHang_DonHang" Association="Self.FK_TrangThaiDonHang_DonHang">
-            <End Role="DonHang" EntitySet="DonHangs" />
-            <End Role="TrangThaiDonHang" EntitySet="TrangThaiDonHangs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ChiTietGioHang_GioHang" Association="Self.FK_ChiTietGioHang_GioHang">
-            <End Role="GioHang" EntitySet="GioHangs" />
-            <End Role="ChiTietGioHang" EntitySet="ChiTietGioHangs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_GioHang_TaiKhoanKH" Association="Self.FK_GioHang_TaiKhoanKH">
-            <End Role="TaiKhoanKH" EntitySet="TaiKhoanKHs" />
-            <End Role="GioHang" EntitySet="GioHangs" />
-          </AssociationSet>
           <AssociationSet Name="FK_LichSuGD_TaiKhoanKH" Association="Self.FK_LichSuGD_TaiKhoanKH">
             <End Role="TaiKhoanKH" EntitySet="TaiKhoanKHs" />
             <End Role="LichSuGD" EntitySet="LichSuGDs" />
           </AssociationSet>
-          <AssociationSet Name="FK_ChiTietGioHang_SanPham" Association="Self.FK_ChiTietGioHang_SanPham">
-            <End Role="SanPham" EntitySet="SanPhams" />
+          <EntitySet Name="LoaiSanPhams" EntityType="JustBook_CT25Team23Model.LoaiSanPham" />
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(JustBook_CT25Team23Model.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(JustBook_CT25Team23Model.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+          <EntitySet Name="DonHangs" EntityType="JustBook_CT25Team23Model.DonHang" />
+          <EntitySet Name="GioHangs" EntityType="JustBook_CT25Team23Model.GioHang" />
+          <AssociationSet Name="FK_LichSuGD_DonHang" Association="JustBook_CT25Team23Model.FK_LichSuGD_DonHang">
+            <End Role="DonHang" EntitySet="DonHangs" />
+            <End Role="LichSuGD" EntitySet="LichSuGDs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TrangThaiDonHang_DonHang" Association="JustBook_CT25Team23Model.FK_TrangThaiDonHang_DonHang">
+            <End Role="DonHang" EntitySet="DonHangs" />
+            <End Role="TrangThaiDonHang" EntitySet="TrangThaiDonHangs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GioHang_TaiKhoanKH" Association="JustBook_CT25Team23Model.FK_GioHang_TaiKhoanKH">
+            <End Role="TaiKhoanKH" EntitySet="TaiKhoanKHs" />
+            <End Role="GioHang" EntitySet="GioHangs" />
+          </AssociationSet>
+          <EntitySet Name="ChiTietDonHangs" EntityType="JustBook_CT25Team23Model.ChiTietDonHang" />
+          <EntitySet Name="ChiTietGioHangs" EntityType="JustBook_CT25Team23Model.ChiTietGioHang" />
+          <AssociationSet Name="FK_ChiTietDonHang_DonHang" Association="JustBook_CT25Team23Model.FK_ChiTietDonHang_DonHang">
+            <End Role="DonHang" EntitySet="DonHangs" />
+            <End Role="ChiTietDonHang" EntitySet="ChiTietDonHangs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ChiTietGioHang_GioHang" Association="JustBook_CT25Team23Model.FK_ChiTietGioHang_GioHang">
+            <End Role="GioHang" EntitySet="GioHangs" />
             <End Role="ChiTietGioHang" EntitySet="ChiTietGioHangs" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="LoaiSanPham">
+          <Key>
+            <PropertyRef Name="MaLoaiSP" />
+          </Key>
+          <Property Name="MaLoaiSP" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CodeLoaiSP" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="TenLoaiSP" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="DonHang">
+          <Key>
+            <PropertyRef Name="MaDH" />
+          </Key>
+          <Property Name="MaDH" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaKH" Type="Int32" Nullable="false" />
+          <Property Name="TenNguoiNhan" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNguoiNhan" Type="Int32" Nullable="false" />
+          <Property Name="DiaChiNguoiNhan" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ThoiGianTao" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="PhuongThucThanhToan" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="TongGiaTriDonHang" Type="Double" Nullable="false" />
+          <NavigationProperty Name="LichSuGDs" Relationship="JustBook_CT25Team23Model.FK_LichSuGD_DonHang" FromRole="DonHang" ToRole="LichSuGD" />
+          <NavigationProperty Name="TrangThaiDonHangs" Relationship="JustBook_CT25Team23Model.FK_TrangThaiDonHang_DonHang" FromRole="DonHang" ToRole="TrangThaiDonHang" />
+          <NavigationProperty Name="ChiTietDonHangs" Relationship="JustBook_CT25Team23Model.FK_ChiTietDonHang_DonHang" FromRole="DonHang" ToRole="ChiTietDonHang" />
+        </EntityType>
+        <EntityType Name="GioHang">
+          <Key>
+            <PropertyRef Name="MaGH" />
+          </Key>
+          <Property Name="MaGH" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaKH" Type="Int32" Nullable="false" />
+          <Property Name="TongTien" Type="Double" Nullable="false" />
+          <NavigationProperty Name="TaiKhoanKH" Relationship="JustBook_CT25Team23Model.FK_GioHang_TaiKhoanKH" FromRole="GioHang" ToRole="TaiKhoanKH" />
+          <NavigationProperty Name="ChiTietGioHangs" Relationship="JustBook_CT25Team23Model.FK_ChiTietGioHang_GioHang" FromRole="GioHang" ToRole="ChiTietGioHang" />
+        </EntityType>
+        <Association Name="FK_LichSuGD_DonHang">
+          <End Type="JustBook_CT25Team23Model.DonHang" Role="DonHang" Multiplicity="1" />
+          <End Type="JustBook_CT25Team23Model.LichSuGD" Role="LichSuGD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DonHang">
+              <PropertyRef Name="MaDH" />
+            </Principal>
+            <Dependent Role="LichSuGD">
+              <PropertyRef Name="MaDH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TrangThaiDonHang_DonHang">
+          <End Type="JustBook_CT25Team23Model.DonHang" Role="DonHang" Multiplicity="1" />
+          <End Type="JustBook_CT25Team23Model.TrangThaiDonHang" Role="TrangThaiDonHang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DonHang">
+              <PropertyRef Name="MaDH" />
+            </Principal>
+            <Dependent Role="TrangThaiDonHang">
+              <PropertyRef Name="MaDH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GioHang_TaiKhoanKH">
+          <End Type="JustBook_CT25Team23Model.TaiKhoanKH" Role="TaiKhoanKH" Multiplicity="1" />
+          <End Type="JustBook_CT25Team23Model.GioHang" Role="GioHang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaiKhoanKH">
+              <PropertyRef Name="MaKH" />
+            </Principal>
+            <Dependent Role="GioHang">
+              <PropertyRef Name="MaKH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ChiTietDonHang">
+          <Key>
+            <PropertyRef Name="MaChiTietDH" />
+          </Key>
+          <Property Name="MaChiTietDH" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaDonHang" Type="Int32" Nullable="false" />
+          <Property Name="MaSP" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="SoLuong" Type="Int32" Nullable="false" />
+          <Property Name="DonGia" Type="Double" Nullable="false" />
+          <Property Name="ChietKhau" Type="Double" Nullable="false" />
+          <Property Name="TongTien" Type="Double" Nullable="false" />
+          <NavigationProperty Name="DonHang" Relationship="JustBook_CT25Team23Model.FK_ChiTietDonHang_DonHang" FromRole="ChiTietDonHang" ToRole="DonHang" />
+        </EntityType>
+        <EntityType Name="ChiTietGioHang">
+          <Key>
+            <PropertyRef Name="MaChiTietGH" />
+          </Key>
+          <Property Name="MaChiTietGH" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaGioHang" Type="Int32" Nullable="false" />
+          <Property Name="MaSP" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TenSP" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="TacGia" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SoLuongMua" Type="Int32" Nullable="false" />
+          <Property Name="SoLuong" Type="Int32" Nullable="false" />
+          <Property Name="DonGia" Type="Double" Nullable="false" />
+          <Property Name="TongCong" Type="Double" Nullable="false" />
+          <Property Name="ImagePath" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="GioHang" Relationship="JustBook_CT25Team23Model.FK_ChiTietGioHang_GioHang" FromRole="ChiTietGioHang" ToRole="GioHang" />
+        </EntityType>
+        <Association Name="FK_ChiTietDonHang_DonHang">
+          <End Type="JustBook_CT25Team23Model.DonHang" Role="DonHang" Multiplicity="1" />
+          <End Type="JustBook_CT25Team23Model.ChiTietDonHang" Role="ChiTietDonHang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DonHang">
+              <PropertyRef Name="MaDH" />
+            </Principal>
+            <Dependent Role="ChiTietDonHang">
+              <PropertyRef Name="MaDonHang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChiTietGioHang_GioHang">
+          <End Type="JustBook_CT25Team23Model.GioHang" Role="GioHang" Multiplicity="1" />
+          <End Type="JustBook_CT25Team23Model.ChiTietGioHang" Role="ChiTietGioHang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GioHang">
+              <PropertyRef Name="MaGH" />
+            </Principal>
+            <Dependent Role="ChiTietGioHang">
+              <PropertyRef Name="MaGioHang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="JustBook_CT25Team23ModelStoreContainer" CdmEntityContainer="DB_CT25Team23Entities">
-          <EntitySetMapping Name="DonHangs">
-            <EntityTypeMapping TypeName="JustBook_CT25Team23Model.DonHang">
-              <MappingFragment StoreEntitySet="DonHang">
-                <ScalarProperty Name="MaDH" ColumnName="MaDH" />
-                <ScalarProperty Name="MaKH" ColumnName="MaKH" />
-                <ScalarProperty Name="MaGH" ColumnName="MaGH" />
-                <ScalarProperty Name="DiaChiGiaoHang" ColumnName="DiaChiGiaoHang" />
-                <ScalarProperty Name="ThoiGianTao" ColumnName="ThoiGianTao" />
-                <ScalarProperty Name="NguoiTao" ColumnName="NguoiTao" />
-                <ScalarProperty Name="TongTien" ColumnName="TongTien" />
-                <ScalarProperty Name="PhuongThucThanhToan" ColumnName="PhuongThucThanhToan" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="GioHangs">
-            <EntityTypeMapping TypeName="JustBook_CT25Team23Model.GioHang">
-              <MappingFragment StoreEntitySet="GioHang">
-                <ScalarProperty Name="MaGH" ColumnName="MaGH" />
-                <ScalarProperty Name="MaKH" ColumnName="MaKH" />
-                <ScalarProperty Name="TongTien" ColumnName="TongTien" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="LichSuGDs">
             <EntityTypeMapping TypeName="JustBook_CT25Team23Model.LichSuGD">
               <MappingFragment StoreEntitySet="LichSuGD">
@@ -581,9 +598,10 @@ warning 6002: The table/view 'CT25Team23.dbo.TrangThaiDonHang' does not have a p
           <EntitySetMapping Name="SanPhams">
             <EntityTypeMapping TypeName="JustBook_CT25Team23Model.SanPham">
               <MappingFragment StoreEntitySet="SanPham">
+                <ScalarProperty Name="MaLoaiSP" ColumnName="MaLoaiSP" />
+                <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
                 <ScalarProperty Name="MaSP" ColumnName="MaSP" />
                 <ScalarProperty Name="TenSP" ColumnName="TenSP" />
-                <ScalarProperty Name="DanhMuc" ColumnName="DanhMuc" />
                 <ScalarProperty Name="TacGia" ColumnName="TacGia" />
                 <ScalarProperty Name="NXB" ColumnName="NXB" />
                 <ScalarProperty Name="DonGia" ColumnName="DonGia" />
@@ -636,33 +654,97 @@ warning 6002: The table/view 'CT25Team23.dbo.TrangThaiDonHang' does not have a p
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ChiTietDonHangs">
-            <EntityTypeMapping TypeName="JustBook_CT25Team23Model.ChiTietDonHang">
-              <MappingFragment StoreEntitySet="ChiTietDonHang">
-                <ScalarProperty Name="MaDH" ColumnName="MaDH" />
-                <ScalarProperty Name="MaSP" ColumnName="MaSP" />
-                <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
-                <ScalarProperty Name="DonGia" ColumnName="DonGia" />
-                <ScalarProperty Name="ChietKhau" ColumnName="ChietKhau" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ChiTietGioHangs">
-            <EntityTypeMapping TypeName="JustBook_CT25Team23Model.ChiTietGioHang">
-              <MappingFragment StoreEntitySet="ChiTietGioHang">
-                <ScalarProperty Name="MaGioHang" ColumnName="MaGioHang" />
-                <ScalarProperty Name="MaSP" ColumnName="MaSP" />
-                <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
-                <ScalarProperty Name="DonGia" ColumnName="DonGia" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="TrangThaiDonHangs">
             <EntityTypeMapping TypeName="JustBook_CT25Team23Model.TrangThaiDonHang">
               <MappingFragment StoreEntitySet="TrangThaiDonHang">
                 <ScalarProperty Name="MaDH" ColumnName="MaDH" />
                 <ScalarProperty Name="ThoiGian" ColumnName="ThoiGian" />
                 <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoaiSanPhams">
+            <EntityTypeMapping TypeName="JustBook_CT25Team23Model.LoaiSanPham">
+              <MappingFragment StoreEntitySet="LoaiSanPham">
+                <ScalarProperty Name="TenLoaiSP" ColumnName="TenLoaiSP" />
+                <ScalarProperty Name="CodeLoaiSP" ColumnName="CodeLoaiSP" />
+                <ScalarProperty Name="MaLoaiSP" ColumnName="MaLoaiSP" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="JustBook_CT25Team23Model.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="JustBook_CT25Team23Model.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="JustBook_CT25Team23Model.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="JustBook_CT25Team23Model.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="JustBook_CT25Team23Model.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="JustBook_CT25Team23Model.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="JustBook_CT25Team23Model.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="JustBook_CT25Team23Model.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="JustBook_CT25Team23Model.Store.sp_upgraddiagrams" />
+          <EntitySetMapping Name="DonHangs">
+            <EntityTypeMapping TypeName="JustBook_CT25Team23Model.DonHang">
+              <MappingFragment StoreEntitySet="DonHang">
+                <ScalarProperty Name="TongGiaTriDonHang" ColumnName="TongGiaTriDonHang" />
+                <ScalarProperty Name="PhuongThucThanhToan" ColumnName="PhuongThucThanhToan" />
+                <ScalarProperty Name="ThoiGianTao" ColumnName="ThoiGianTao" />
+                <ScalarProperty Name="DiaChiNguoiNhan" ColumnName="DiaChiNguoiNhan" />
+                <ScalarProperty Name="PhoneNguoiNhan" ColumnName="PhoneNguoiNhan" />
+                <ScalarProperty Name="TenNguoiNhan" ColumnName="TenNguoiNhan" />
+                <ScalarProperty Name="MaKH" ColumnName="MaKH" />
+                <ScalarProperty Name="MaDH" ColumnName="MaDH" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GioHangs">
+            <EntityTypeMapping TypeName="JustBook_CT25Team23Model.GioHang">
+              <MappingFragment StoreEntitySet="GioHang">
+                <ScalarProperty Name="TongTien" ColumnName="TongTien" />
+                <ScalarProperty Name="MaKH" ColumnName="MaKH" />
+                <ScalarProperty Name="MaGH" ColumnName="MaGH" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChiTietDonHangs">
+            <EntityTypeMapping TypeName="JustBook_CT25Team23Model.ChiTietDonHang">
+              <MappingFragment StoreEntitySet="ChiTietDonHang">
+                <ScalarProperty Name="TongTien" ColumnName="TongTien" />
+                <ScalarProperty Name="ChietKhau" ColumnName="ChietKhau" />
+                <ScalarProperty Name="DonGia" ColumnName="DonGia" />
+                <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+                <ScalarProperty Name="MaSP" ColumnName="MaSP" />
+                <ScalarProperty Name="MaDonHang" ColumnName="MaDonHang" />
+                <ScalarProperty Name="MaChiTietDH" ColumnName="MaChiTietDH" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChiTietGioHangs">
+            <EntityTypeMapping TypeName="JustBook_CT25Team23Model.ChiTietGioHang">
+              <MappingFragment StoreEntitySet="ChiTietGioHang">
+                <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+                <ScalarProperty Name="TongCong" ColumnName="TongCong" />
+                <ScalarProperty Name="DonGia" ColumnName="DonGia" />
+                <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+                <ScalarProperty Name="SoLuongMua" ColumnName="SoLuongMua" />
+                <ScalarProperty Name="TacGia" ColumnName="TacGia" />
+                <ScalarProperty Name="TenSP" ColumnName="TenSP" />
+                <ScalarProperty Name="MaSP" ColumnName="MaSP" />
+                <ScalarProperty Name="MaGioHang" ColumnName="MaGioHang" />
+                <ScalarProperty Name="MaChiTietGH" ColumnName="MaChiTietGH" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

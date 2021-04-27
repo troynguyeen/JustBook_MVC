@@ -1,110 +1,359 @@
-﻿
+﻿@model IEnumerable<JustBook.ViewModel.ShoppingCartModel>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Giỏ hàng của tôi | JustBook";
     Layout = "~/Views/Header.cshtml";
 }
 
 <!-- detail shopping cart -->
-<div class="layout_cartDetail layout_padding collection_section">
+<div class="layout_cartDetail layout_padding collection_section" style="padding-bottom: 200px;">
     <div class="container">
         <div class="cart_detail">
-            <div class="cartInner">
-                <p class="cart_title">GIỎ HÀNG <span style="font-size: 12px;">(2 sản phẩm)</span></p>
-                <ul style="padding-top: 20px;">
-                    <li style="padding: 15px;">
-                        <div class="item_cart">
-                            <a href="#">
-                                <img src="~/images/cart_dungluachonannhan.jpg" alt="">
-                            </a>
-                            <div class="cart_content">
-                                <div>
-                                    <a href="#" style="padding-bottom: 20px;">Đừng Lựa Chọn An Nhàn Khi Còn Trẻ</a>
-                                    <p></p>
-                                    <p>Tác giả: <a href="#">Cánh Thiên</a></p>
-                                    <p>Sách có thể bọc bằng <a href="#">BookCare</a></p>
-                                    <a href="#" style="padding-right: 15px;">Xóa</a>
-                                    <a href="#">Để dành mua sau</a>
-                                </div>
-                                <div class="cart_productsDetails">
-                                    <div class="cart_productsPrices">
-                                        57.200đ
-                                    </div>
-                                    <div>
-                                        <span class="btn_quantity">+</span>
-                                        <span class="btn_quantity">1</span>
-                                        <span class="btn_quantity">-</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li style="padding: 15px;">
-                        <div class="item_cart">
-                            <a href="#">
-                                <img src="~/images/cart_tuoitredanggia.jpg" alt="">
-                            </a>
-                            <div class="cart_content">
-                                <div>
-                                    <a href="#">Tuổi Trẻ Đáng Giá Bao Nhiêu (Tái Bản)</a>
-                                    <p></p>
-                                    <p>Tác giả: <a href="#">Rosie Nguyễn</a></p>
-                                    <p>Sách có thể bọc bằng <a href="#">BookCare</a></p>
-                                    <a href="#" style="padding-right: 15px;">Xóa</a>
-                                    <a href="#">Để dành mua sau</a>
-                                </div>
-                                <div class="cart_productsDetails">
-                                    <div class="cart_productsPrices">
-                                        52.000đ
-                                    </div>
-                                    <div>
-                                        <span class="btn_quantity">+</span>
-                                        <span class="btn_quantity">1</span>
-                                        <span class="btn_quantity">-</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <div class="cart_TotalPrices">
-                <div class="shipping_address">
-                    <p class="heading_shippingAddress">
-                        <span>Địa chỉ nhận hàng</span>
-                        <a href="#">Thay đổi</a>
-                    </p>
-                    <p class="title_shippingAddress">
-                        <span class="name_shippingAddress">Nguyễn Chí Thành</span>
-                        <span>0522905064</span>
-                    </p>
-                    <p class="address_shippingAddress">
-                        <span>69/68 Đặng Thùy Trâm, P. 13, Q. Bình Thạnh, TP. HCM</span>
-                    </p>
-                </div>
-                <div class="cart_prices">
-                    <div>
-                        <ul class="prices_items">
-                            <li class="prices_item">
-                                <span class="prices_text">Tạm tính</span>
-                                <span class="prices_temporary">109.200đ</span>
-                            </li>
+            @if (Session["CartCounter"] != null && Session["TongSoLuongMua"] != null)
+            {
+                <div id="hasItem" style="display: flex;">
+                    <div class="cartInner" style="background-color: rgb(239, 239, 239);">
+                        <p class="cart_title" style="margin-bottom: 0;">GIỎ HÀNG <span style="font-size: 12px;">(@Session["CartCounter"] sản phẩm)</span></p>
+
+                        <ul style="background-color: rgb(239, 239, 239);">
+                            @foreach (var sanpham in Model)
+                            {
+                                var price_old = string.Format("{0:#,##0 VND}", sanpham.DonGia);
+                                var price_new = string.Format("{0:#,##0 VND}", sanpham.DonGia - sanpham.DonGia * 0.15);
+                                <li id="@sanpham.MaSP" style="padding: 25px; background-color: #FFF; margin-bottom: 20px;">
+                                    <div class="item_cart">
+                                        <a href="@Url.Action("Detail", "Shopping", new {id = @sanpham.MaSP})">
+                                            <img src="@Url.Content(@sanpham.ImagePath)" width="100px" alt="book">
+                                        </a>
+                                        <div class="cart_content" style="width: 100%; padding-left: 25px;">
+                                            <div style="word-break: break-all; width: 300px;">
+                                                <a href="@Url.Action("Detail", "Shopping", new {id = @sanpham.MaSP})" style="padding-bottom: 20px;">@sanpham.TenSP</a>
+                                                <p></p>
+                                                <p style="font-size: 12px;">Tác giả: <a href="#">@sanpham.TacGia</a></p>
+                                                <p style="font-size: 12px;">Sách có thể bọc bằng <a href="#">BookCare</a></p>
+                                                <a itemid="@sanpham.MaSP" onclick="RemoveItem(this)" href="#" style="padding-right: 20px; font-size: 14px;">Xóa</a>
+                                                <a href="#" style="font-size: 14px;">Để dành mua sau</a>
+                                            </div>
+                                            <div class="cart_productsDetails">
+                                                <div class="cart_productsPrices">
+                                                    <div style="font-size: 17px; font-weight: bold;">@price_new</div>
+                                                    <span style="text-decoration: line-through; font-size: 13px;
+                                                        color: rgb(162, 162, 162);} ">@price_old</span>
+                                                        <span style="font-size: 13px; font-weight: bold;">-15%</span>
+                                                    </div>
+                                                    <div class="quantity buttons_added">
+                                                        <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="@sanpham.SoLuong"
+                                                         itemid="@sanpham.MaSP" name="quantityItemName" value="@sanpham.SoLuongMua" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button" value="+" class="plus">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                }
                         </ul>
                     </div>
-                    <div>
-                        <p class="prices_total">
-                            <span class="prices_text">Thành tiền</span>
-                            <span class="prices_value">
-                                109.200đ
-                                <i style="display: block; font-size: 12px; color: rgb(51, 51, 51);">(Đã bao gồm VAT nếu có)</i>
-                            </span>
-                        </p>
+                    <div class="cart_TotalPrices" style="width: 350px;">
+                        @if (Session["MaKH"] != null)
+                        {
+                            <div class="shipping_address">
+                                <p class="heading_shippingAddress">
+                                    <span style="font-weight: bold;">Địa chỉ nhận hàng</span>
+                                    <a href="#" onclick="EditInfo()">Thay đổi</a>
+                                </p>
+                                <div id="ThongTinGiaoHang">
+                                    <p class="title_shippingAddress">
+                                        <span class="name_shippingAddress" id="TenKH" style="font-weight: bold;">
+                                            @if (Session["TenKH_GiaoHang"] != null)
+                                            {
+                                                @Session["TenKH_GiaoHang"].ToString()
+                                            }
+                                            else
+                                            {
+                                                @Session["TenKH"].ToString()
+                                            }
+                                        </span>
+                                        <span id="Phone">
+                                            @if (Session["Phone_GiaoHang"] != null)
+                                            {
+                                                @Session["Phone_GiaoHang"].ToString()
+                                            }
+                                            else
+                                            {
+                                                @Session["Phone"].ToString()
+                                            }
+                                        </span>
+                                    </p>
+                                    <p class="address_shippingAddress">
+                                        <span id="DiaChi">
+                                            @if (Session["DiaChi_GiaoHang"] != null)
+                                            {
+                                                @Session["DiaChi_GiaoHang"].ToString()
+                                            }
+                                            else
+                                            {
+                                                @Session["DiaChi"].ToString()
+                                            }
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
+                        }
+                        <div class="cart_prices">
+                            <div>
+                                <ul class="prices_items">
+                                    <li class="prices_item">
+                                        <span class="prices_text">Tạm tính</span>
+                                        <span class="prices_temporary" id="totalPrice_temp">@Session["TongCong_temp"].ToString()</span>
+                                    </li>
+                                    <li class="prices_item" style="color: red; padding-top: 10px; font-weight: bold;">
+                                        <span>Khuyến mãi</span>
+                                        <span>15%</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <p class="prices_total">
+                                    <span class="prices_text" style="font-weight: bold;">Thành tiền</span>
+                                    <span class="prices_value" id="totalPrice">@Session["TongCong"].ToString()</span>
+                                    <div style="display: flex; justify-content: flex-end;">
+                                        <i style="display: block; font-size: 12px; color: rgb(51, 51, 51);">(Đã bao gồm VAT nếu có)</i>
+                                    </div>
+                                </p>
+                            </div>
+                        </div>
+                        <a style="color: #FFF;" href="@Url.Action("Index", "Payment")">
+                            <button type="button" class="cart__submit btn btn-danger" style="padding: 10px;">
+                                Tiến hành đặt hàng
+                            </button>
+                        </a>
                     </div>
                 </div>
-                <a style="color: #FFF;" href="@Url.Action("Index", "Payment")">
-						<button type="button" class="cart__submit btn btn-danger">Tiến hành đặt hàng</button>
-				</a>
-            </div>
+            }
+            else
+            {
+                <div class="cartInner" style="background-color: rgb(239, 239, 239); width: 100%;">
+                    <p class="cart_title" style="margin-bottom: 0;">GIỎ HÀNG <span style="font-size: 12px;">(0 sản phẩm)</span></p>
+                    <div style="display: flex; flex-direction: column; align-items: center;">
+                        <img src="https://salt.tikicdn.com/desktop/img/mascot@2x.png">
+                        <div style="font-size: 20px; padding: 30px;">Không có sản phẩm nào trong giỏ hàng của bạn.</div>
+                        <a href="@Url.Action("Index", "Shopping")" class="btn btn-warning" style="font-weight: bold; color: #000;">Tiếp tục mua sắm</a>
+                    </div>
+                </div>
+            }
         </div>
     </div>
 </div>
-<!-- contact section end -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+
+    function SaveInfo() {
+        var Info = `
+        <div id="ThongTinGiaoHang">
+            <p class="title_shippingAddress">
+                <span class="name_shippingAddress" id="TenKH" style="font-weight: bold;"></span>
+                <span id="Phone"></span>
+            </p>
+            <p class="address_shippingAddress">
+                <span id="DiaChi"></span>
+            </p>
+        </div>`;
+
+        var TenKH = $("#TenKH").val();
+        var Phone = $("#Phone").val();
+        var DiaChi = $("#DiaChi").val();
+
+        if (TenKH == "" || Phone == "" || DiaChi == "") {
+            alert("Bạn phải nhập đầy đủ thông tin.");
+
+        } else {
+            $("#FormEdit").replaceWith($(Info));
+
+            $("#TenKH").text(TenKH);
+            $("#Phone").text(Phone);
+            $("#DiaChi").text(DiaChi);
+
+            var formData = new FormData();
+            formData.append("TenKH", TenKH);
+            formData.append("Phone", Phone);
+            formData.append("DiaChi", DiaChi);
+
+            $.ajax({
+                async: true,
+                type: 'POST',
+                contentType: false,
+                processData: false,
+                data: formData,
+                url: '/Cart/SaveInfo',
+                success: function (data) {
+                    if (data.Success) {
+                    }
+                },
+                error: function () {
+                    alert(data.Message);
+                }
+            });
+        }
+
+        
+
+    }
+
+    function Cancel() {
+        var Info = `
+        <div id="ThongTinGiaoHang">
+            <p class="title_shippingAddress">
+                <span class="name_shippingAddress" id="TenKH" style="font-weight: bold;"></span>
+                <span id="Phone"></span>
+            </p>
+            <p class="address_shippingAddress">
+                <span id="DiaChi"></span>
+            </p>
+        </div>`;
+
+        var TenKH = sessionStorage.getItem("TenKH");
+        var Phone = sessionStorage.getItem("Phone");
+        var DiaChi = sessionStorage.getItem("DiaChi");
+
+        $("#FormEdit").replaceWith($(Info));
+
+        $("#TenKH").text(TenKH);
+        $("#Phone").text(Phone);
+        $("#DiaChi").text(DiaChi);
+
+    }
+
+    function EditInfo() {
+        var formEdit = `
+        <form id="FormEdit">
+            <input type="text" id="TenKH" placeholder="Tên người nhận" style="width: 100%; margin-top: 10px; border: 1px solid #C8C8C8; border-radius: 4px;">
+            <input type="text" id="Phone" placeholder="Số điện thoại" style="width: 100%; margin-top: 10px; border: 1px solid #C8C8C8; border-radius: 4px;">
+            <input type="text" id="DiaChi" placeholder="Địa chỉ nhận" style="width: 100%; margin-top: 10px; border: 1px solid #C8C8C8; border-radius: 4px;">
+            <div style="margin-top: 20px; display: flex; justify-content: space-between;">
+                <button class="btn btn-primary" onclick="SaveInfo()">Lưu thay đổi</button>
+                <button class="btn btn-danger" onclick="Cancel()">Hủy</button>
+            </div>
+        </form>`;
+
+        if ($("#TenKH").text() != "" || $("#Phone").text() != "" || $("#DiaChi").text() != "") {
+            sessionStorage.setItem("TenKH", $("#TenKH").text());
+            sessionStorage.setItem("Phone", $("#Phone").text());
+            sessionStorage.setItem("DiaChi", $("#DiaChi").text());
+
+            $("#ThongTinGiaoHang").replaceWith($(formEdit));
+        }
+    }
+
+    function RemoveItem(item) {
+        var hasNoItem = `
+        <div class="cartInner" style="background-color: rgb(239, 239, 239); width: 100%;">
+            <p class="cart_title" style="margin-bottom: 0;">GIỎ HÀNG <span style="font-size: 12px;">(0 sản phẩm)</span></p>
+            <div style="display: flex; flex-direction: column; align-items: center;">
+                <img src="https://salt.tikicdn.com/desktop/img/mascot@2x.png">
+                <div style="font-size: 20px; padding: 30px;">Không có sản phẩm nào trong giỏ hàng của bạn.</div>
+                <a href="@Url.Action("Index", "Shopping")" class="btn btn-warning" style="font-weight: bold; color: #000;">Tiếp tục mua sắm</a>
+            </div>
+        </div>`;
+
+        var itemId = $(item).attr("itemid");
+        var formData = new FormData();
+
+        formData.append("SelectedID", itemId);
+
+        $.ajax({
+            async: true,
+            type: 'POST',
+            contentType: false,
+            processData: false,
+            data: formData,
+            url: '/Cart/RemoveItemFromCart',
+            success: function (data) {
+                if (data.Success) {
+                    $("#cartCount").text(data.Counter);
+                    $("#totalPrice_temp").text(data.TotalPrice_temp);
+                    $("#totalPrice").text(data.TotalPrice);
+                    $("#" + itemId).remove();
+
+                    if (data.RemoveAll) {
+                        $("#hasItem").replaceWith($(hasNoItem));
+                    }
+                }
+            },
+                error: function () {
+                    alert(data.Message);
+                }
+            });
+    }
+
+    $(document).ready(function () {
+        $("input[name=quantityItemName]").change(function () {
+            var itemId = $(this).attr("itemid");
+            var quantityItem = this.value;
+            var formData = new FormData();
+            var SoLuongConLai = 0;
+
+            async function getSoLuong() {
+                await $.ajax({
+                    async: true,
+                    type: 'GET',
+                    data: {
+                        SelectedID: itemId
+                    },
+                    url: '/Cart/GetSoLuong',
+                    success: function (SoLuong) {
+                        SoLuongConLai = SoLuong;
+                    },
+                    error: function (err) {
+                        console.error(err);
+                    }
+                });
+                return SoLuongConLai;
+            }
+
+            getSoLuong().then(
+                function (soluong) {
+                    formData.append("SelectedID", itemId);
+
+                    if (quantityItem === "" || quantityItem <= 0) {
+                        formData.append("QuantityBuying", 1);
+                        $("input[itemid=" + itemId + "]").val(1);
+                    }
+
+                    if (quantityItem <= soluong) {
+                        formData.append("QuantityBuying", quantityItem);
+
+                    } else {
+                        formData.append("QuantityBuying", soluong);
+                        $("input[itemid=" + itemId + "]").val(soluong);
+                        alert("Bạn chỉ có thể mua tối đa " + soluong + " sản phẩm.");
+                    }
+
+                    $.ajax({
+                        async: true,
+                        type: 'POST',
+                        contentType: false,
+                        processData: false,
+                        data: formData,
+                        url: '/Cart/UpdateQuantityBuying',
+                        success: function (data) {
+                            if (data.Success) {
+                                $("#cartCount").text(data.Counter);
+                                $("#totalPrice_temp").text(data.TotalPrice_temp);
+                                $("#totalPrice").text(data.TotalPrice);
+
+                                if (data.Message != "") {
+                                    alert(data.Message);
+                                }
+                            } else {
+                                alert(data.Message);
+                            }
+                        },
+                        error: function () {
+                            alert(data.Message);
+                        }
+                    })
+                }
+            );
+        });
+    });
+</script>

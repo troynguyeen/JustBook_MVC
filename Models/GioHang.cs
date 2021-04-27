@@ -24,8 +24,8 @@ namespace JustBook.Models
         public int MaKH { get; set; }
         public double TongTien { get; set; }
     
+        public virtual TaiKhoanKH TaiKhoanKH { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ChiTietGioHang> ChiTietGioHangs { get; set; }
-        public virtual TaiKhoanKH TaiKhoanKH { get; set; }
     }
 }

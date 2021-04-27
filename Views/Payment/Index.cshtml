@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<JustBook.ViewModel.ShoppingCartModel>
 @{
     ViewBag.Title = "Thông tin hóa đơn | JustBook";
     Layout = "~/Views/Header.cshtml";
@@ -7,13 +7,7 @@
 <!-- detail shopping cart -->
 <div class="layout_cartDetail layout_padding collection_section">
     <div class="container">
-        <div class="orders_detail">
-            <div style="width: 150px; padding-right: 10px;">
-                <a href="@Url.Action("OrderHistory", "UserHome")" style="color: #337ab7; padding-right: 30px; font-size: 20px">
-                    <span class="fas fa-arrow-left" style="font-size: 18px;"></span>
-                    Trở về
-                </a>
-            </div>
+        <div class="orders_detail" id="orderDetail">
             <div class="ordersInner">
                 <div class="orders_list">
                     <h4 class="orders_title">1. Chọn hình thức giao hàng</h4>
@@ -25,36 +19,26 @@
                             </label>
                         </div>
                         <div class="layout_paymentItems">
-                            <div class="item_left">
+                            <div class="item_left" style="width: 550px;">
                                 <ul>
-                                    <li>
-                                        <div class="item_detailOrder">
-                                            <img src="~/images/cart_dungluachonannhan.jpg" alt="" width="50px">
-                                            <div class="order_items">
-                                                <p class="order_nameItem">Đừng Lựa Chọn An Nhàn Khi Còn Trẻ</p>
-                                                <p class="money_paymentDetail" style="margin-top: 10px;">
-                                                    <span>SL: x1</span>
-                                                    <span>
-                                                        57.200đ
-                                                    </span>
-                                                </p>
+                                    @foreach(var sanpham in Model)
+                                    {
+                                        var price_new = string.Format("{0:#,##0 VND}", sanpham.DonGia - sanpham.DonGia * 0.15);
+                                        <li style="padding-bottom: 20px;">
+                                            <div class="item_detailOrder">
+                                                <img src="@Url.Content(@sanpham.ImagePath)" alt="" width="50px">
+                                                <div class="order_items">
+                                                    <p style="color: rgb(120, 120, 120); width: 250px;">
+                                                        @sanpham.TenSP
+                                                    </p>
+                                                    <p class="money_paymentDetail" style="margin-top: 10px;">
+                                                        <span>SL: <span>x</span>@sanpham.SoLuongMua</span>
+                                                        <span>@price_new</span>
+                                                    </p>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="item_detailOrder">
-                                            <img src="~/images/cart_tuoitredanggia.jpg" alt="" width="50px">
-                                            <div class="order_items">
-                                                <p class="order_nameItem">Tuổi Trẻ Đáng Giá Bao Nhiêu (Tái Bản)</p>
-                                                <p class="money_paymentDetail" style="margin-top: 10px;">
-                                                    <span>SL: x1</span>
-                                                    <span>
-                                                        52.000đ
-                                                    </span>
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </li>
+                                        </li>
+                                    }
                                 </ul>
                             </div>
                             <div class="item_right">
@@ -62,9 +46,6 @@
                                     <div class="subheading_order">
                                         <span class="heading__est-time_order">Giao vào Thứ Hai, 22/03</span>
                                         <span class="heading__fulfil_order">Được giao bởi JustBook (từ Hồ Chí Minh)</span>
-                                    </div>
-                                    <div>
-                                        <span class="shipping-fee">14.000đ</span>
                                     </div>
                                 </div>
                                 <div style="color: rgb(120, 120, 120); margin-top: 15px;">
@@ -75,13 +56,13 @@
                     </div>
                 </div>
                 <div class="payments_list">
-                    <h4 class="payments_title">3. Chọn hình thức thanh toán</h4>
+                    <h4 class="payments_title">2. Chọn hình thức thanh toán</h4>
                     <div class="payments_selecting">
-                        <ul>
-                            <li>
+                        <ul id="paymentChoice">
+                            <li id="cashPayment">
                                 <div class="custom-radio form-check">
-                                    <input class="custom-radioInput form-check-input" style="margin: 5px;" type="radio" name="paymentSelecting" id="paymentSelecting1" checked>
-                                    <label class="custom-radioLabel form-check-label" for="paymentSelecting1">
+                                    <input class="custom-radioInput form-check-input" style="margin: 5px;" type="radio" name="paymentSelecting" id="cash" value="cash" checked>
+                                    <label class="custom-radioLabel form-check-label" for="cash">
                                         <div class="item_payment">
                                             <img class="icons_payment" src="~/icon/cash_payment.svg" alt="cash" width="32px">
                                             <span>Thanh toán tiền mặt khi nhận hàng</span>
@@ -89,46 +70,24 @@
                                     </label>
                                 </div>
                             </li>
-                            <li>
+                            <li id="cardPayment">
                                 <div class="custom-radio form-check">
-                                    <input class="custom-radioInput form-check-input" style="margin: 5px;" type="radio" name="paymentSelecting" id="paymentSelecting2">
-                                    <label class="custom-radioLabel form-check-label" for="paymentSelecting2">
+                                    <input class="custom-radioInput form-check-input" style="margin: 5px;" type="radio" name="paymentSelecting" id="card" value="card">
+                                    <label class="custom-radioLabel form-check-label" for="card">
                                         <div class="item_payment">
                                             <img class="icons_payment" src="~/icon/debit-card.svg" alt="debit" width="32px">
                                             <span>Thẻ ATM nội địa/Internet Banking</span>
                                         </div>
                                     </label>
                                 </div>
-                            </li>
-                            <li>
+                            </li>             
+                            <li id="momoPayment">
                                 <div class="custom-radio form-check">
-                                    <input class="custom-radioInput form-check-input" style="margin: 5px;" type="radio" name="paymentSelecting" id="paymentSelecting3">
-                                    <label class="custom-radioLabel form-check-label" for="paymentSelecting3">
-                                        <div class="item_payment">
-                                            <img class="icons_payment" src="~/icon/credit-card.svg" alt="credit" width="32px">
-                                            <span>Thanh toán bằng thẻ quốc tế Visa, Master, JCB</span>
-                                        </div>
-                                    </label>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="custom-radio form-check">
-                                    <input class="custom-radioInput form-check-input" style="margin: 5px;" type="radio" name="paymentSelecting" id="paymentSelecting4">
-                                    <label class="custom-radioLabel form-check-label" for="paymentSelecting4">
+                                    <input class="custom-radioInput form-check-input" style="margin: 5px;" type="radio" name="paymentSelecting" id="momo" value="momo">
+                                    <label class="custom-radioLabel form-check-label" for="momo">
                                         <div class="item_payment">
                                             <img class="icons_payment" src="https://frontend.tikicdn.com/_desktop-next/static/img/icons/checkout/icon-payment-method-mo-mo.svg" alt="cash" width="32px">
                                             <span>Thanh toán bằng ví MoMo</span>
-                                        </div>
-                                    </label>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="custom-radio form-check">
-                                    <input class="custom-radioInput form-check-input" style="margin: 5px;" type="radio" name="paymentSelecting" id="paymentSelecting5">
-                                    <label class="custom-radioLabel form-check-label" for="paymentSelecting5">
-                                        <div class="item_payment">
-                                            <img class="icons_payment" src="https://frontend.tikicdn.com/_desktop-next/static/img/icons/checkout/icon-payment-method-zalo-pay.svg" alt="cash" width="32px">
-                                            <span>Thanh toán bằng ZaloPay</span>
                                         </div>
                                     </label>
                                 </div>
@@ -137,68 +96,94 @@
                     </div>
                 </div>
                 <div class="orders_confirm">
-                    <button type="button" class="orders_submit btn btn-danger">ĐẶT MUA</button>
+                    <button type="button" class="orders_submit btn btn-danger" onclick="Buy()">ĐẶT MUA</button>
                     <p class="orders_note">(Xin vui lòng kiểm tra lại đơn hàng trước khi Đặt Mua)</p>
                 </div>
             </div>
-            <div class="orders_TotalPrices">
+            <div class="orders_TotalPrices" style="width: 400px;">
                 <div class="shipping_address">
                     <div class="address_title">
                         <span>Địa chỉ giao hàng</span>
-                        <a href="#">Sửa</a>
                     </div>
                     <div class="address_orders">
-                        <span class="name_ordersAdress">Nguyễn Chí Thành</span>
-                        <span class="street_ordersAdress">69/68 Đặng Thùy Trâm, P. 13, Q. Bình Thạnh, TP. HCM</span>
-                        <span class="phone_ordersAdress">Điện thoại: 0522905064</span>
+                        <span class="name_ordersAdress" id="TenKH_GiaoHang">
+                            @if (Session["TenKH_GiaoHang"] != null)
+                            {
+                                @Session["TenKH_GiaoHang"].ToString()
+                            }
+                            else
+                            {
+                                @Session["TenKH"].ToString()
+                            }
+                        </span>
+                        <span class="street_ordersAdress" id="DiaChi_GiaoHang">
+                            @if (Session["DiaChi_GiaoHang"] != null)
+                            {
+                                @Session["DiaChi_GiaoHang"].ToString()
+                            }
+                            else
+                            {
+                                @Session["DiaChi"].ToString()
+                            }
+                        </span>
+                        <span class="phone_ordersAdress">
+                            Điện thoại:
+                            <span id="Phone_GiaoHang">
+                                @if (Session["Phone_GiaoHang"] != null)
+                                {
+                                    @Session["Phone_GiaoHang"].ToString()
+                                }
+                                else
+                                {
+                                    @Session["Phone"].ToString()
+                                }
+                            </span>
+                        </span>
                     </div>
                 </div>
                 <div class="cart_prices">
                     <div class="title_ordersPrices">
                         <div class="subTitle_ordersPrices">
                             <b style="font-size: 15px;">Đơn hàng</b>
-                            <p style="font-size: 13px; color: rgb(120, 120, 120);">2 Sản phẩm.</p>
+                            <p style="font-size: 13px; color: rgb(120, 120, 120);">@Session["CartCounter"].ToString() Sản phẩm.</p>
                         </div>
-                        <a href="#" style="font-size: 13px; margin-top: 4px;">Sửa</a>
+                        <a href="@Url.Action("Index", "Cart")" style="font-size: 13px; margin-top: 4px;">Sửa</a>
                     </div>
                     <div class="fromCart">
                         <div>
                             <ul>
-                                <li>
-                                    <div class="info_fromCart">
-                                        <div class="item_formCart">
-                                            <strong class="qty_fromCart">1 x</strong>
-                                            <a class="nameItem_formCart" href="#">Đừng Lựa Chọn An Nhàn Khi Còn Trẻ</a>
+                                @foreach (var sanpham in Model)
+                                {
+                                    var price_new = string.Format("{0:#,##0 VND}", sanpham.DonGia - sanpham.DonGia * 0.15);
+                                    <li>
+                                        <div class="info_fromCart">
+                                            <div class="item_formCart">
+                                                <strong class="qty_fromCart">@sanpham.SoLuongMua x</strong>
+                                                <a class="nameItem_formCart" href="@Url.Action("Detail", "Shopping", new {id = @sanpham.MaSP})" target="_blank" style="width: 140px; word-break: break-all;">
+                                                    @sanpham.TenSP
+                                                </a>
+                                            </div>
+                                            <div class="prices_fromCart">@price_new</div>
                                         </div>
-                                        <div class="prices_fromCart">57.200đ</div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="info_fromCart">
-                                        <div class="item_formCart">
-                                            <strong class="qty_fromCart">1 x</strong>
-                                            <a class="nameItem_formCart" href="#">Tuổi Trẻ Đáng Giá Bao Nhiêu (Tái Bản)</a>
-                                        </div>
-                                        <div class="prices_fromCart">52.000đ</div>
-                                    </div>
-                                </li>
+                                    </li>
+                                }
                             </ul>
                         </div>
                         <div class="fee_payment">
                             <div class="fee_temporary">
                                 <div>Tạm tính</div>
-                                <div>116.800đ</div>
+                                <div>@Session["TongCong"].ToString()</div>
                             </div>
                             <div class="fee_shipping">
                                 <div>Phí vận chuyển</div>
-                                <div>14.000đ</div>
+                                <div>0 VND <span style="font-style: italic;">(HCM City only)</span></div>
                             </div>
                         </div>
                         <div>
                             <p class="fee_total">
                                 <strong class="fee_text">Thành tiền: </strong>
                                 <span class="fee_value">
-                                    123.200đ
+                                    <span id="TongCong">@Session["TongCong"].ToString()</span>
                                     <i style="display: block; font-size: 12px; color: rgb(51, 51, 51);">(Đã bao gồm VAT nếu có)</i>
                                 </span>
                             </p>
@@ -209,4 +194,137 @@
         </div>
     </div>
 </div>
-<!-- contact section end -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+
+    function SaveOrder() {
+        var payment = $('input[name=paymentSelecting]:checked', '#paymentChoice').val();
+
+        var formData = new FormData();
+        formData.append("TenNguoiNhan", $("#TenKH_GiaoHang").text());
+        formData.append("PhoneNguoiNhan", Number($("#Phone_GiaoHang").text()));
+        formData.append("DiaChiNguoiNhan", $("#DiaChi_GiaoHang").text());
+
+        if (payment == "momo") {
+            formData.append("PhuongThucThanhToan", "Ví Momo");
+
+        } else if (payment == "card") {
+            formData.append("PhuongThucThanhToan", "Thẻ ATM");
+            
+        } else {
+            formData.append("PhuongThucThanhToan", "Tiền mặt");
+        }
+
+        $.ajax({
+            async: true,
+            type: 'POST',
+            contentType: false,
+            processData: false,
+            data: formData,
+            url: '/Payment/CreateOrder',
+            success: function (data) {
+                if (data.Success) {
+                    alert(data.Message);
+                }
+                else {
+                    alert("Không thể tạo đơn hàng.");
+                }
+            },
+            error: function () {
+                alert(data.Message);
+            }
+        })
+    }
+
+    function Buy() {
+
+        SaveOrder();
+
+        var card = `
+        <div id="cardPayment_info" style="padding-top: 20px;">
+            <div style="font-size: 17px; font-weight: bold;">Ngân hàng Techcombank</div>
+            <div>Người nhận: Nguyễn Chí Thành</div>
+            <div>STK: 1900123456789</div>
+            <div>Nội dung: Mã đơn hàng + Họ tên + Số điện thoại</div>
+        </div>`;
+
+        var momo = `
+        <div id="momoPayment_info" style="padding-top: 20px;">
+            <div style="font-size: 17px; font-weight: bold;">Ví Momo</div>
+            <div>Người nhận: Nguyễn Chí Thành <span style="font-style: italic;">(Admin JustBook)</span></div>
+            <div>Phone: 123456789</div>
+            <div>Nội dung: Mã đơn hàng + Họ tên + Số điện thoại</div>
+        </div>`;
+
+        var payment = $('input[name=paymentSelecting]:checked', '#paymentChoice').val();
+        var MessagePayment = `
+        <div style="margin: 100px 0;">
+            <div style="display: flex; justify-content: center; align-items: center;">
+                <img src="https://www.flaticon.com/svg/vstatic/svg/4003/4003688.svg?token=exp=1619428363~hmac=c9a5b5f54aff16b649c490985332a98d" width="400px;"/>
+                <div style="padding-left: 50px;">
+                    <div style="font-size: 20px; color: rgb(183, 0, 23); padding-bottom: 20px;">Cảm ơn bạn đã mua hàng tại JustBook !</div>
+                    <div style="padding-bottom: 20px; font-weight: bold;">Mã số đơn hàng của bạn:</div>
+                    <div style="font-size: 30px; font-weight: bold; color: #FFF; background-color: #ff4e5b; padding: 10px; text-align: center;">
+                        JUSTBOOK-01
+                    </div>
+                    <div style="padding: 20px 0;">Bạn có thể xem lại <a href="@Url.Action("OrderHistory", "UserHome")">đơn hàng của tôi.</a></div>
+                    <div>Bạn đã chọn phương thức thanh toán <span id="PaymentName" style="font-weight: bold;">Tiền mặt</span></div>
+                    <div id="PaymentMethod"></div>
+                    <div style="font-style: italic; padding-top: 20px;">
+                        (Nếu bạn chọn phương thức thanh toán 
+                        <a href="#" style="font-weight: bold;">Thẻ ATM</a>
+                        hoặc
+                        <a href="#" style="font-weight: bold;">Ví Momo</a> 
+                        xin vui lòng chuyển khoản trong vòng 15 phút kể từ khi đơn hàng này được tạo.)
+                    </div>
+                </div>            
+            </div>
+        </div>
+        `;
+
+        $("#orderDetail").replaceWith($(MessagePayment));
+
+        if (payment == "card") {
+            $("#PaymentName").text("Thẻ ATM")
+            $("#PaymentMethod").append($(card));
+        }
+
+        else if (payment == "momo") {
+            $("#PaymentName").text("Ví Momo")
+            $("#PaymentMethod").append($(momo));
+        }
+    }
+
+    $('#paymentChoice input').on('change', function () {
+
+        var card = `
+        <div id="cardPayment_info" style="margin-left: 67px; padding-bottom: 20px;">
+            <div style="font-size: 17px; font-weight: bold;">Ngân hàng Techcombank</div>
+            <div>Người nhận: Nguyễn Chí Thành <span style="font-style: italic;">(Admin JustBook)</span></div>
+            <div>STK: 1900123456789</div>
+            <div>Nội dung: Mã đơn hàng + Họ tên + Số điện thoại</div>
+        </div>`;
+
+        var momo = `
+        <div id="momoPayment_info" style="margin-left: 67px; padding-bottom: 20px;">
+            <div style="font-size: 17px; font-weight: bold;">Ví Momo</div>
+            <div>Người nhận: Nguyễn Chí Thành <span style="font-style: italic;">(Admin JustBook)</span></div>
+            <div>Phone: 123456789</div>
+            <div>Nội dung: Mã đơn hàng + Họ tên + Số điện thoại</div>
+        </div>`;
+
+        var payment = $('input[name=paymentSelecting]:checked', '#paymentChoice').val();
+
+        $("#cardPayment_info").remove();
+        $("#momoPayment_info").remove();
+
+        if (payment == "card") {
+            $("#cardPayment").append($(card));
+
+        } else if (payment == "momo") {
+            $("#momoPayment").append($(momo));
+        }
+    });
+</script>

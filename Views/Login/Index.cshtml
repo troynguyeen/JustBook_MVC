@@ -8,17 +8,21 @@
 <div class="layout_padding collection_section">
     <div class="container">
         <div class="collection_section_2">
+            @if (Session["Message"] != null)
+            {
+                <div style="text-align: center; padding: 30px; color: red;">@Session["Message"].ToString()</div>
+            }
             <div class="row">
                 <div class="login_box" style="margin-left: 350px">
                     @using (Html.BeginForm("Verify", "Login", FormMethod.Post))
                     {
-                    <form>
-                        <input class="center-block" type="email" id="email" name="Email" placeholder="Enter Email" required style="width: 500px ; height: 50px;"><br><br>
-                        <input class="center-block" type="password" id="pass" name="MatKhau" placeholder="Enter Password" required style="width: 500px; height: 50px;"><br>
-                        <label style="color: red; padding-bottom: 20px;">@Html.DisplayFor(model => model.LoginErrorMessage)</label>
-                        <p> Don't have an account?<a href="@Url.Action("Index", "Register")"> Click here</a></p><br>
-                        <button class="subscribr_bt" style="width: 100%;">Sign In</button><br><br><br><br>
-                    </form>
+                        <form>
+                            <input class="center-block" type="email" id="email" name="Email" placeholder="Enter Email" required style="width: 500px ; height: 50px;"><br><br>
+                            <input class="center-block" type="password" id="pass" name="MatKhau" placeholder="Enter Password" required style="width: 500px; height: 50px;"><br>
+                            <label style="color: red; padding-bottom: 20px;">@Html.DisplayFor(model => model.LoginErrorMessage)</label>
+                            <p> Don't have an account?<a href="@Url.Action("Index", "Register")"> Click here</a></p><br>
+                            <button class="subscribr_bt" style="width: 100%;">Sign In</button><br><br><br><br>
+                        </form>
                     }
                 </div>
             </div>

@@ -10,18 +10,10 @@
 namespace JustBook.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class ChiTietDonHang
+    public partial class sp_helpdiagramdefinition_Result
     {
-        public int MaChiTietDH { get; set; }
-        public int MaDonHang { get; set; }
-        public string MaSP { get; set; }
-        public int SoLuong { get; set; }
-        public double DonGia { get; set; }
-        public double ChietKhau { get; set; }
-        public double TongTien { get; set; }
-    
-        public virtual DonHang DonHang { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

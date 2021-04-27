@@ -17,25 +17,25 @@ namespace JustBook.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public DonHang()
         {
-            this.ChiTietDonHangs = new HashSet<ChiTietDonHang>();
             this.LichSuGDs = new HashSet<LichSuGD>();
             this.TrangThaiDonHangs = new HashSet<TrangThaiDonHang>();
+            this.ChiTietDonHangs = new HashSet<ChiTietDonHang>();
         }
     
         public int MaDH { get; set; }
         public int MaKH { get; set; }
-        public int MaGH { get; set; }
-        public string DiaChiGiaoHang { get; set; }
+        public string TenNguoiNhan { get; set; }
+        public int PhoneNguoiNhan { get; set; }
+        public string DiaChiNguoiNhan { get; set; }
         public System.DateTime ThoiGianTao { get; set; }
-        public string NguoiTao { get; set; }
-        public double TongTien { get; set; }
         public string PhuongThucThanhToan { get; set; }
+        public double TongGiaTriDonHang { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ChiTietDonHang> ChiTietDonHangs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LichSuGD> LichSuGDs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TrangThaiDonHang> TrangThaiDonHangs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ChiTietDonHang> ChiTietDonHangs { get; set; }
     }
 }

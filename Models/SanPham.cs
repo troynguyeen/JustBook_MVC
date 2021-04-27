@@ -14,15 +14,8 @@ namespace JustBook.Models
     
     public partial class SanPham
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public SanPham()
-        {
-            this.ChiTietGioHangs = new HashSet<ChiTietGioHang>();
-        }
-    
         public string MaSP { get; set; }
         public string TenSP { get; set; }
-        public string DanhMuc { get; set; }
         public string TacGia { get; set; }
         public string NXB { get; set; }
         public double DonGia { get; set; }
@@ -33,8 +26,7 @@ namespace JustBook.Models
         public string KichThuoc { get; set; }
         public string LoaiBia { get; set; }
         public string TrangThai { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ChiTietGioHang> ChiTietGioHangs { get; set; }
+        public string ImagePath { get; set; }
+        public int MaLoaiSP { get; set; }
     }
 }

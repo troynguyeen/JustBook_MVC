@@ -1,0 +1,170 @@
+﻿@model JustBook.ViewModel.ShoppingViewModel
+@{
+    ViewBag.Title = @Model.TenSP + " | JustBook";
+    Layout = "~/Views/Header.cshtml";
+}
+
+<div class="about_main layout_padding" style="background-color: rgb(239, 239, 239);">
+    <div class="container">
+        <div>
+            <div class="container-fluid">
+                <div class="wrapper row" style="background-color: #FFF; border-radius: 0;">
+                    <div class="preview col-md-5">
+                        <div class="preview-pic tab-content">
+                            <div class="tab-pane active" id="pic-1">
+                                <img class="image-preview" src="@Url.Content(@Model.ImagePath)" />
+                            </div>
+                            <div class="tab-pane" id="pic-2">
+                                <img class="image-preview" src="@Url.Content(@Model.ImagePath)" />
+                            </div>
+                            <div class="tab-pane" id="pic-3">
+                                <img class="image-preview" src="@Url.Content(@Model.ImagePath)" />
+                            </div>
+                        </div>
+                        <ul class="preview-thumbnail nav nav-tabs">
+                            <li class="active">
+                                <a data-target="#pic-1" data-toggle="tab">
+                                    <img src="@Url.Content(@Model.ImagePath)" />
+                                </a>
+                            </li>
+                            <li>
+                                <a data-target="#pic-2" data-toggle="tab">
+                                    <img src="@Url.Content(@Model.ImagePath)" />
+                                </a>
+                            </li>
+                            <li>
+                                <a data-target="#pic-3" data-toggle="tab">
+                                    <img src="@Url.Content(@Model.ImagePath)" />
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="details col-md-7">
+                        <h3 class="product-title">@Model.TenSP</h3>
+                        <div class="info">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    Nhà cung cấp: <a href="#">Tiki</a>
+                                </div>
+                                <div class="col-md-6">Tác giả: <b>@Model.TacGia</b></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    Nhà xuất bản: <b>@Model.NXB</b>
+                                </div>
+                                <div class="col-md-6">Hình thức bìa: <b>@Model.LoaiBia</b></div>
+                            </div>
+                        </div>
+                        <div class="rating">
+                            <div class="stars">
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                            </div>
+                            <div class="review-no">Số lượng : @Model.SoLuong</div>
+                            <div class="review-no">Số trang : @Model.SoTrang</div>
+                        </div>
+                        @{
+                            var price_old = string.Format("{0:#,##0 VND}", @Model.DonGia);
+                            var price_new = string.Format("{0:#,##0 VND}", @Model.DonGia - @Model.DonGia * 0.15);
+                            <div class="price">
+                                <span class="home-product-item__price-current" style="font-size: 30px;">@price_new</span>
+                                <span class="home-product-item__price-old" style="font-size: 15px; color: #000;">@price_old</span>
+                                <span style="font-size: 15px;">-15%</span>
+                            </div>
+                        }
+                        <div class="quantity buttons_added">
+                            <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="@Model.SoLuong"
+                                                                                name="quantityItemName" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button" value="+" class="plus">
+                        </div>
+                        <div class="input-group col-md-8">
+                            <input class="btn btn-danger" type="button" value="Thêm vào giỏ hàng"
+                                   style="height: 50px; font-weight: bold;" itemid="@Model.MaSP" onclick="AddtoCart(this)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div style="font-size: 20px; padding-top: 30px;">MÔ TẢ SẢN PHẨM</div>
+            <div style="background-color: #FFF; padding: 20px; margin-top: 10px;">
+                @Model.MoTa
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function AddtoCart(item) {
+        var itemId = $(item).attr("itemid");
+        var quantityItem = $("input[name=quantityItemName]").val();
+        var formData = new FormData();
+
+        async function getSoLuong() {
+            await $.ajax({
+                async: true,
+                type: 'GET',
+                data: {
+                    SelectedID: itemId
+                },
+                url: '/Cart/GetSoLuong',
+                success: function (SoLuong) {
+                    SoLuongConLai = SoLuong;
+                },
+                error: function (err) {
+                    console.error(err);
+                }
+            });
+            return SoLuongConLai;
+        }
+
+        getSoLuong().then(
+            function (soluong) {
+
+                formData.append("SelectedID", itemId);
+
+                if (quantityItem === "" || quantityItem <= 0) {
+                    formData.append("QuantityBuying", 1);
+                    $("input[name=quantityItemName]").val(1);
+                }
+
+                if (quantityItem <= soluong) {
+                    formData.append("QuantityBuying", quantityItem);
+                } else {
+                    formData.append("QuantityBuying", soluong);
+                    $("input[name=quantityItemName]").val(soluong);
+                    alert("Bạn chỉ có thể mua tối đa " + soluong + " sản phẩm.");
+                }
+
+                $.ajax({
+                    async: true,
+                    type: 'POST',
+                    contentType: false,
+                    processData: false,
+                    data: formData,
+                    url: '/Cart/Index',
+                    success: function (data) {
+                        if (data.Success) {
+                            $("#cartCount").text(data.Counter);
+                            $("#totalPrice_temp").text(data.TotalPrice_temp);
+                            $("#totalPrice").text(data.TotalPrice);
+
+                            if (data.Message != "") {
+                                alert(data.Message);
+                            }
+                        } else {
+                            alert(data.Message);
+                        }
+                    },
+                    error: function () {
+                        alert(data.Message);
+                    }
+                })
+            }
+        );
+    }
+</script>
+
+
