@@ -78,6 +78,7 @@ namespace JustBook.Controllers
                     string CartTotal_temp = Session["TongCong_temp"].ToString();
                     Session["CartCounter"] = CartCounter;
                     Session["CartItem"] = listOfshoppingCartModels;
+
                     return View(listOfshoppingCartModels);
                 }
                 else
@@ -401,71 +402,82 @@ namespace JustBook.Controllers
             {
                 Session["TongSoLuongMua"] = CartCounter;
 
-                //Update giỏ hàng trong Database
-                //Xóa giỏ hàng cũ trong Database
-                if (db.GioHangs.Any(model => model.MaKH == MaKH))
+                if(Session["MaKH"] != null)
                 {
-                    GioHang giohang = db.GioHangs.FirstOrDefault(model => model.MaKH == MaKH);
-                    var ListOfChiTietGH = db.ChiTietGioHangs.Where(model => model.MaGioHang == giohang.MaGH).ToList();
-
-                    foreach (var chitiet in ListOfChiTietGH)
+                    //Update giỏ hàng trong Database
+                    //Xóa giỏ hàng cũ trong Database
+                    if (db.GioHangs.Any(model => model.MaKH == MaKH))
                     {
-                        db.ChiTietGioHangs.Remove(chitiet);
+                        GioHang giohang = db.GioHangs.FirstOrDefault(model => model.MaKH == MaKH);
+                        var ListOfChiTietGH = db.ChiTietGioHangs.Where(model => model.MaGioHang == giohang.MaGH).ToList();
+
+                        foreach (var chitiet in ListOfChiTietGH)
+                        {
+                            db.ChiTietGioHangs.Remove(chitiet);
+                            db.SaveChanges();
+                        }
+                        db.GioHangs.Remove(giohang);
                         db.SaveChanges();
                     }
-                    db.GioHangs.Remove(giohang);
+
+                    //Thay thế giỏ hàng cũ bằng cách thêm giỏ hàng mới
+                    int MaGH = 0;
+                    GioHang update_giohang = new GioHang();
+                    update_giohang.MaKH = MaKH;
+
+                    foreach (var sp_giohang in listOfshoppingCartModels)
+                    {
+                        update_giohang.TongTien += sp_giohang.TongCong;
+                    }
+
+                    db.GioHangs.Add(update_giohang);
                     db.SaveChanges();
-                }
+                    MaGH = update_giohang.MaGH;
 
-                //Thay thế giỏ hàng cũ bằng cách thêm giỏ hàng mới
-                int MaGH = 0;
-                GioHang update_giohang = new GioHang();
-                update_giohang.MaKH = MaKH;
+                    foreach (var so_chitietGH in listOfshoppingCartModels)
+                    {
+                        ChiTietGioHang ChiTietGH = new ChiTietGioHang();
+                        ChiTietGH.MaGioHang = MaGH;
+                        ChiTietGH.MaSP = so_chitietGH.MaSP;
+                        ChiTietGH.TenSP = so_chitietGH.TenSP;
+                        ChiTietGH.TacGia = so_chitietGH.TacGia;
+                        ChiTietGH.SoLuongMua = so_chitietGH.SoLuongMua;
+                        ChiTietGH.SoLuong = so_chitietGH.SoLuong;
+                        ChiTietGH.DonGia = so_chitietGH.DonGia;
+                        ChiTietGH.TongCong = so_chitietGH.TongCong;
+                        ChiTietGH.ImagePath = so_chitietGH.ImagePath;
 
-                foreach (var sp_giohang in listOfshoppingCartModels)
-                {
-                    update_giohang.TongTien += sp_giohang.TongCong;
-                }
-
-                db.GioHangs.Add(update_giohang);
-                db.SaveChanges();
-                MaGH = update_giohang.MaGH;
-
-                foreach (var so_chitietGH in listOfshoppingCartModels)
-                {
-                    ChiTietGioHang ChiTietGH = new ChiTietGioHang();
-                    ChiTietGH.MaGioHang = MaGH;
-                    ChiTietGH.MaSP = so_chitietGH.MaSP;
-                    ChiTietGH.TenSP = so_chitietGH.TenSP;
-                    ChiTietGH.TacGia = so_chitietGH.TacGia;
-                    ChiTietGH.SoLuongMua = so_chitietGH.SoLuongMua;
-                    ChiTietGH.SoLuong = so_chitietGH.SoLuong;
-                    ChiTietGH.DonGia = so_chitietGH.DonGia;
-                    ChiTietGH.TongCong = so_chitietGH.TongCong;
-                    ChiTietGH.ImagePath = so_chitietGH.ImagePath;
-
-                    db.ChiTietGioHangs.Add(ChiTietGH);
-                    db.SaveChanges();
+                        db.ChiTietGioHangs.Add(ChiTietGH);
+                        db.SaveChanges();
+                    }
                 }
             }
             else
             {
-                Session["TongSoLuongMua"] = null;
                 removeAll = true;
 
-                //Xóa giỏ hàng cũ trong Database
-                if (db.GioHangs.Any(model => model.MaKH == MaKH))
+                if (Session["MaKH"] != null)
                 {
-                    GioHang giohang = db.GioHangs.FirstOrDefault(model => model.MaKH == MaKH);
-                    var ListOfChiTietGH = db.ChiTietGioHangs.Where(model => model.MaGioHang == giohang.MaGH).ToList();
-
-                    foreach (var chitiet in ListOfChiTietGH)
+                    Session["TongSoLuongMua"] = null;
+                    
+                    //Xóa giỏ hàng cũ trong Database
+                    if (db.GioHangs.Any(model => model.MaKH == MaKH))
                     {
-                        db.ChiTietGioHangs.Remove(chitiet);
+                        GioHang giohang = db.GioHangs.FirstOrDefault(model => model.MaKH == MaKH);
+                        var ListOfChiTietGH = db.ChiTietGioHangs.Where(model => model.MaGioHang == giohang.MaGH).ToList();
+
+                        foreach (var chitiet in ListOfChiTietGH)
+                        {
+                            db.ChiTietGioHangs.Remove(chitiet);
+                            db.SaveChanges();
+                        }
+                        db.GioHangs.Remove(giohang);
                         db.SaveChanges();
                     }
-                    db.GioHangs.Remove(giohang);
-                    db.SaveChanges();
+                }
+                else
+                {
+                    Session.Abandon();
                 }
             }
 

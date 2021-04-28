@@ -95,7 +95,7 @@
                                     <form class="form-inline">
                                         @using (Html.BeginForm("Index", "Search", FormMethod.Get))
                                         {
-                                            @Html.TextBox("searching", null, new { @style = " width: 345px !important; " });                                         
+                                            @Html.TextBox("searching", null, new { @placeholder = "Tìm kiếm sản phẩm...", @style = "width: 350px !important; border-radius: 4px; margin-right: 10px;" });                                         
                                             <button class="custom-btn btn btn-outline-danger my-2 my-sm-0" type="submit" value="Search" formaction="@Url.Action("Index", "Search")" Search">Search</button>
                                         }
 
