@@ -1187,6 +1187,7 @@
     <Content Include="Views\Shopping\Detail.cshtml" />
     <Content Include="Views\UserHome\OrderDetail.cshtml" />
     <Content Include="Views\Search\Index.cshtml" />
+    <Content Include="Views\Login\AdminLogin.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

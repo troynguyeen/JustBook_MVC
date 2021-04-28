@@ -90,36 +90,56 @@
                                         <a class="bookItem dropdown-item" href="#">Sách Giảm Giá</a>
                                     </div>
                                 </div>
-                                <nav class="col-lg-7 navbar navbar-light bg-light">
+                                @if (Session["MaQT"] == null)
+                                {
+                                    <nav class="col-lg-8 navbar navbar-light bg-light">
 
-                                    <form class="form-inline">
-                                        @using (Html.BeginForm("Index", "Search", FormMethod.Get))
+                                        <form class="form-inline">
+                                            @using (Html.BeginForm("Index", "Search", FormMethod.Get))
+                                            {
+                                                @Html.TextBox("searching", null, new { @placeholder = "Tìm kiếm sản phẩm...", @style = "width: 350px !important; border-radius: 4px; margin-right: 10px;" });
+                                                <button class="custom-btn btn btn-outline-danger my-2 my-sm-0" type="submit" value="Search" formaction="@Url.Action("Index", "Search")" Search">Search</button>
+                                            }
+
+                                        </form>
+                                    </nav>
+                                }
+                                else
+                                {
+                                    <nav class="col-lg-10 navbar navbar-light bg-light">
+
+                                        <form class="form-inline">
+                                            @using (Html.BeginForm("Index", "Search", FormMethod.Get))
+                                            {
+                                                @Html.TextBox("searching", null, new { @placeholder = "Tìm kiếm sản phẩm...", @style = "width: 350px !important; border-radius: 4px; margin-right: 10px;" });
+                                                <button class="custom-btn btn btn-outline-danger my-2 my-sm-0" type="submit" value="Search" formaction="@Url.Action("Index", "Search")" Search">Search</button>
+                                            }
+
+                                        </form>
+                                    </nav>
+                                }
+                                @if (Session["MaQT"] == null)
+                                {
+                                    <div class="col-sm-3 cart">
+                                        @if (Session["CartCounter"] == null)
                                         {
-                                            @Html.TextBox("searching", null, new { @placeholder = "Tìm kiếm sản phẩm...", @style = "width: 350px !important; border-radius: 4px; margin-right: 10px;" });                                         
-                                            <button class="custom-btn btn btn-outline-danger my-2 my-sm-0" type="submit" value="Search" formaction="@Url.Action("Index", "Search")" Search">Search</button>
+                                            <a href="@Url.Action("Index", "Cart")">
+                                                <i class="fa fa-shopping-cart"></i>
+                                                <span class='badge badge-warning' id="cartCount">0</span>
+                                                <span class="cartText">Giỏ Hàng</span>
+                                            </a>
                                         }
-
-                                    </form>
-                                </nav>
-                                <div class="col-sm-3 cart">
-                                    @if (Session["CartCounter"] == null)
-                                    {
-                                        <a href="@Url.Action("Index", "Cart")">
-                                            <i class="fa fa-shopping-cart"></i>
-                                            <span class='badge badge-warning' id="cartCount">0</span>
-                                            <span class="cartText">Giỏ Hàng</span>
-                                        </a>
-                                    }
-                                    else
-                                    {
-                                        <a href="@Url.Action("Index", "Cart")">
-                                            <i class="fa fa-shopping-cart"></i>
-                                            <span class='badge badge-warning' id="cartCount">@Session["CartCounter"]</span>
-                                            <span class="cartText">Giỏ Hàng</span>
-                                        </a>
-                                    }
-                                </div>
-                                @if (Session["MaKH"] == null)
+                                        else
+                                        {
+                                            <a href="@Url.Action("Index", "Cart")">
+                                                <i class="fa fa-shopping-cart"></i>
+                                                <span class='badge badge-warning' id="cartCount">@Session["CartCounter"]</span>
+                                                <span class="cartText">Giỏ Hàng</span>
+                                            </a>
+                                        }
+                                    </div>
+                                }
+                                @if (Session["MaKH"] == null && Session["MaQT"] == null)
                                 {
                                     <div class="col-sm-4 login dropdown">
                                         <div id="loginMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -135,6 +155,40 @@
                                             </a>
                                             <a href="@Url.Action("Index", "Register")" class="itemLogin dropdown-item">
                                                 Tạo tài khoản
+                                            </a>
+                                            <div style="border-top: 1px solid #E0E0E0; margin: 0 30px;"></div>
+                                            <a href="@Url.Action("AdminLogin", "Login")" class="itemLogin dropdown-item btn-warning" style="color: #000; font-weight: bold;">
+                                                Tài khoản Admin
+                                            </a>
+                                        </div>
+                                    </div>
+                                }
+                                else if (Session["MaQT"] != null)
+                                {
+                                    <div class="col-sm-4 login dropdown">
+                                        <div id="loginMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <span class="glyphicon glyphicon-user" style="font-size: 25px; align-self: center;"></span>
+                                            <div style="padding-left: 10px;">
+                                                <span style="font-size: 11px;">Tài khoản</span>
+                                                <div class="dropdown-toggle">@Session["TenQT"].ToString()</div>
+                                            </div>
+                                        </div>
+                                        <div class="dropdown-menu" style="left: 0px;" aria-labelledby="loginMenu">
+                                            <a href="@Url.Action("OrderManagement", "AdminHome")" class="dropdown-item">
+                                                Quản lý đơn hàng
+                                            </a>
+                                            <a href="@Url.Action("ProductManagement", "AdminHome")" class="dropdown-item">
+                                                Quản lý sản phẩm
+                                            </a>
+                                            <a href="@Url.Action("AdminNotification", "AdminHome")" class="dropdown-item">
+                                                Thông báo của tôi
+                                                <span class="badge" style="background-color: red;">11</span>
+                                            </a>
+                                            <a href="@Url.Action("AdminAccount", "AdminHome")" class="dropdown-item">
+                                                Thông tin tài khoản
+                                            </a>
+                                            <a href="@Url.Action("LogOut", "Login")" class="dropdown-item">
+                                                Đăng xuất
                                             </a>
                                         </div>
                                     </div>
@@ -166,14 +220,6 @@
                                         </div>
                                     </div>
                                 }
-                                <div class="col-sm-2" style="padding-top: 5px;">
-                                    <a href="../AdminHome">
-                                        <button class="custom-btn-admin custom-btn btn btn-outline-danger">
-                                            <span class="fas fa-user-lock" style="font-size: 15px;"></span>
-                                            <span style="padding-left: 5px;">Kênh Admin</span>
-                                        </button>
-                                    </a>
-                                </div>
                             </div>
                         </div>
                     </nav>

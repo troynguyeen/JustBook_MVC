@@ -1,0 +1,34 @@
+﻿@model JustBook.Models.TaiKhoanQT
+@{
+    ViewBag.Title = "Đăng nhập tài khoản Admin";
+    Layout = "~/Views/Header.cshtml";
+}
+
+<div class="collection_text" style="background-color: #ffa82d; color: #000;">Admin</div>
+<div class="layout_padding collection_section">
+    <div class="container">
+        <div class="collection_section_2">
+            <div class="row">
+                <div class="login_box" style="margin-left: 350px">
+                    @using (Html.BeginForm("AdminVerify", "Login", FormMethod.Post))
+                    {
+                    <form>
+                        <div id="message" style="text-align: center; padding: 30px; color: red;"></div>
+                        <input class="center-block" type="email" id="email" name="Email" placeholder="Enter Email" required style="width: 500px ; height: 50px;"><br><br>
+                        <input class="center-block" type="password" id="pass" name="MatKhau" placeholder="Enter Password" required style="width: 500px; height: 50px;"><br>
+                        @if (Session["AdminMessage"] != null)
+                        {
+                            <div style="padding-bottom: 20px; color: red; font-weight: bold;">@Session["AdminMessage"].ToString()</div>
+                        }
+                        <p style="padding-bottom: 20px;">Bạn cần đăng nhập bằng tài khoản Admin</p>
+                        <button class="subscribr_bt btn-warning" style="width: 100%; font-weight: bold;">
+                            Sign In
+                        </button><br><br><br><br>
+                    </form>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

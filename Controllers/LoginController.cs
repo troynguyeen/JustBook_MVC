@@ -10,11 +10,37 @@ namespace JustBook.Controllers
 {
     public class LoginController : Controller
     {
-
+        DB_CT25Team23Entities db;
+        public LoginController()
+        {
+            db = new DB_CT25Team23Entities();
+        }
         // GET: Login
         public ActionResult Index()
         {
             return View();
+        }
+
+        public ActionResult AdminLogin()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AdminVerify(JustBook.Models.TaiKhoanQT accountAdminModel)
+        {
+            var accountAdminDetail = db.TaiKhoanQTs.Where(acc => acc.Email == accountAdminModel.Email && acc.MatKhau == accountAdminModel.MatKhau).FirstOrDefault();
+
+            if (accountAdminDetail == null)
+            {
+                Session["AdminMessage"] = "Wrong email or password.";
+                return View("AdminLogin", accountAdminModel);
+            }
+
+            Session["MaQT"] = accountAdminDetail.MaQT;
+            Session["TenQT"] = accountAdminDetail.TenQT;
+
+            return RedirectToAction("Index", "AdminHome");
         }
 
         [HttpPost]
