@@ -11,7 +11,8 @@ namespace JustBook.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class TaiKhoanQT
     {
         public int MaQT { get; set; }
@@ -19,6 +20,7 @@ namespace JustBook.Models
         public string Email { get; set; }
         public int Phone { get; set; }
         public string GioiTinh { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public System.DateTime NgaySinh { get; set; }
         public string MatKhau { get; set; }
         public string DiaChi { get; set; }
