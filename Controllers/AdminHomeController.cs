@@ -25,9 +25,36 @@ namespace JustBook.Controllers
 
         public ActionResult AdminAccount()
         {
-            return View();
-        }
+            if (Session["MaQT"] == null)
+            {
+                return RedirectToAction("AdminLogin", "Login");
+            }
+            int maQt = Int32.Parse(Session["MaQT"].ToString());
+            var admin = db.TaiKhoanQTs.FirstOrDefault(ad => ad.MaQT == maQt);
 
+            return View(admin);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AdminEditInformation(TaiKhoanQT admin)
+        {
+            if(admin == null)
+            {
+                return RedirectToAction("Index");
+            }
+            var adminE = db.TaiKhoanQTs.FirstOrDefault(ad => ad.MaQT == admin.MaQT);
+            if (adminE == null)
+            {
+                return RedirectToAction("Index");
+            }
+            adminE.GioiTinh = admin.GioiTinh;
+            adminE.TenQT = admin.TenQT;
+            adminE.Email = admin.Email;
+            adminE.NgaySinh = admin.NgaySinh;
+            adminE.Phone = admin.Phone;
+            db.SaveChanges();
+            return RedirectToAction("AdminAccount");
+        }
         public ActionResult AdminNotification()
         {
             return View();
@@ -48,12 +75,12 @@ namespace JustBook.Controllers
         {
             SanPhamViewModel sp_viewmodel = new SanPhamViewModel();
             sp_viewmodel.CategorySelectListItem = (from loai_sp in db.LoaiSanPhams
-                select new SelectListItem()
-                {
-                    Text = loai_sp.TenLoaiSP,
-                    Value = loai_sp.MaLoaiSP.ToString(),
-                    Selected = true
-                });
+                                                   select new SelectListItem()
+                                                   {
+                                                       Text = loai_sp.TenLoaiSP,
+                                                       Value = loai_sp.MaLoaiSP.ToString(),
+                                                       Selected = true
+                                                   });
 
             return View(sp_viewmodel);
         }
@@ -61,7 +88,7 @@ namespace JustBook.Controllers
         [HttpPost]
         public JsonResult AddProduct(SanPhamViewModel sp_viewmodel)
         {
-            if(db.SanPhams.Any(sanpham => sanpham.MaSP == sp_viewmodel.MaSP)) 
+            if (db.SanPhams.Any(sanpham => sanpham.MaSP == sp_viewmodel.MaSP))
             {
                 return Json(new { Success = false, Message = "Mã sản phẩm đã tồn tại" }, JsonRequestBehavior.AllowGet);
             }
@@ -103,7 +130,7 @@ namespace JustBook.Controllers
                 db.SanPhams.Add(sp);
                 db.SaveChanges();
             }
-            return Json(new {Success = true, Message = "Sản phẩm đã được thêm mới thành công." }, JsonRequestBehavior.AllowGet);
+            return Json(new { Success = true, Message = "Sản phẩm đã được thêm mới thành công." }, JsonRequestBehavior.AllowGet);
         }
 
     }
