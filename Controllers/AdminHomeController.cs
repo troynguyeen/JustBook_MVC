@@ -53,6 +53,7 @@ namespace JustBook.Controllers
             adminE.NgaySinh = admin.NgaySinh;
             adminE.Phone = admin.Phone;
             db.SaveChanges();
+            Session["TenQT"] = admin.TenQT;
             return RedirectToAction("AdminAccount");
         }
         public ActionResult AdminNotification()
