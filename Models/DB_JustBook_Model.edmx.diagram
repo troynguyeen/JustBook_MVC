@@ -10,18 +10,18 @@
         <EntityTypeShape EntityType="JustBook_CT25Team23Model.sysdiagram" Width="1.5" PointX="9.125" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="JustBook_CT25Team23Model.TaiKhoanKH" Width="1.5" PointX="0.5" PointY="2.75" IsExpanded="true" />
         <EntityTypeShape EntityType="JustBook_CT25Team23Model.TaiKhoanQT" Width="1.5" PointX="12.25" PointY="0.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="JustBook_CT25Team23Model.TrangThaiDonHang" Width="1.5" PointX="10" PointY="4.5" IsExpanded="true" />
         <AssociationConnector Association="JustBook_CT25Team23Model.FK_LichSuGD_TaiKhoanKH" ManuallyRouted="false" />
         <EntityTypeShape EntityType="JustBook_CT25Team23Model.LoaiSanPham" Width="1.5" PointX="6.25" PointY="0.875" />
         <EntityTypeShape EntityType="JustBook_CT25Team23Model.DonHang" Width="1.5" PointX="7.25" PointY="6.25" />
         <EntityTypeShape EntityType="JustBook_CT25Team23Model.GioHang" Width="1.5" PointX="4.375" PointY="5.5" />
         <AssociationConnector Association="JustBook_CT25Team23Model.FK_LichSuGD_DonHang" />
-        <AssociationConnector Association="JustBook_CT25Team23Model.FK_TrangThaiDonHang_DonHang" />
         <AssociationConnector Association="JustBook_CT25Team23Model.FK_GioHang_TaiKhoanKH" />
         <EntityTypeShape EntityType="JustBook_CT25Team23Model.ChiTietDonHang" Width="1.5" PointX="10.125" PointY="7.5" />
         <EntityTypeShape EntityType="JustBook_CT25Team23Model.ChiTietGioHang" Width="1.5" PointX="1.5" PointY="7" />
         <AssociationConnector Association="JustBook_CT25Team23Model.FK_ChiTietDonHang_DonHang" />
         <AssociationConnector Association="JustBook_CT25Team23Model.FK_ChiTietGioHang_GioHang" />
+        <EntityTypeShape EntityType="JustBook_CT25Team23Model.TrangThaiDonHang" Width="1.5" PointX="9.5" PointY="3.875" />
+        <AssociationConnector Association="JustBook_CT25Team23Model.FK_TrangThaiDonHang_DonHang" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -226,6 +226,8 @@
             url: '/Payment/CreateOrder',
             success: function (data) {
                 if (data.Success) {
+                    $("#cartCount").text(0);
+                    $("#MaDH").text(data.MaDH);
                     alert(data.Message);
                 }
                 else {
@@ -266,8 +268,8 @@
                 <div style="padding-left: 50px;">
                     <div style="font-size: 20px; color: rgb(183, 0, 23); padding-bottom: 20px;">Cảm ơn bạn đã mua hàng tại JustBook !</div>
                     <div style="padding-bottom: 20px; font-weight: bold;">Mã số đơn hàng của bạn:</div>
-                    <div style="font-size: 30px; font-weight: bold; color: #FFF; background-color: #ff4e5b; padding: 10px; text-align: center;">
-                        JUSTBOOK-01
+                    <div id="MaDH" style="font-size: 30px; font-weight: bold; color: #FFF; background-color: #ff4e5b; padding: 10px; text-align: center;">
+                        Đang chờ...
                     </div>
                     <div style="padding: 20px 0;">Bạn có thể xem lại <a href="@Url.Action("OrderHistory", "UserHome")">đơn hàng của tôi.</a></div>
                     <div>Bạn đã chọn phương thức thanh toán <span id="PaymentName" style="font-weight: bold;">Tiền mặt</span></div>

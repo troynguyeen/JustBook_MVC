@@ -32,12 +32,12 @@ namespace JustBook.Models
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<TaiKhoanKH> TaiKhoanKHs { get; set; }
         public virtual DbSet<TaiKhoanQT> TaiKhoanQTs { get; set; }
-        public virtual DbSet<TrangThaiDonHang> TrangThaiDonHangs { get; set; }
         public virtual DbSet<LoaiSanPham> LoaiSanPhams { get; set; }
         public virtual DbSet<DonHang> DonHangs { get; set; }
         public virtual DbSet<GioHang> GioHangs { get; set; }
         public virtual DbSet<ChiTietDonHang> ChiTietDonHangs { get; set; }
         public virtual DbSet<ChiTietGioHang> ChiTietGioHangs { get; set; }
+        public virtual DbSet<TrangThaiDonHang> TrangThaiDonHangs { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
