@@ -50,26 +50,25 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @for (int i = 1; i < 12; i++)
+                    @foreach (var dh in Model)
                     {
-                        string MaDH = "DH0";
-                        int GiaTien = 10000;
-                        MaDH += i;
-                        GiaTien *= i;
+                        var giatridonhang = string.Format("{0:#,##0 VND}", dh.TongGiaTriDonHang);
                         <tr class="order-rows">
-                            <td><a href="@Url.Action("OrderDetail", "UserHome")">@MaDH</a></td>
-                            <td>@DateTime.Now.ToString("d")</td>
-                            <td>Sản phẩm @i</td>
-                            <td>@GiaTien VND</td>
-
-                            @if (i % 2 == 0)
-                            {
-                                <td>Đang giao hàng</td>
-                            }
-                            else
-                            {
-                                <td>Đã giao hàng thành công</td>
-                            }
+                            <td>
+                                <a href="@Url.Action("OrderDetail", "UserHome", new {id = @dh.MaDH})">
+                                    <button class="btn btn-primary">Detail</button>
+                                </a>
+                                <p></p>
+                                <a href="#">
+                                    <button class="btn btn-danger">Delete</button>
+                                </a>
+                            </td>
+                            <td><a href="@Url.Action("OrderDetail", "AdminHome", new {id = @dh.MaDH})">@dh.MaDH</a></td>
+                            <td>@dh.MaKH</td>
+                            <td>@dh.ThoiGianTao</td>
+                            <td>@dh.PhuongThucThanhToan</td>
+                            <td>@giatridonhang</td>
+                            <td>@dh.TrangThaiDonHang</td>
                         </tr>
                     }
                 </tbody>
