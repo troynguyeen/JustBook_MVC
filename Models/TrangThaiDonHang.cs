@@ -14,6 +14,7 @@ namespace JustBook.Models
     
     public partial class TrangThaiDonHang
     {
+        public int MaTrangThaiDH { get; set; }
         public int MaDH { get; set; }
         public System.DateTime ThoiGian { get; set; }
         public string TrangThai { get; set; }

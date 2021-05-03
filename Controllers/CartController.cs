@@ -297,7 +297,7 @@ namespace JustBook.Controllers
 
             int TongSoLuongMua = 0;
             double TongCong = 0;
-            for (int i = 0; i < listOfshoppingCartModels.Count; i++)
+            for (int i = 0; i < listOfshoppingCartModels.Count; i++) 
             {
                 TongSoLuongMua += listOfshoppingCartModels[i].SoLuongMua;
                 TongCong += listOfshoppingCartModels[i].TongCong;

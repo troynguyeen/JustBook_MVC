@@ -4,41 +4,156 @@
     Layout = "~/Views/Header.cshtml";
 }
 
-<h2>Chi tiết đơn hàng</h2>
+<style>
+    table, td, th {
+        border-bottom: 1px solid rgb(244, 244, 244);
+        padding: 20px;
+    }
 
-<div class="user-state-order">
-    <div class="top-state">
-        <span class="column-state">
-            <div class="title-column-state">Mã đơn hàng</div>
-            <div><a href="@Url.Action("TrackingState", "UserHome")">DH001</a></div>
-        </span>
-        <span class="column-state" style="padding-left: 10px;">
-            <div class="title-column-state">Ngày mua</div>
-            <div>@DateTime.Now.ToString("d")</div>
-        </span>
-        <span class="column-state" style="padding-left: 10px; border: none;">
-            <div class="title-column-state">Tổng tiền</div>
-            <div>79.000đ</div>
-        </span>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .title-page {
+        display: flex;
+        align-items: center;
+        font-size: 18px;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .order-date {
+        display: flex;
+        justify-content: flex-end;
+        padding-bottom: 20px;
+    }
+
+    .order-content {
+        width: 300px;
+        background-color: #FFF;
+        padding: 20px;
+        height: 100%;
+    }
+
+    .order-prices {
+        display: flex;
+        padding: 10px 20px;
+    }
+
+    .list-prices {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        padding: 20px 0;
+    }
+
+    .order-title {
+        font-size: 16px;
+        font-weight: bold;
+        padding: 10px 0;
+    }
+</style>
+
+<div class="page-admin">
+    <div class="sidebar-admin">
+        <div class="sidebar-title">DANH SÁCH CHỨC NĂNG</div>
+        <a class="sidebar-item" href="@Url.Action("Index", "UserHome")">
+            <span class="fa fa-user-alt"></span>
+            <span class="sidebar-item-title">Thông tin tài khoản</span>
+        </a>
+        <a class="sidebar-item" href="@Url.Action("Notification", "UserHome")">
+            <span class="fas fa-bell"></span>
+            <span class="sidebar-item-title">Thông báo của tôi</span>
+            <span class="badge" style="background-color: red;">11</span>
+        </a>
+        <a class="sidebar-item" href="@Url.Action("OrderHistory", "UserHome")">
+            <span class="fa fa-address-card"></span>
+            <span class="sidebar-item-title">Quản lý đơn hàng</span>
+        </a>
     </div>
-    <div>
-        <div style="font-size: 23px; color: rgb(102, 102, 102); padding-bottom: 10px;">Dự kiến giao vào Thứ Ba, @DateTime.Now.ToString("d")</div>
-        <div class="progress-state">
-            <div class="progress" style="width: 650px; height: 10px; margin-bottom: 5px;">
-                <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+    <div class="content-admin-order">
+        <div class="title-page">
+            <div style="padding-right: 20px;">
+                Chi tiết đơn hàng #748515299
             </div>
-            <a href="@Url.Action("TrackingState", "UserHome")">
-                <button class="btn btn-warning" style="font-weight: bold; color: #000; margin-left: 50px">Theo dõi chi tiết</button>
-            </a>
+            <select style="width: 250px;">
+                <option value="Chờ xác nhận" selected>Chờ xác nhận</option>
+                <option value="Đang giao hàng">Đang giao hàng</option>
+                <option value="Giao hàng thành công">Giao hàng thành công</option>
+            </select>
         </div>
-        <div style="color: #28a745; padding-bottom: 20px;">Đặt hàng thành công</div>
-    </div>
-    <div style="display: flex; width: 400px; padding-bottom: 10px;">
-        <img src="~/images/cart_dungluachonannhan.jpg" alt="dungluachonannhan" width="100" height="100">
-        <div>
-            <p style="font-size: 16px; color: rgb(102, 102, 102);">Đừng Lựa Chọn An Nhàn Khi Còn Trẻ và 2 sản phẩm khác</p>
-            <div>57.200đ</div>
-            <div>Số lượng: 1</div>
+        <div class="order-date">Ngày đặt hàng: 09:27 15/11/2019</div>
+        <div style="display: flex;">
+            <div>
+                <div class="order-title">ĐỊA CHỈ NGƯỜI NHẬN</div>
+                <div class="order-content" style="margin-right: 20px;">
+                    <p style="font-weight: bold;">NGUYỄN CHÍ THÀNH</p>
+                    <p>Địa chỉ: 9B/1A, KP Đồng An 2, P.Bình Hoà, TX.Thuận An</p>
+                    <p>Điện thoại: 0522905064</p>
+                </div>
+            </div>
+            <div>
+                <div class="order-title">HÌNH THỨC GIAO HÀNG</div>
+                <div class="order-content" style="margin-right: 20px;">
+                    <p>Giao vào Thứ ba, 19/11</p>
+                    <p>Phí vận chuyển: 18.000đ</p>
+                </div>
+            </div>
+            <div>
+                <div class="order-title">HÌNH THỨC THANH TOÁN</div>
+                <div class="order-content">Thanh toán tiền mặt khi nhận hàng</div>
+            </div>
+        </div>
+        <div style="background-color: #FFF; margin-top: 60px;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Sản phẩm</th>
+                        <th>Đơn giá</th>
+                        <th>Số lượng</th>
+                        <th>Chiết khấu</th>
+                        <th>Tổng tiền</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="order-rows">
+                        <td>
+                            <div style="display: flex;">
+                                <img width="50px;" src="https://salt.tikicdn.com/cache/200x200/media/catalog/product/i/m/img028.u335.d20160604.t134059.jpg" />
+                                <div style="padding-left: 10px;">
+                                    <a href="#">60 Bài Luận Tiếng Anh Thông Dụng</a>
+                                    <div>Danh mục: Sách IT</div>
+                                    <div>Mã: <a href="#">IT-01</a></div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>25.500 ₫</td>
+                        <td>2</td>
+                        <td>15%</td>
+                        <td>25.500 ₫</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="list-prices">
+                <div class="order-prices">
+                    <div style="padding-right: 50px;">Tạm tính</div>
+                    <div>115.800 ₫</div>
+                </div>
+                <div class="order-prices">
+                    <div style="padding-right: 50px;">Phí vận chuyển</div>
+                    <div>18.000 ₫</div>
+                </div>
+                <div class="order-prices">
+                    <div style="padding-right: 50px;">Tổng cộng</div>
+                    <div style="font-size: 18px; color: red;">133.800 ₫</div>
+                </div>
+            </div>
+        </div>
+        <div style="padding: 20px 0;">
+            <a href="@Url.Action("TrackingState", "UserHome")">
+                <input class="btn btn-warning" style="font-weight: bold; color: #000;" type="button" value="Theo dõi chi tiết" />
+            </a>
         </div>
     </div>
 </div>
