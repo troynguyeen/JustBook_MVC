@@ -259,6 +259,7 @@
     <Content Include="images\map-icon.png" />
     <Content Include="images\mm.png" />
     <Content Include="images\oc.png" />
+    <Content Include="images\payment_success.png" />
     <Content Include="images\phone-icon.png" />
     <Content Include="images\ps.png" />
     <Content Include="images\search_icon.png" />
@@ -1201,7 +1202,7 @@
     <Content Include="Views\AdminHome\AddProduct.cshtml" />
     <Content Include="Views\Shopping\Index.cshtml" />
     <Content Include="Views\Shopping\Detail.cshtml" />
-    <Content Include="Views\UserHome\OrderDetail.cshtml" />
+    <Content Include="Views\UserHome\OrderUserDetail.cshtml" />
     <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Views\Login\AdminLogin.cshtml" />
     <Content Include="Views\AdminHome\OrderDetail.cshtml" />

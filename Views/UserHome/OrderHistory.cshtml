@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<JustBook.ViewModel.OrderManagementModel>
 @{
     ViewBag.Title = "Lịch sử đơn hàng | JustBook";
     Layout = "~/Views/Header.cshtml";
@@ -15,7 +15,7 @@
     }
 
     th, td {
-        padding: 20px;
+        padding: 20px 10px;
     }
 </style>
 
@@ -38,13 +38,13 @@
     </div>
     <div class="content-user">
         <div class="admin-title-account" style="font-size: 18px; padding: 0;">ĐƠN HÀNG CỦA TÔI</div>
-        <div class="user-table" style="width: 800px;">
+        <div class="user-table" style="width: 100%;">
             <table>
                 <thead>
                     <tr>
-                        <th>Mã đơn hàng</th>
+                        <th style="text-align: center;">Mã đơn hàng</th>
                         <th>Ngày mua</th>
-                        <th>Sản phẩm</th>
+                        <th style="width: 300px;">Sản phẩm</th>
                         <th>Giá tiền</th>
                         <th>Trạng thái đơn hàng</th>
                     </tr>
@@ -53,23 +53,20 @@
                     @foreach (var dh in Model)
                     {
                         var giatridonhang = string.Format("{0:#,##0 VND}", dh.TongGiaTriDonHang);
-                        <tr class="order-rows">
-                            <td>
-                                <a href="@Url.Action("OrderDetail", "UserHome", new {id = @dh.MaDH})">
-                                    <button class="btn btn-primary">Detail</button>
-                                </a>
-                                <p></p>
-                                <a href="#">
-                                    <button class="btn btn-danger">Delete</button>
-                                </a>
-                            </td>
-                            <td><a href="@Url.Action("OrderDetail", "AdminHome", new {id = @dh.MaDH})">@dh.MaDH</a></td>
-                            <td>@dh.MaKH</td>
-                            <td>@dh.ThoiGianTao</td>
-                            <td>@dh.PhuongThucThanhToan</td>
-                            <td>@giatridonhang</td>
+                    <tr class="order-rows">
+                        <td style="text-align: center;"><a href="@Url.Action("OrderUserDetail", "UserHome", new {id = @dh.MaDH})">@dh.MaDH</a></td>
+                        <td>@dh.ThoiGianTao</td>
+                        <td>@dh.TenSP</td>
+                        <td>@giatridonhang</td>
+                        @if (dh.TrangThaiDonHang == "Đã bị hủy")
+                        {
+                            <td style="color: red;">@dh.TrangThaiDonHang</td>
+                        }
+                        else
+                        {
                             <td>@dh.TrangThaiDonHang</td>
-                        </tr>
+                        }
+                    </tr>
                     }
                 </tbody>
             </table>

@@ -31,30 +31,31 @@ namespace JustBook.Controllers
         {
             int idKH = Int32.Parse(Session["MaKH"].ToString());
         IEnumerable <OrderManagementModel> listOfDonHang = (from trangthai in
-               (from trangthai in db.TrangThaiDonHangs
-                orderby trangthai.MaTrangThaiDH descending
+            (from trangthai in db.TrangThaiDonHangs
                 group trangthai by trangthai.MaDH into grp
                 select grp.OrderByDescending(x => x.MaTrangThaiDH).FirstOrDefault())
                 join dh in db.DonHangs on trangthai.MaDH equals dh.MaDH
+                join chitiet in db.ChiTietDonHangs on dh.MaDH equals chitiet.MaDonHang
+                join sp in db.SanPhams on chitiet.MaSP equals sp.MaSP
                 where dh.MaKH == idKH
-                select new OrderManagementModel ()
+                select new OrderManagementModel()
                   {
-                     
-                  MaDH = dh.MaDH,
-                  MaKH = dh.MaKH,
-                  TenNguoiNhan = dh.TenNguoiNhan,
-                  PhoneNguoiNhan = dh.PhoneNguoiNhan,
-                  DiaChiNguoiNhan = dh.DiaChiNguoiNhan,
-                  ThoiGianTao = dh.ThoiGianTao,
-                  PhuongThucThanhToan = dh.PhuongThucThanhToan,
-                  TongGiaTriDonHang = dh.TongGiaTriDonHang,
-                  TrangThaiDonHang = trangthai.TrangThai
+                      MaDH = dh.MaDH,
+                      MaKH = dh.MaKH,
+                      TenSP = sp.TenSP,
+                      TenNguoiNhan = dh.TenNguoiNhan,
+                      PhoneNguoiNhan = dh.PhoneNguoiNhan,
+                      DiaChiNguoiNhan = dh.DiaChiNguoiNhan,
+                      ThoiGianTao = dh.ThoiGianTao,
+                      PhuongThucThanhToan = dh.PhuongThucThanhToan,
+                      TongGiaTriDonHang = dh.TongGiaTriDonHang,
+                      TrangThaiDonHang = trangthai.TrangThai
                   }
-           ).ToList();
+           ).GroupBy(x => x.MaDH).Select(i => i.FirstOrDefault()).ToList();
             return View(listOfDonHang);
         }
 
-        public ActionResult OrderDetail()
+        public ActionResult OrderUserDetail()
         {
             var currentId_Url = Url.RequestContext.RouteData.Values["id"];
 
