@@ -16,6 +16,7 @@ namespace JustBook.ViewModel
         public string PhuongThucThanhToan { get; set; }
         public double TongGiaTriDonHang { get; set; }
         public string TrangThaiDonHang { get; set; }
+        public string TenSP { get; set; }
         public virtual ICollection<OrderDetailViewModel> ChiTietDonHang { get; set; }
     }
 }

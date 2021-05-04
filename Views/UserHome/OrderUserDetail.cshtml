@@ -1,0 +1,199 @@
+﻿@model JustBook.ViewModel.OrderManagementModel
+@{
+    ViewBag.Title = "Đơn hàng của tôi | JustBook";
+    Layout = "~/Views/Header.cshtml";
+    var giatridonhang = string.Format("{0:#,##0 VND}", Model.TongGiaTriDonHang);
+}
+<style>
+    table, td, th {
+        border-bottom: 1px solid rgb(244, 244, 244);
+        padding: 20px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .title-page {
+        display: flex;
+        align-items: center;
+        font-size: 18px;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .order-date {
+        display: flex;
+        justify-content: flex-end;
+        padding-bottom: 20px;
+    }
+
+    .order-content {
+        width: 300px;
+        background-color: #FFF;
+        padding: 20px;
+        height: 100%;
+    }
+
+    .order-prices {
+        display: flex;
+        padding: 10px 20px;
+    }
+
+    .list-prices {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        padding: 20px 0;
+    }
+
+    .order-title {
+        font-size: 16px;
+        font-weight: bold;
+        padding: 10px 0;
+    }
+
+    .label_state {
+        background-color: #FFF;
+        padding: 5px;
+        border: 5px solid #ec971f;
+        border-radius: 4px;
+    }
+
+    .canceled_state {
+        background-color: #c9302c;
+        padding: 10px;
+        color: #FFF;
+        border-radius: 4px;
+    }
+</style>
+
+<div class="page-admin">
+    <div class="sidebar-admin">
+        <div class="sidebar-title">DANH SÁCH CHỨC NĂNG</div>
+        <a class="sidebar-item" href="@Url.Action("Index", "UserHome")">
+            <span class="fa fa-user-alt"></span>
+            <span class="sidebar-item-title">Thông tin tài khoản</span>
+        </a>
+        <a class="sidebar-item" href="@Url.Action("Notification", "UserHome")">
+            <span class="fas fa-bell"></span>
+            <span class="sidebar-item-title">Thông báo của tôi</span>
+            <span class="badge" style="background-color: red;">11</span>
+        </a>
+        <a class="sidebar-item" href="@Url.Action("OrderHistory", "UserHome")">
+            <span class="fa fa-address-card"></span>
+            <span class="sidebar-item-title">Quản lý đơn hàng</span>
+        </a>
+    </div>
+    <div class="content-admin-order">
+        <div class="title-page">
+            <div style="padding-right: 20px;">
+                Chi tiết đơn hàng #<span id="MaDH">@Model.MaDH</span>
+            </div>
+            @if (Model.TrangThaiDonHang == "Đã bị hủy")
+            {
+                <div class="canceled_state">@Model.TrangThaiDonHang</div>
+            }
+            else
+            {
+                <div class="label_state">@Model.TrangThaiDonHang</div>
+            }
+        </div>
+        <div class="order-date">Ngày đặt hàng: @Model.ThoiGianTao</div>
+        <div style="display: flex;">
+            <div>
+                <div class="order-title">ĐỊA CHỈ NGƯỜI NHẬN</div>
+                <div class="order-content" style="margin-right: 20px;">
+                    <p style="font-weight: bold;">@Model.TenNguoiNhan</p>
+                    <p>@Model.DiaChiNguoiNhan</p>
+                    <p>@Model.PhoneNguoiNhan</p>
+                </div>
+            </div>
+            <div>
+                <div class="order-title">HÌNH THỨC GIAO HÀNG</div>
+                <div class="order-content" style="margin-right: 20px;">
+                    @{var ThoiGianGH = (int)@Model.ThoiGianTao.DayOfWeek + 1;}
+                    @if (ThoiGianGH == 1)
+                    {
+                        <p>
+                            Giao vào Chủ Nhật, @Model.ThoiGianTao.ToString("dd/MM/yyyy")
+                        </p>
+                    }
+                    else
+                    {
+                        <p>
+                            Giao vào Thứ @ThoiGianGH, @Model.ThoiGianTao.ToString("dd/MM/yyyy")
+                        </p>
+                    }
+                    <p>Phí vận chuyển: 0 VND</p>
+                </div>
+            </div>
+            <div>
+                <div class="order-title">HÌNH THỨC THANH TOÁN</div>
+                <div class="order-content">Thanh toán bằng @Model.PhuongThucThanhToan</div>
+            </div>
+        </div>
+        <div style="background-color: #FFF; margin-top: 60px;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Sản phẩm</th>
+                        <th>Đơn giá</th>
+                        <th>Số lượng</th>
+                        <th>Chiết khấu</th>
+                        <th>Tổng tiền</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var chitietDH in Model.ChiTietDonHang)
+                    {
+                        var giamonhang = chitietDH.DonGia * chitietDH.SoLuong;
+                        var giamonhang_VND = string.Format("{0:#,##0 VND}", giamonhang);
+                        var dongia = string.Format("{0:#,##0 VND}", chitietDH.DonGia);
+                        <tr class="order-rows" id="row_@chitietDH.MaSP">
+                            <td style="width: 400px;">
+                                <div style="display: flex;">
+                                    <img width="70" height="70" src="@Url.Content(@chitietDH.ImagePath)" />
+                                    <div style="padding-left: 10px;">
+                                        <a href="@Url.Action("Detail", "Shopping", new {id = @chitietDH.MaSP})" target="_blank">
+                                            @chitietDH.TenSP
+                                        </a>
+                                        <div>Danh mục: @chitietDH.LoaiSanPham</div>
+                                        <div>Mã: <a id="Ma" href="@Url.Action("Detail", "Shopping", new {id = @chitietDH.MaSP})" target="_blank">
+                                            @chitietDH.MaSP</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>@dongia</td>
+                            <td style="text-align: center;">@chitietDH.SoLuong</td>
+                            <td style="text-align: center;">15%</td>
+                            <td class="TongTienMonHang" id="@chitietDH.MaSP" data-content="@giamonhang">@giamonhang_VND</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="list-prices">
+                <div class="order-prices">
+                    <div style="padding-right: 50px;">Tạm tính</div>
+                    <div>@giatridonhang</div>
+                </div>
+                <div class="order-prices">
+                    <div style="padding-right: 50px;">Phí vận chuyển</div>
+                    <div>0 VND</div>
+                </div>
+                <div class="order-prices">
+                    <div style="padding-right: 50px;">Tổng cộng</div>
+                    <div style="font-size: 18px; color: red;">@giatridonhang</div>
+                </div>
+            </div>
+        </div>
+        <div style="padding: 20px 0;">
+            <a href="@Url.Action("TrackingState", "UserHome")">
+                <input class="btn btn-warning" style="font-weight: bold; color: #000;" type="button" value="Theo dõi chi tiết" />
+            </a>
+        </div>
+    </div>
+</div>
+

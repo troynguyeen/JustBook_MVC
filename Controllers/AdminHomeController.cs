@@ -167,14 +167,15 @@ namespace JustBook.Controllers
             }
 
             //Xóa trạng thái bị trùng
-            if(db.TrangThaiDonHangs.Any(x => x.TrangThai == TrangThaiDonHang))
+            if(db.TrangThaiDonHangs.Any(x => x.MaDH == dh.MaDH && x.TrangThai == TrangThaiDonHang))
             {
-                TrangThaiDonHang trangthai_remove = db.TrangThaiDonHangs.FirstOrDefault(x => x.TrangThai == TrangThaiDonHang);
+                TrangThaiDonHang trangthai_remove = db.TrangThaiDonHangs.FirstOrDefault(x => x.MaDH == dh.MaDH && x.TrangThai == TrangThaiDonHang);
                 db.TrangThaiDonHangs.Remove(trangthai_remove);
+                db.SaveChanges();
             }
             
             //Cập nhật trạng thái
-            TrangThaiDonHang trangthai = db.TrangThaiDonHangs.FirstOrDefault(x => x.MaDH == dh.MaDH);
+            TrangThaiDonHang trangthai = new TrangThaiDonHang();
             trangthai.MaDH = dh.MaDH;
             trangthai.TrangThai = TrangThaiDonHang;
             trangthai.ThoiGian = DateTime.Now;
@@ -196,6 +197,47 @@ namespace JustBook.Controllers
             }
 
             return Json(new { Success = true }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult CancelOrder(int MaDH, string TrangThaiDonHang)
+        {
+            DonHang dh = db.DonHangs.SingleOrDefault(x => x.MaDH == MaDH);
+            TrangThaiDonHang trangthai = new TrangThaiDonHang();
+
+            trangthai.MaDH = dh.MaDH;
+            trangthai.TrangThai = TrangThaiDonHang;
+            trangthai.ThoiGian = DateTime.Now;
+
+            db.TrangThaiDonHangs.Add(trangthai);
+            db.SaveChanges();
+
+            return Json(new { Success = true }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult DeleteOrder(int MaDH)
+        {
+            DonHang dh = db.DonHangs.SingleOrDefault(x => x.MaDH == MaDH);
+            var listOfDetailOrder = db.ChiTietDonHangs.Where(x => x.MaDonHang == MaDH).ToList();
+            var listOfStateOrder = db.TrangThaiDonHangs.Where(x => x.MaDH == MaDH).ToList();
+
+            foreach (var chitet in listOfDetailOrder)
+            {
+                db.ChiTietDonHangs.Remove(chitet);
+                db.SaveChanges();
+            }
+
+            foreach (var trangthai in listOfStateOrder)
+            {
+                db.TrangThaiDonHangs.Remove(trangthai);
+                db.SaveChanges();
+            }
+
+            db.DonHangs.Remove(dh);
+            db.SaveChanges();
+
+            return Json(new { Success = true, Message = "Xóa đơn hàng #" + MaDH + " thành công." }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult ProductManagement()

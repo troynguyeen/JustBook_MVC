@@ -55,6 +55,13 @@
         font-weight: bold;
         padding: 10px 0;
     }
+
+    .canceled_state {
+        background-color: #c9302c;
+        padding: 10px;
+        color: #FFF;
+        border-radius: 4px;
+    }
 </style>
 
 <div class="page-admin">
@@ -87,19 +94,26 @@
             <div style="padding-right: 20px;">
                 Chi tiết đơn hàng #<span id="MaDH">@Model.MaDH</span>
             </div>
-            <select id="selected_state" style="width: 250px;">
-                <option selected>@Model.TrangThaiDonHang</option>
+            @if (@Model.TrangThaiDonHang != "Đã bị hủy")
+            {
+                <select id="selected_state" style="width: 250px;">
+                    <option selected>@Model.TrangThaiDonHang</option>
 
-                @{string[] arr = { "Chờ xác nhận", "Admin đã tiếp nhận", "Đang đóng gói", "Đang giao hàng", "Giao hàng thành công" }; }
-                @{List<string> listOfState = new List<string>(arr);}
-                @for (int i = 0; i < listOfState.Count; i++)
-                {
-                    if (@Model.TrangThaiDonHang != listOfState[i])
+                    @{string[] arr = { "Chờ xác nhận", "Admin đã tiếp nhận", "Đang đóng gói", "Đang giao hàng", "Giao hàng thành công" }; }
+                    @{List<string> listOfState = new List<string>(arr);}
+                    @for (int i = 0; i < listOfState.Count; i++)
                     {
-                        <option>@listOfState[i]</option>
+                        if (@Model.TrangThaiDonHang != listOfState[i])
+                        {
+                            <option>@listOfState[i]</option>
+                        }
                     }
-                }
-            </select>
+                </select>
+            }
+            else
+            {
+                <div class="canceled_state">Đã bị hủy</div>
+            }
         </div>
         <div class="order-date">Ngày đặt hàng: @Model.ThoiGianTao</div>
         <div style="display: flex;">
@@ -114,8 +128,20 @@
             <div>
                 <div class="order-title">HÌNH THỨC GIAO HÀNG</div>
                 <div class="order-content" style="margin-right: 30px;">
-                    <p>Giao vào Thứ ba, 19/11</p>
-                    <p>Phí vận chuyển: 18.000đ</p>
+                    @{var ThoiGianGH = (int)@Model.ThoiGianTao.DayOfWeek + 1;}
+                    @if (ThoiGianGH == 1)
+                    {
+                        <p>
+                            Giao vào Chủ Nhật, @Model.ThoiGianTao.ToString("dd/MM/yyyy")
+                        </p>
+                    }
+                    else
+                    {
+                        <p>
+                            Giao vào Thứ @ThoiGianGH, @Model.ThoiGianTao.ToString("dd/MM/yyyy")
+                        </p>
+                    }
+                    <p>Phí vận chuyển: 0 VND</p>
                 </div>
             </div>
             <div>
@@ -145,20 +171,34 @@
                                 <div style="display: flex;">
                                     <img width="70" height="70" src="@Url.Content(@chitietDH.ImagePath)" />
                                     <div style="padding-left: 10px;">
-                                        <a href="#">@chitietDH.TenSP</a>
+                                        <a href="@Url.Action("Detail", "Shopping", new {id = @chitietDH.MaSP})" target="_blank">
+                                            @chitietDH.TenSP
+                                        </a>
                                         <div>Danh mục: @chitietDH.LoaiSanPham</div>
-                                        <div>Mã: <a id="Ma" href="#">@chitietDH.MaSP</a></div>
-                                        <div style="padding-top: 10px;">
-                                            <a onclick="RemoveItem(this)" href="#" itemid="@chitietDH.MaSP">Xóa</a>
-                                        </div>
+                                        <div>Mã: <a id="Ma" href="@Url.Action("Detail", "Shopping", new {id = @chitietDH.MaSP})" target="_blank">
+                                            @chitietDH.MaSP</a></div>
+                                        @if (@Model.TrangThaiDonHang != "Đã bị hủy")
+                                        {
+                                            <div style="padding-top: 10px;">
+                                                <a id="removeButton" onclick="RemoveItem(this)" href="#" itemid="@chitietDH.MaSP">Xóa</a>
+                                            </div>
+                                        }
                                     </div>
                                 </div>
                             </td>
                             <td>@dongia</td>
                             <td style="display: flex; justify-content: center; margin-top: 30px; border: none;">
                                 <div class="quantity buttons_added">
-                                    <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="@chitietDH.SoLuongConLai"
-                                    itemid="@chitietDH.MaSP" name="quantityItemName" value="@chitietDH.SoLuong" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button" value="+" class="plus">
+                                    @if (@Model.TrangThaiDonHang != "Đã bị hủy")
+                                    {
+                                        <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="@chitietDH.SoLuongConLai"
+                                         itemid="@chitietDH.MaSP" name="quantityItemName" value="@chitietDH.SoLuong" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button" value="+" class="plus">
+                                    }
+                                    else
+                                    {
+                                        <input disabled type="button" value="-" class="minus"><input disabled type="number" step="1" min="1" max="@chitietDH.SoLuongConLai"
+                                         itemid="@chitietDH.MaSP" name="quantityItemName" value="@chitietDH.SoLuong" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input disabled type="button" value="+" class="plus">
+                                    }
                                 </div>
                             </td>
                             <td style="text-align: center;">15%</td>
@@ -183,8 +223,44 @@
             </div>
         </div>
         <div style="padding: 20px 0; display: flex; justify-content: space-between;">
-            <input onclick="SaveChange()" class="btn btn-warning" style="font-weight: bold; color: #000;" type="button" value="Lưu lại thay đổi" />
-            <input class="btn btn-danger" style="font-weight: bold;" type="button" value="Hủy đơn hàng" />
+            @if (@Model.TrangThaiDonHang != "Đã bị hủy")
+            {
+                <input id="save" onclick="SaveChange()" class="btn btn-warning" style="font-weight: bold; color: #000;" type="button" value="Lưu lại thay đổi" />
+                <input id="cancel" class="btn btn-danger" style="font-weight: bold;" type="button" value="Hủy đơn hàng"
+                       data-toggle="modal" data-target="#messageModal" />
+            }
+            else
+            {
+                <input disabled id="save" onclick="SaveChange()" class="btn btn-warning" style="font-weight: bold; color: #000;" type="button" value="Lưu lại thay đổi" />
+                <input disabled id="cancel" class="btn btn-danger" style="font-weight: bold;" type="button" value="Hủy đơn hàng"
+                       data-toggle="modal" data-target="#messageModal" />
+            }
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="messageModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4 class="modal-title" id="messageModalLabel" style="color: red; font-weight: bold;">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    Cảnh báo
+                </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="font-weight: bold;">
+                Đơn hàng sau khi hủy sẽ không thể chỉnh sửa. 
+                <div style="padding-top: 10px;">Bạn có muốn tiếp tục ?</div>
+            </div>
+            <div class="modal-footer">
+                <button type="reset" class="btn btn-danger" onclick="CancelOrder()" data-dismiss="modal">Đồng ý</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Hủy bỏ</button>
+            </div>
         </div>
     </div>
 </div>
@@ -196,6 +272,43 @@
     $(window).on('load', function () {
         sessionStorage.removeItem("RemoveId")
     });
+
+    function CancelOrder() {
+        var formData = new FormData();
+        var MaDH = $("#MaDH").text();
+        var canceled = `<div class="canceled_state">Đã bị hủy</div>`
+
+        $("#selected_state").replaceWith($(canceled))
+        $("#save").prop('disabled', true);
+        $("#cancel").prop('disabled', true);
+       
+        $("input[name=quantityItemName]").each(function () {
+            $(this).prop('disabled', true);
+            $(".plus").prop('disabled', true);
+            $(".minus").prop('disabled', true);
+            $("#removeButton").remove();
+        });
+
+        formData.append("MaDH", MaDH);
+        formData.append("TrangThaiDonHang", "Đã bị hủy");
+
+        $.ajax({
+            async: true,
+            type: 'POST',
+            contentType: false,
+            processData: false,
+            data: formData,
+            url: '/AdminHome/CancelOrder',
+            success: function (data) {
+                if (data.Success) {
+                    
+                }
+            },
+            error: function () {
+                alert(data.Message);
+            }
+        });
+    }
 
     function SaveChange() {
         var formData = new FormData();
@@ -246,7 +359,6 @@
                 alert(data.Message);
             }
         });
-
     }
 
     function RemoveItem(item) {
@@ -279,7 +391,6 @@
         $("#TamTinh").text((TongCong).toLocaleString('it-IT', { style: 'currency', currency: 'VND' }));
         $("#TongCong").text((TongCong).toLocaleString('it-IT', { style: 'currency', currency: 'VND' }));
         $("#TongCong").attr("data-content", TongCong)
-
     }
 
     $(document).ready(function () {
