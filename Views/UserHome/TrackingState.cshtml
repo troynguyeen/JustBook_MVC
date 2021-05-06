@@ -1,42 +1,127 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Trạng thái đơn hàng | JustBook";
     Layout = "~/Views/Header.cshtml";
 }
 
-<div class="user-state-order">
-    <div class="top-state">
-        <span class="column-state">
-            <div class="title-column-state">Mã đơn hàng</div>
-            <div><a href="@Url.Action("TrackingState", "UserHome")">DH001</a></div>
-        </span>
-        <span class="column-state" style="padding-left: 10px;">
-            <div class="title-column-state">Ngày mua</div>
-            <div>@DateTime.Now.ToString("d")</div>
-        </span>
-        <span class="column-state" style="padding-left: 10px; border: none;">
-            <div class="title-column-state">Tổng tiền</div>
-            <div>79.000đ</div>
-        </span>
+<style>
+    .tracking-page {
+        margin: 50px 0;
+        width: 1000px;
+    }
+
+    .title-tracking {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 18px;
+        margin-bottom: 30px;
+    }
+
+    .trackingDetail {
+        background-color: #FFF;
+        padding: 20px;
+    }
+
+    .border_trackingDetail {
+        border-radius: 4px;
+        border: 1px solid rgb(218, 218, 218);
+        border-bottom: none;
+    }
+
+    .title_trackingDetail {
+        font-size: 13px;
+        font-weight: bold;
+        background-color: rgb(241, 241, 241);
+        padding: 12px 15px;
+        border-bottom: 1px solid rgb(218, 218, 218);
+    }
+
+    .state_trackingDetail {
+        font-size: 13px;
+        padding: 12px 15px;
+        border-bottom: 1px solid rgb(218, 218, 218);
+    }
+
+    .detail_product {
+        display: flex;
+        justify-content: space-between;
+        background-color: #FFF;
+        padding: 15px 20px;
+    }
+</style>
+
+<div class="page-admin">
+    <div class="sidebar-admin">
+        <div class="sidebar-title">DANH SÁCH CHỨC NĂNG</div>
+        <a class="sidebar-item" href="@Url.Action("Index", "AdminHome")">
+            <span class="fa fa-home"></span>
+            <span class="sidebar-item-title">Trang chủ</span>
+        </a>
+        <a class="sidebar-item" href="@Url.Action("AdminAccount", "AdminHome")">
+            <span class="fa fa-user-alt"></span>
+            <span class="sidebar-item-title">Thông tin tài khoản</span>
+        </a>
+        <a class="sidebar-item" href="@Url.Action("AdminNotification", "AdminHome")">
+            <span class="fas fa-bell"></span>
+            <span class="sidebar-item-title">Thông báo của tôi</span>
+            <span class="badge" style="background-color: red;">5</span>
+        </a>
+        <a class="sidebar-item" href="@Url.Action("OrderManagement", "AdminHome")">
+            <span class="fa fa-address-card"></span>
+            <span class="sidebar-item-title">Quản lý đơn hàng</span>
+        </a>
+        <a class="sidebar-item" href="@Url.Action("ProductManagement", "AdminHome")">
+            <span class="fas fa-tags"></span>
+            <span class="sidebar-item-title">Quản lý sản phẩm</span>
+        </a>
     </div>
-    <div>
-        <div style="font-size: 23px; color: rgb(102, 102, 102); padding-bottom: 10px;">Dự kiến giao vào Thứ Ba, @DateTime.Now.ToString("d")</div>
-        <div class="progress-state">
-            <div class="progress" style="width: 650px; height: 10px; margin-bottom: 5px;">
-                <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+    <div class="tracking-page">
+        <div class="title-tracking">
+            <div>
+                Theo dõi đơn hàng #<span id="MaDH">2312</span>
             </div>
-            <a href="@Url.Action("TrackingState", "UserHome")">
-                <button class="btn btn-warning" style="font-weight: bold; color: #000; margin-left: 50px">Theo dõi chi tiết</button>
-            </a>
+            <div>
+                <a href="@Url.Action("OrderUserDetail", "AdminHome")">
+                    <button class="btn btn-warning" style="font-weight: bold; color: #000;" type="button">Xem chi tiết đơn hàng</button>
+                </a>
+            </div>
         </div>
-        <div style="color: #28a745; padding-bottom: 20px;">Đặt hàng thành công</div>
-    </div>
-    <div style="display: flex; width: 400px; padding-bottom: 10px;">
-        <img src="~/images/cart_dungluachonannhan.jpg" alt="dungluachonannhan" width="100" height="100">
+        <div style="margin-bottom: 10px;">TRẠNG THÁI ĐƠN HÀNG</div>
+        <div style="background-color: #FFF; padding: 20px;">
+            <div>Trạng thái: Giao hàng thành công | 15:32 Thứ tư, 05-08-2020</div>
+            <div class="progress-state">
+                <div class="progress" style="width: 650px; height: 10px; margin-bottom: 5px;">
+                    <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            </div>
+        </div>
         <div>
-            <p style="font-size: 16px; color: rgb(102, 102, 102);">Đừng Lựa Chọn An Nhàn Khi Còn Trẻ và 2 sản phẩm khác</p>
-            <div>57.200đ</div>
-            <div>Số lượng: 1</div>
+            <div style="margin-top: 20px; margin-bottom: 10px;">CHI TIẾT TRẠNG THÁI ĐƠN HÀNG</div>
+            <div class="trackingDetail">
+                <div class="border_trackingDetail">
+                    <div class="title_trackingDetail">Cập nhật mới nhất: Thứ tư, 05-08-2020</div>
+                    <div class="state_trackingDetail">15:32   Giao hàng thành công</div>
+                    <div class="state_trackingDetail">15:32   Giao hàng thành công</div>
+                    <div class="state_trackingDetail">15:32   Giao hàng thành công</div>
+                </div>
+            </div>
+        </div>
+        <div style="margin-top: 20px; margin-bottom: 10px;">KIỆN HÀNG GỒM CÓ</div>
+        <div class="detail_product">
+            <div style="display: flex; padding: 10px 0;">
+                <img style="margin-right: 30px;" src="https://salt.tikicdn.com/cache/200x200/ts/product/9d/4c/f5/71d4b5bb624f7ba5254cc022c4ba412a.jpg" width="80px" />
+                <div>
+                    <div>Giày Thể Thao Nam Biti's Hunter X - Summer 2K19 Adventure Collection DSMH01100DEN42 - Thunder Black (Size 42)</div>
+                    <div style="margin-top: 10px;">Bán và giao bởi <b>JustBook</b></div>
+                </div>
+            </div>
+            <div style="display: flex; padding: 10px 0;">
+                <img style="margin-right: 30px;" src="https://salt.tikicdn.com/cache/200x200/ts/product/9d/4c/f5/71d4b5bb624f7ba5254cc022c4ba412a.jpg" width="80px" />
+                <div>
+                    <div>Giày Thể Thao Nam Biti's Hunter X - Summer 2K19 Adventure Collection DSMH01100DEN42 - Thunder Black (Size 42)</div>
+                    <div style="margin-top: 10px;">Bán và giao bởi <b>JustBook</b></div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
