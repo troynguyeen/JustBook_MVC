@@ -175,8 +175,7 @@
                                             @chitietDH.TenSP
                                         </a>
                                         <div>Danh mục: @chitietDH.LoaiSanPham</div>
-                                        <div>Mã: <a id="Ma" href="@Url.Action("Detail", "Shopping", new {id = @chitietDH.MaSP})" target="_blank">
-                                            @chitietDH.MaSP</a></div>
+                                        <div>Mã: <a id="Ma" href="@Url.Action("Detail", "Shopping", new {id = @chitietDH.MaSP})" target="_blank">@chitietDH.MaSP</a></div>
                                         @if (@Model.TrangThaiDonHang != "Đã bị hủy")
                                         {
                                             <div style="padding-top: 10px;">
