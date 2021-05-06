@@ -37,6 +37,7 @@ namespace JustBook.Controllers
         {
             int MaDH = 0;
             int MaKH = Int32.Parse(Session["MaKH"].ToString());
+            listOfshoppingCartModels = Session["CartItem"] as List<ShoppingCartModel>;
             GioHang giohang = db.GioHangs.FirstOrDefault(model => model.MaKH == MaKH);
 
             DonHang donhang = new DonHang();
@@ -66,7 +67,33 @@ namespace JustBook.Controllers
                 db.SaveChanges();
             }
 
-            return Json(new { Success = true, Message = "Tạo Đơn hàng thành công."}, JsonRequestBehavior.AllowGet);
+            //Cập nhật trạng thái đơn hàng
+            TrangThaiDonHang trangthai = new TrangThaiDonHang();
+            trangthai.MaDH = MaDH;
+            trangthai.ThoiGian = DateTime.Now;
+            trangthai.TrangThai = "Chờ xác nhận";
+            db.TrangThaiDonHangs.Add(trangthai);
+            db.SaveChanges();
+
+            //Xóa giỏ hàng sau khi tạo đơn hàng
+            if (db.GioHangs.Any(model => model.MaKH == MaKH))
+            {
+                GioHang giohangcu = db.GioHangs.FirstOrDefault(model => model.MaKH == MaKH);
+                var ListOfChiTietGH = db.ChiTietGioHangs.Where(model => model.MaGioHang == giohang.MaGH).ToList();
+
+                foreach (var chitiet in ListOfChiTietGH)
+                {
+                    db.ChiTietGioHangs.Remove(chitiet);
+                    db.SaveChanges();
+                }
+                db.GioHangs.Remove(giohangcu);
+                db.SaveChanges();
+            }
+
+            Session["CartItem"] = null;
+            Session["CartCounter"] = null;
+
+            return Json(new { Success = true, MaDH = MaDH, Message = "Tạo Đơn hàng thành công."}, JsonRequestBehavior.AllowGet);
         }
     }
 }

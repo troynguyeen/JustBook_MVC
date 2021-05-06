@@ -1,0 +1,453 @@
+﻿@model JustBook.ViewModel.OrderManagementModel
+@{
+    ViewBag.Title = "Chi tiết đơn hàng | Admin";
+    Layout = "~/Views/Header.cshtml";
+
+    var giatridonhang = string.Format("{0:#,##0 VND}", Model.TongGiaTriDonHang);
+}
+
+<style>
+    table, td, tr, th {
+        border-bottom: 1px solid rgb(244, 244, 244);
+        padding: 20px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .title-page {
+        display: flex;
+        align-items: center;
+        font-size: 18px;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .order-date {
+        display: flex;
+        justify-content: flex-end;
+        padding-bottom: 20px;
+    }
+
+    .order-content {
+        width: 300px;
+        background-color: #FFF;
+        padding: 20px;
+        height: 100%;
+    }
+
+    .order-prices {
+        display: flex;
+        padding: 10px 20px;
+    }
+
+    .list-prices {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        padding: 20px 0;
+    }
+
+    .order-title {
+        font-size: 16px;
+        font-weight: bold;
+        padding: 10px 0;
+    }
+
+    .canceled_state {
+        background-color: #c9302c;
+        padding: 10px;
+        color: #FFF;
+        border-radius: 4px;
+    }
+</style>
+
+<div class="page-admin">
+    <div class="sidebar-admin">
+        <div class="sidebar-title">DANH SÁCH CHỨC NĂNG</div>
+        <a class="sidebar-item" href="@Url.Action("Index", "AdminHome")">
+            <span class="fa fa-home"></span>
+            <span class="sidebar-item-title">Trang chủ</span>
+        </a>
+        <a class="sidebar-item" href="@Url.Action("AdminAccount", "AdminHome")">
+            <span class="fa fa-user-alt"></span>
+            <span class="sidebar-item-title">Thông tin tài khoản</span>
+        </a>
+        <a class="sidebar-item" href="@Url.Action("AdminNotification", "AdminHome")">
+            <span class="fas fa-bell"></span>
+            <span class="sidebar-item-title">Thông báo của tôi</span>
+            <span class="badge" style="background-color: red;">5</span>
+        </a>
+        <a class="sidebar-item" href="@Url.Action("OrderManagement", "AdminHome")">
+            <span class="fa fa-address-card"></span>
+            <span class="sidebar-item-title">Quản lý đơn hàng</span>
+        </a>
+        <a class="sidebar-item" href="@Url.Action("ProductManagement", "AdminHome")">
+            <span class="fas fa-tags"></span>
+            <span class="sidebar-item-title">Quản lý sản phẩm</span>
+        </a>
+    </div>
+    <div class="content-admin-order">
+        <div class="title-page">
+            <div style="padding-right: 20px;">
+                Chi tiết đơn hàng #<span id="MaDH">@Model.MaDH</span>
+            </div>
+            @if (@Model.TrangThaiDonHang != "Đã bị hủy")
+            {
+                <select id="selected_state" style="width: 250px;">
+                    <option selected>@Model.TrangThaiDonHang</option>
+
+                    @{string[] arr = { "Chờ xác nhận", "Admin đã tiếp nhận", "Đang đóng gói", "Đang giao hàng", "Giao hàng thành công" }; }
+                    @{List<string> listOfState = new List<string>(arr);}
+                    @for (int i = 0; i < listOfState.Count; i++)
+                    {
+                        if (@Model.TrangThaiDonHang != listOfState[i])
+                        {
+                            <option>@listOfState[i]</option>
+                        }
+                    }
+                </select>
+            }
+            else
+            {
+                <div class="canceled_state">Đã bị hủy</div>
+            }
+        </div>
+        <div class="order-date">Ngày đặt hàng: @Model.ThoiGianTao</div>
+        <div style="display: flex;">
+            <div>
+                <div class="order-title">ĐỊA CHỈ NGƯỜI NHẬN</div>
+                <div class="order-content" style="margin-right: 30px;">
+                    <p style="font-weight: bold;">@Model.TenNguoiNhan</p>
+                    <p>Địa chỉ: @Model.DiaChiNguoiNhan</p>
+                    <p>Điện thoại: @Model.PhoneNguoiNhan</p>
+                </div>
+            </div>
+            <div>
+                <div class="order-title">HÌNH THỨC GIAO HÀNG</div>
+                <div class="order-content" style="margin-right: 30px;">
+                    @{var ThoiGianGH = (int)@Model.ThoiGianTao.DayOfWeek + 1;}
+                    @if (ThoiGianGH == 1)
+                    {
+                        <p>
+                            Giao vào Chủ Nhật, @Model.ThoiGianTao.ToString("dd/MM/yyyy")
+                        </p>
+                    }
+                    else
+                    {
+                        <p>
+                            Giao vào Thứ @ThoiGianGH, @Model.ThoiGianTao.ToString("dd/MM/yyyy")
+                        </p>
+                    }
+                    <p>Phí vận chuyển: 0 VND</p>
+                </div>
+            </div>
+            <div>
+                <div class="order-title">HÌNH THỨC THANH TOÁN</div>
+                <div class="order-content">Thanh toán bằng @Model.PhuongThucThanhToan</div>
+            </div>
+        </div>
+        <div style="background-color: #FFF; margin-top: 60px;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Sản phẩm</th>
+                        <th>Đơn giá</th>
+                        <th style="text-align: center;">Số lượng</th>
+                        <th style="text-align: center;">Chiết khấu</th>
+                        <th>Tổng tiền</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var chitietDH in Model.ChiTietDonHang)
+                    {
+                        var giamonhang = chitietDH.DonGia * chitietDH.SoLuong;
+                        var giamonhang_VND = string.Format("{0:#,##0 VND}", giamonhang);
+                        var dongia = string.Format("{0:#,##0 VND}", chitietDH.DonGia);
+                        <tr class="order-rows" id="row_@chitietDH.MaSP">
+                            <td style="width: 400px;">
+                                <div style="display: flex;">
+                                    <img width="70" height="70" src="@Url.Content(@chitietDH.ImagePath)" />
+                                    <div style="padding-left: 10px;">
+                                        <a href="@Url.Action("Detail", "Shopping", new {id = @chitietDH.MaSP})" target="_blank">
+                                            @chitietDH.TenSP
+                                        </a>
+                                        <div>Danh mục: @chitietDH.LoaiSanPham</div>
+                                        <div>Mã: <a id="Ma" href="@Url.Action("Detail", "Shopping", new {id = @chitietDH.MaSP})" target="_blank">@chitietDH.MaSP</a></div>
+                                        @if (@Model.TrangThaiDonHang != "Đã bị hủy")
+                                        {
+                                            <div style="padding-top: 10px;">
+                                                <a id="removeButton" onclick="RemoveItem(this)" href="#" itemid="@chitietDH.MaSP">Xóa</a>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </td>
+                            <td>@dongia</td>
+                            <td style="display: flex; justify-content: center; margin-top: 30px; border: none;">
+                                <div class="quantity buttons_added">
+                                    @if (@Model.TrangThaiDonHang != "Đã bị hủy")
+                                    {
+                                        <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="@chitietDH.SoLuongConLai"
+                                         itemid="@chitietDH.MaSP" name="quantityItemName" value="@chitietDH.SoLuong" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button" value="+" class="plus">
+                                    }
+                                    else
+                                    {
+                                        <input disabled type="button" value="-" class="minus"><input disabled type="number" step="1" min="1" max="@chitietDH.SoLuongConLai"
+                                         itemid="@chitietDH.MaSP" name="quantityItemName" value="@chitietDH.SoLuong" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input disabled type="button" value="+" class="plus">
+                                    }
+                                </div>
+                            </td>
+                            <td style="text-align: center;">15%</td>
+                            <td class="TongTienMonHang" id="@chitietDH.MaSP" data-content="@giamonhang">@giamonhang_VND</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="list-prices">
+                <div class="order-prices">
+                    <div style="padding-right: 50px;">Tạm tính</div>
+                    <div id="TamTinh">@giatridonhang</div>
+                </div>
+                <div class="order-prices">
+                    <div style="padding-right: 50px;">Phí vận chuyển</div>
+                    <div>0 VND</div>
+                </div>
+                <div class="order-prices">
+                    <div style="padding-right: 50px;">Tổng cộng</div>
+                    <div id="TongCong" data-content="@Model.TongGiaTriDonHang" style="font-size: 18px; color: red;">@giatridonhang</div>
+                </div>
+            </div>
+        </div>
+        <div style="padding: 20px 0; display: flex; justify-content: space-between;">
+            @if (@Model.TrangThaiDonHang != "Đã bị hủy")
+            {
+                <input id="save" onclick="SaveChange()" class="btn btn-warning" style="font-weight: bold; color: #000;" type="button" value="Lưu lại thay đổi" />
+                <input id="cancel" class="btn btn-danger" style="font-weight: bold;" type="button" value="Hủy đơn hàng"
+                       data-toggle="modal" data-target="#messageModal" />
+            }
+            else
+            {
+                <input disabled id="save" onclick="SaveChange()" class="btn btn-warning" style="font-weight: bold; color: #000;" type="button" value="Lưu lại thay đổi" />
+                <input disabled id="cancel" class="btn btn-danger" style="font-weight: bold;" type="button" value="Hủy đơn hàng"
+                       data-toggle="modal" data-target="#messageModal" />
+            }
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="messageModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4 class="modal-title" id="messageModalLabel" style="color: red; font-weight: bold;">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    Cảnh báo
+                </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="font-weight: bold;">
+                Đơn hàng sau khi hủy sẽ không thể chỉnh sửa. 
+                <div style="padding-top: 10px;">Bạn có muốn tiếp tục ?</div>
+            </div>
+            <div class="modal-footer">
+                <button type="reset" class="btn btn-danger" onclick="CancelOrder()" data-dismiss="modal">Đồng ý</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Hủy bỏ</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+
+    $(window).on('load', function () {
+        sessionStorage.removeItem("RemoveId")
+    });
+
+    function CancelOrder() {
+        var formData = new FormData();
+        var MaDH = $("#MaDH").text();
+        var canceled = `<div class="canceled_state">Đã bị hủy</div>`
+
+        $("#selected_state").replaceWith($(canceled))
+        $("#save").prop('disabled', true);
+        $("#cancel").prop('disabled', true);
+       
+        $("input[name=quantityItemName]").each(function () {
+            $(this).prop('disabled', true);
+            $(".plus").prop('disabled', true);
+            $(".minus").prop('disabled', true);
+            $("#removeButton").remove();
+        });
+
+        formData.append("MaDH", MaDH);
+        formData.append("TrangThaiDonHang", "Đã bị hủy");
+
+        $.ajax({
+            async: true,
+            type: 'POST',
+            contentType: false,
+            processData: false,
+            data: formData,
+            url: '/AdminHome/CancelOrder',
+            success: function (data) {
+                if (data.Success) {
+                    
+                }
+            },
+            error: function () {
+                alert(data.Message);
+            }
+        });
+    }
+
+    function SaveChange() {
+        var formData = new FormData();
+
+        var MaDH = $("#MaDH").text();
+        var SelectedState = $("#selected_state option:selected").text();
+        var TongCong = $("#TongCong").attr("data-content");
+        var RemoveId = sessionStorage.getItem("RemoveId")
+        var listOfMaSP = []
+        var listOfSoLuongMua = []
+        var listOfTongTienMonHang = []
+
+        $("a[id=Ma]").each(function () {
+            listOfMaSP.push($(this).text())
+        });
+
+        $("input[name=quantityItemName]").each(function () {
+            listOfSoLuongMua.push($(this).val())
+        });
+
+        $("td[class=TongTienMonHang]").each(function () {
+            listOfTongTienMonHang.push($(this).attr("data-content"))
+        });
+
+        formData.append("MaDH", MaDH);
+        formData.append("TrangThaiDonHang", SelectedState);
+        formData.append("TongCong", TongCong);
+        formData.append("MaSP", listOfMaSP);
+        formData.append("SoLuongMua", listOfSoLuongMua);
+        formData.append("TongTienMonHang", listOfTongTienMonHang);
+        formData.append("RemoveId", RemoveId);
+
+        sessionStorage.removeItem("RemoveId")
+
+        $.ajax({
+            async: true,
+            type: 'POST',
+            contentType: false,
+            processData: false,
+            data: formData,
+            url: '/AdminHome/OrderSaveChanges',
+            success: function (data) {
+                if (data.Success) {
+                    alert("Lưu lại thay đổi đơn hàng thành công.")
+                }
+            },
+            error: function () {
+                alert(data.Message);
+            }
+        });
+    }
+
+    function RemoveItem(item) {
+        var itemId = $(item).attr("itemid");
+        var TongCong = 0;
+        var length = 0;
+        var ListOfRemoveId = [];
+
+        $('tr[id]').each(function () {
+            length += 1
+        })
+
+        if (length > 1) {
+            $("#" + "row_" + itemId).remove();
+
+            if (sessionStorage.getItem("RemoveId") != null) {
+                ListOfRemoveId.push(sessionStorage.getItem("RemoveId"))
+            }
+            ListOfRemoveId.push(itemId)
+            sessionStorage.setItem("RemoveId", ListOfRemoveId)
+
+        } else {
+            alert("Đơn hàng phải có ít nhất 1 sản phẩm.")
+        }
+
+        $('td[data-content]').each(function () {
+            TongCong += parseInt($(this).attr('data-content'))
+        });
+
+        $("#TamTinh").text((TongCong).toLocaleString('it-IT', { style: 'currency', currency: 'VND' }));
+        $("#TongCong").text((TongCong).toLocaleString('it-IT', { style: 'currency', currency: 'VND' }));
+        $("#TongCong").attr("data-content", TongCong)
+    }
+
+    $(document).ready(function () {
+        $("input[name=quantityItemName]").change(function () {
+            var itemId = $(this).attr("itemid");
+            var quantityItem = this.value;
+            var SanPham = {};
+            var TongCong = 0;
+
+            async function getSoLuong() {
+                await $.ajax({
+                    async: true,
+                    type: 'GET',
+                    data: {
+                        SelectedID: itemId
+                    },
+                    url: '/AdminHome/getInfo',
+                    success: function (data) {
+                        SanPham["SoLuong"] = data.SoLuong
+                        SanPham["DonGia"] = data.DonGia
+                    },
+                    error: function (err) {
+                        console.error(err);
+                    }
+                });
+                return SanPham;
+            }
+            getSoLuong().then(
+                function (SanPham) {
+                    var soluong = SanPham["SoLuong"]
+                    var dongia = SanPham["DonGia"]
+
+                    if (quantityItem === "" || quantityItem <= 0) {
+                        $("input[itemid=" + itemId + "]").val(1);
+                        $("#" + itemId).text(dongia.toLocaleString('it-IT', { style: 'currency', currency: 'VND' }));
+                        $("#" + itemId).attr("data-content", dongia)
+                    }
+                    else if (quantityItem > soluong) {
+                        $("input[itemid=" + itemId + "]").val(soluong);
+                        $("#" + itemId).text((soluong * dongia).toLocaleString('it-IT', { style: 'currency', currency: 'VND' }));
+                        $("#" + itemId).attr("data-content", soluong * dongia)
+                        alert("Chỉ có thể chỉnh sửa tối đa " + soluong + " sản phẩm.");
+
+                    } else {
+                        $("#" + itemId).text((quantityItem * dongia).toLocaleString('it-IT', { style: 'currency', currency: 'VND' }));
+                        $("#" + itemId).attr("data-content", quantityItem * dongia)
+                    }
+
+                    $('td[data-content]').each(function () {
+                        TongCong += parseInt($(this).attr('data-content'))
+                    });
+
+                    $("#TamTinh").text((TongCong).toLocaleString('it-IT', { style: 'currency', currency: 'VND' }));
+                    $("#TongCong").text((TongCong).toLocaleString('it-IT', { style: 'currency', currency: 'VND' }));
+                    $("#TongCong").attr("data-content", TongCong)
+                }
+            )
+        })
+    });
+</script>
+

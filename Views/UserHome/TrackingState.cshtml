@@ -1,146 +1,127 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Trạng thái đơn hàng | JustBook";
     Layout = "~/Views/Header.cshtml";
 }
 
-<div class="container-fluid">
-    <div class="card status-package">
-        <a href="@Url.Action("OrderHistory", "UserHome")" style="color: #337ab7; padding-right: 30px; font-size: 20px">
-            <span class="fas fa-arrow-left" style="font-size: 18px;"></span>
-            Trở về
+<style>
+    .tracking-page {
+        margin: 50px 0;
+        width: 1000px;
+    }
+
+    .title-tracking {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 18px;
+        margin-bottom: 30px;
+    }
+
+    .trackingDetail {
+        background-color: #FFF;
+        padding: 20px;
+    }
+
+    .border_trackingDetail {
+        border-radius: 4px;
+        border: 1px solid rgb(218, 218, 218);
+        border-bottom: none;
+    }
+
+    .title_trackingDetail {
+        font-size: 13px;
+        font-weight: bold;
+        background-color: rgb(241, 241, 241);
+        padding: 12px 15px;
+        border-bottom: 1px solid rgb(218, 218, 218);
+    }
+
+    .state_trackingDetail {
+        font-size: 13px;
+        padding: 12px 15px;
+        border-bottom: 1px solid rgb(218, 218, 218);
+    }
+
+    .detail_product {
+        display: flex;
+        justify-content: space-between;
+        background-color: #FFF;
+        padding: 15px 20px;
+    }
+</style>
+
+<div class="page-admin">
+    <div class="sidebar-admin">
+        <div class="sidebar-title">DANH SÁCH CHỨC NĂNG</div>
+        <a class="sidebar-item" href="@Url.Action("Index", "AdminHome")">
+            <span class="fa fa-home"></span>
+            <span class="sidebar-item-title">Trang chủ</span>
         </a>
-        <div class="card-header">
-            <h4 class="status-header">Trạng thái đơn hàng</h4>
+        <a class="sidebar-item" href="@Url.Action("AdminAccount", "AdminHome")">
+            <span class="fa fa-user-alt"></span>
+            <span class="sidebar-item-title">Thông tin tài khoản</span>
+        </a>
+        <a class="sidebar-item" href="@Url.Action("AdminNotification", "AdminHome")">
+            <span class="fas fa-bell"></span>
+            <span class="sidebar-item-title">Thông báo của tôi</span>
+            <span class="badge" style="background-color: red;">5</span>
+        </a>
+        <a class="sidebar-item" href="@Url.Action("OrderManagement", "AdminHome")">
+            <span class="fa fa-address-card"></span>
+            <span class="sidebar-item-title">Quản lý đơn hàng</span>
+        </a>
+        <a class="sidebar-item" href="@Url.Action("ProductManagement", "AdminHome")">
+            <span class="fas fa-tags"></span>
+            <span class="sidebar-item-title">Quản lý sản phẩm</span>
+        </a>
+    </div>
+    <div class="tracking-page">
+        <div class="title-tracking">
+            <div>
+                Theo dõi đơn hàng #<span id="MaDH">2312</span>
+            </div>
+            <div>
+                <a href="@Url.Action("OrderUserDetail", "AdminHome")">
+                    <button class="btn btn-warning" style="font-weight: bold; color: #000;" type="button">Xem chi tiết đơn hàng</button>
+                </a>
+            </div>
         </div>
-        <div class="card-body">
-            <ul class="timeline" id="timeline">
-                <li class="li complete">
-                    <div class="timestamp">
-                        <span class="date">11/15/2014</span>
-                    </div>
-                    <div class="status">
-                        <h4>Đơn hàng đã đặt</h4>
-                    </div>
-                </li>
-                <li class="li complete">
-                    <div class="timestamp">
-                        <span class="date">11/15/2014</span>
-                    </div>
-                    <div class="status">
-                        <h4>Đơn hàng đã thanh toán</h4>
-                    </div>
-                </li>
-                <li class="li complete">
-                    <div class="timestamp">
-                        <span class="date">11/15/2014</span>
-                    </div>
-                    <div class="status">
-                        <h4>Đã giao cho ĐVVC</h4>
-                    </div>
-                </li>
-                <li class="li complete">
-                    <div class="timestamp">
-                        <span class="date">TBD </span>
-                    </div>
-                    <div class="status">
-                        <h4>Đang giao</h4>
-                    </div>
-                </li>
-                <li class="li">
-                    <div class="timestamp">
-                        <span class="date">TBD</span>
-                    </div>
-                    <div class="status">
-                        <h4>Đánh giá</h4>
-                    </div>
-                </li>
-            </ul>
-            <div class="card-footer confirm-received">
-                <div class="col-md-9">
-                    <p>
-                        Người bán đã gửi hàng. Bạn sẽ nhận được sản phẩm dự kiến vào
-                        09-03-2021.
-                    </p>
-                </div>
-                <div class="col-md-3">
-                    <button class="btn confirm-button">Đã nhận hàng</button>
+        <div style="margin-bottom: 10px;">TRẠNG THÁI ĐƠN HÀNG</div>
+        <div style="background-color: #FFF; padding: 20px;">
+            <div>Trạng thái: Giao hàng thành công | 15:32 Thứ tư, 05-08-2020</div>
+            <div class="progress-state">
+                <div class="progress" style="width: 650px; height: 10px; margin-bottom: 5px;">
+                    <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- end card -->
-    <div class="card address-package">
-        <div class="card-header">
-            <h4 class="status-header">Địa Chỉ Nhận Hàng</h4>
-        </div>
-        <div class="card-body">
-            <ul class="address">
-                <li class="name">Nguyễn Đình Bảo</li>
-                <li>(+84)0938832442</li>
-                <li>19 Nguyễn Duy, phường 2, quận Bình Thạnh, Hồ Chí Minh</li>
-            </ul>
-        </div>
-    </div>
-    <div class="card infor-package">
-        <div class="card-header row">
-            <h4 class="status-header col-md-9">Kiện hàng 1</h4>
-            <h4 class="col-md-2" style="color: #fc6969;text-transform: uppercase;">Đã giao</h4>
-        </div>
-        <div class="card-body row">
-            <div class="col-md-6 delivery-name">
-                Ninja Van <br />SPEVN215502360721S
-            </div>
-            <div class="col-md-6">
-                <ul class="sessions" id="sessions">
-                    <li>
-                        <div class="time">09:00 09-03-2021</div>
-                        <p>Đã giao hàng</p>
-                    </li>
-                    <li>
-                        <div class="time">09:05 09-03-2021</div>
-                        <p>Đang giao hàng</p>
-                    </li>
-                    <li>
-                        <div class="time">09:30 08-03-2021</div>
-                        <p>Đã nhập kho</p>
-                    </li>
-                    <li>
-                        <div class="time">13:00 08-03-2021</div>
-                        <p>Đã lấy hàng</p>
-                    </li>
-                    <li>
-                        <div class="time">13:30 08-03-2021</div>
-                        <p>Đã lấy hàng (Ninja Van:SPEVN215502360721S)</p>
-                    </li>
-                </ul>
+        <div>
+            <div style="margin-top: 20px; margin-bottom: 10px;">CHI TIẾT TRẠNG THÁI ĐƠN HÀNG</div>
+            <div class="trackingDetail">
+                <div class="border_trackingDetail">
+                    <div class="title_trackingDetail">Cập nhật mới nhất: Thứ tư, 05-08-2020</div>
+                    <div class="state_trackingDetail">15:32   Giao hàng thành công</div>
+                    <div class="state_trackingDetail">15:32   Giao hàng thành công</div>
+                    <div class="state_trackingDetail">15:32   Giao hàng thành công</div>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="card items-list">
-        <div class="card-body">
-            <div class="header-items">
-                <strong>ngbdao8899</strong>
-                <button class="btn" style="margin:10px">chat</button>
-                <button type="button" class="btn btn-primary">xem shop</button>
+        <div style="margin-top: 20px; margin-bottom: 10px;">KIỆN HÀNG GỒM CÓ</div>
+        <div class="detail_product">
+            <div style="display: flex; padding: 10px 0;">
+                <img style="margin-right: 30px;" src="https://salt.tikicdn.com/cache/200x200/ts/product/9d/4c/f5/71d4b5bb624f7ba5254cc022c4ba412a.jpg" width="80px" />
+                <div>
+                    <div>Giày Thể Thao Nam Biti's Hunter X - Summer 2K19 Adventure Collection DSMH01100DEN42 - Thunder Black (Size 42)</div>
+                    <div style="margin-top: 10px;">Bán và giao bởi <b>JustBook</b></div>
+                </div>
             </div>
-            <ul>
-                <li class="infor-item row">
-                    <img src="https://via.placeholder.com/60" alt="" class="thumbnail-product col-md-2">
-                    <label class="label-product col-md-7">Cục sạc dự phòng Xiaomi 10.000mah <br /> Màu trắng</label>
-                    <p class="item-quantity col-md-2">x2</p>
-                </li>
-                <li class="infor-item row">
-                    <img src="https://via.placeholder.com/60" alt="" class="thumbnail-product col-md-2">
-                    <label class="label-product col-md-7">Củ sạc Xiaomi 30W <br /> Màu đen</label>
-                    <p class="item-quantity col-md-2">x2</p>
-                </li>
-                <li class="infor-item row">
-                    <img src="https://via.placeholder.com/60" alt="" class="thumbnail-product col-md-2">
-                    <label class="label-product col-md-7">Dây sạc Type-c 15m<br /> Màu trắng</label>
-                    <p class="item-quantity col-md-2">x2</p>
-                </li>
-            </ul>
+            <div style="display: flex; padding: 10px 0;">
+                <img style="margin-right: 30px;" src="https://salt.tikicdn.com/cache/200x200/ts/product/9d/4c/f5/71d4b5bb624f7ba5254cc022c4ba412a.jpg" width="80px" />
+                <div>
+                    <div>Giày Thể Thao Nam Biti's Hunter X - Summer 2K19 Adventure Collection DSMH01100DEN42 - Thunder Black (Size 42)</div>
+                    <div style="margin-top: 10px;">Bán và giao bởi <b>JustBook</b></div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

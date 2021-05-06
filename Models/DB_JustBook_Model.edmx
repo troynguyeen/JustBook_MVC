@@ -125,16 +125,13 @@
           <Property Name="MatKhau" Type="nvarchar" MaxLength="15" Nullable="false" />
           <Property Name="DiaChi" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'CT25Team23.dbo.TrangThaiDonHang' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="TrangThaiDonHang">
           <Key>
-            <PropertyRef Name="MaDH" />
-            <PropertyRef Name="ThoiGian" />
-            <PropertyRef Name="TrangThai" />
+            <PropertyRef Name="MaTrangThaiDH" />
           </Key>
+          <Property Name="MaTrangThaiDH" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MaDH" Type="int" Nullable="false" />
-          <Property Name="ThoiGian" Type="date" Nullable="false" />
+          <Property Name="ThoiGian" Type="datetime" Nullable="false" />
           <Property Name="TrangThai" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <Association Name="FK_ChiTietDonHang_DonHang">
@@ -251,13 +248,7 @@ warning 6002: The table/view 'CT25Team23.dbo.TrangThaiDonHang' does not have a p
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TaiKhoanKH" EntityType="Self.TaiKhoanKH" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TaiKhoanQT" EntityType="Self.TaiKhoanQT" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TrangThaiDonHang" EntityType="Self.TrangThaiDonHang" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [TrangThaiDonHang].[MaDH] AS [MaDH], 
-    [TrangThaiDonHang].[ThoiGian] AS [ThoiGian], 
-    [TrangThaiDonHang].[TrangThai] AS [TrangThai]
-    FROM [dbo].[TrangThaiDonHang] AS [TrangThaiDonHang]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="TrangThaiDonHang" EntityType="Self.TrangThaiDonHang" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_ChiTietDonHang_DonHang" Association="Self.FK_ChiTietDonHang_DonHang">
             <End Role="DonHang" EntitySet="DonHang" />
             <End Role="ChiTietDonHang" EntitySet="ChiTietDonHang" />
@@ -355,17 +346,6 @@ warning 6002: The table/view 'CT25Team23.dbo.TrangThaiDonHang' does not have a p
           <Property Name="MatKhau" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="DiaChi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
-        <EntityType Name="TrangThaiDonHang">
-          <Key>
-            <PropertyRef Name="MaDH" />
-            <PropertyRef Name="ThoiGian" />
-            <PropertyRef Name="TrangThai" />
-          </Key>
-          <Property Name="MaDH" Type="Int32" Nullable="false" />
-          <Property Name="ThoiGian" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="TrangThai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="DonHang" Relationship="JustBook_CT25Team23Model.FK_TrangThaiDonHang_DonHang" FromRole="TrangThaiDonHang" ToRole="DonHang" />
-        </EntityType>
         <Association Name="FK_LichSuGD_TaiKhoanKH">
           <End Role="TaiKhoanKH" Type="Self.TaiKhoanKH" Multiplicity="1" />
           <End Role="LichSuGD" Type="Self.LichSuGD" Multiplicity="*" />
@@ -384,7 +364,6 @@ warning 6002: The table/view 'CT25Team23.dbo.TrangThaiDonHang' does not have a p
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="TaiKhoanKHs" EntityType="Self.TaiKhoanKH" />
           <EntitySet Name="TaiKhoanQTs" EntityType="Self.TaiKhoanQT" />
-          <EntitySet Name="TrangThaiDonHangs" EntityType="Self.TrangThaiDonHang" />
           <AssociationSet Name="FK_LichSuGD_TaiKhoanKH" Association="Self.FK_LichSuGD_TaiKhoanKH">
             <End Role="TaiKhoanKH" EntitySet="TaiKhoanKHs" />
             <End Role="LichSuGD" EntitySet="LichSuGDs" />
@@ -426,10 +405,6 @@ warning 6002: The table/view 'CT25Team23.dbo.TrangThaiDonHang' does not have a p
             <End Role="DonHang" EntitySet="DonHangs" />
             <End Role="LichSuGD" EntitySet="LichSuGDs" />
           </AssociationSet>
-          <AssociationSet Name="FK_TrangThaiDonHang_DonHang" Association="JustBook_CT25Team23Model.FK_TrangThaiDonHang_DonHang">
-            <End Role="DonHang" EntitySet="DonHangs" />
-            <End Role="TrangThaiDonHang" EntitySet="TrangThaiDonHangs" />
-          </AssociationSet>
           <AssociationSet Name="FK_GioHang_TaiKhoanKH" Association="JustBook_CT25Team23Model.FK_GioHang_TaiKhoanKH">
             <End Role="TaiKhoanKH" EntitySet="TaiKhoanKHs" />
             <End Role="GioHang" EntitySet="GioHangs" />
@@ -443,6 +418,11 @@ warning 6002: The table/view 'CT25Team23.dbo.TrangThaiDonHang' does not have a p
           <AssociationSet Name="FK_ChiTietGioHang_GioHang" Association="JustBook_CT25Team23Model.FK_ChiTietGioHang_GioHang">
             <End Role="GioHang" EntitySet="GioHangs" />
             <End Role="ChiTietGioHang" EntitySet="ChiTietGioHangs" />
+          </AssociationSet>
+          <EntitySet Name="TrangThaiDonHangs" EntityType="JustBook_CT25Team23Model.TrangThaiDonHang" />
+          <AssociationSet Name="FK_TrangThaiDonHang_DonHang" Association="JustBook_CT25Team23Model.FK_TrangThaiDonHang_DonHang">
+            <End Role="DonHang" EntitySet="DonHangs" />
+            <End Role="TrangThaiDonHang" EntitySet="TrangThaiDonHangs" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="LoaiSanPham">
@@ -477,8 +457,8 @@ warning 6002: The table/view 'CT25Team23.dbo.TrangThaiDonHang' does not have a p
           <Property Name="PhuongThucThanhToan" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
           <Property Name="TongGiaTriDonHang" Type="Double" Nullable="false" />
           <NavigationProperty Name="LichSuGDs" Relationship="JustBook_CT25Team23Model.FK_LichSuGD_DonHang" FromRole="DonHang" ToRole="LichSuGD" />
-          <NavigationProperty Name="TrangThaiDonHangs" Relationship="JustBook_CT25Team23Model.FK_TrangThaiDonHang_DonHang" FromRole="DonHang" ToRole="TrangThaiDonHang" />
           <NavigationProperty Name="ChiTietDonHangs" Relationship="JustBook_CT25Team23Model.FK_ChiTietDonHang_DonHang" FromRole="DonHang" ToRole="ChiTietDonHang" />
+          <NavigationProperty Name="TrangThaiDonHangs" Relationship="JustBook_CT25Team23Model.FK_TrangThaiDonHang_DonHang" FromRole="DonHang" ToRole="TrangThaiDonHang" />
         </EntityType>
         <EntityType Name="GioHang">
           <Key>
@@ -498,18 +478,6 @@ warning 6002: The table/view 'CT25Team23.dbo.TrangThaiDonHang' does not have a p
               <PropertyRef Name="MaDH" />
             </Principal>
             <Dependent Role="LichSuGD">
-              <PropertyRef Name="MaDH" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TrangThaiDonHang_DonHang">
-          <End Type="JustBook_CT25Team23Model.DonHang" Role="DonHang" Multiplicity="1" />
-          <End Type="JustBook_CT25Team23Model.TrangThaiDonHang" Role="TrangThaiDonHang" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DonHang">
-              <PropertyRef Name="MaDH" />
-            </Principal>
-            <Dependent Role="TrangThaiDonHang">
               <PropertyRef Name="MaDH" />
             </Dependent>
           </ReferentialConstraint>
@@ -576,6 +544,28 @@ warning 6002: The table/view 'CT25Team23.dbo.TrangThaiDonHang' does not have a p
             </Principal>
             <Dependent Role="ChiTietGioHang">
               <PropertyRef Name="MaGioHang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="TrangThaiDonHang">
+          <Key>
+            <PropertyRef Name="MaTrangThaiDH" />
+          </Key>
+          <Property Name="MaTrangThaiDH" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaDH" Type="Int32" Nullable="false" />
+          <Property Name="ThoiGian" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TrangThai" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DonHang" Relationship="JustBook_CT25Team23Model.FK_TrangThaiDonHang_DonHang" FromRole="TrangThaiDonHang" ToRole="DonHang" />
+        </EntityType>
+        <Association Name="FK_TrangThaiDonHang_DonHang">
+          <End Type="JustBook_CT25Team23Model.DonHang" Role="DonHang" Multiplicity="1" />
+          <End Type="JustBook_CT25Team23Model.TrangThaiDonHang" Role="TrangThaiDonHang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DonHang">
+              <PropertyRef Name="MaDH" />
+            </Principal>
+            <Dependent Role="TrangThaiDonHang">
+              <PropertyRef Name="MaDH" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -651,15 +641,6 @@ warning 6002: The table/view 'CT25Team23.dbo.TrangThaiDonHang' does not have a p
                 <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
                 <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
                 <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TrangThaiDonHangs">
-            <EntityTypeMapping TypeName="JustBook_CT25Team23Model.TrangThaiDonHang">
-              <MappingFragment StoreEntitySet="TrangThaiDonHang">
-                <ScalarProperty Name="MaDH" ColumnName="MaDH" />
-                <ScalarProperty Name="ThoiGian" ColumnName="ThoiGian" />
-                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -745,6 +726,16 @@ warning 6002: The table/view 'CT25Team23.dbo.TrangThaiDonHang' does not have a p
                 <ScalarProperty Name="MaSP" ColumnName="MaSP" />
                 <ScalarProperty Name="MaGioHang" ColumnName="MaGioHang" />
                 <ScalarProperty Name="MaChiTietGH" ColumnName="MaChiTietGH" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TrangThaiDonHangs">
+            <EntityTypeMapping TypeName="JustBook_CT25Team23Model.TrangThaiDonHang">
+              <MappingFragment StoreEntitySet="TrangThaiDonHang">
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+                <ScalarProperty Name="ThoiGian" ColumnName="ThoiGian" />
+                <ScalarProperty Name="MaDH" ColumnName="MaDH" />
+                <ScalarProperty Name="MaTrangThaiDH" ColumnName="MaTrangThaiDH" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

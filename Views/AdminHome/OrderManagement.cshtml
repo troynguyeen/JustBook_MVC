@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<JustBook.ViewModel.OrderManagementModel>
 @{
     ViewBag.Title = "Quản lý đơn hàng | Admin";
     Layout = "~/Views/Header.cshtml";
@@ -16,6 +16,11 @@
 
     th, td {
         padding: 20px;
+        text-align: center;
+    }
+
+    td {
+        border-right: 1px solid #dcdcdc;
     }
 </style>
 
@@ -53,40 +58,38 @@
                         <tr>
                             <th></th>
                             <th>Mã đơn hàng</th>
-                            <th>Ngày mua</th>
-                            <th>Sản phẩm</th>
-                            <th>Giá tiền</th>
+                            <th>Mã khách hàng</th>
+                            <th>Thời gian tạo</th>
+                            <th>Phương thức thanh toán</th>
+                            <th>Tổng giá trị đơn hàng</th>
                             <th>Trạng thái đơn hàng</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @for (int i = 1; i < 12; i++)
+                        @foreach (var dh in Model)
                         {
-                            string MaDH = "DH0";
-                            int GiaTien = 10000;
-                            MaDH += i;
-                            GiaTien *= i;
-                            <tr class="order-rows">
+                            var giatridonhang = string.Format("{0:#,##0 VND}", dh.TongGiaTriDonHang);
+                            <tr class="order-rows" itemid="@dh.MaDH">
                                 <td>
-                                    <a href="#">
+                                    <a href="@Url.Action("OrderDetail", "AdminHome", new {id = @dh.MaDH})">
                                         <button class="btn btn-primary">Edit</button>
                                     </a>
                                     <a href="#">
-                                        <button class="btn btn-danger">Delete</button>
+                                        <button itemid="@dh.MaDH" class="btn btn-danger" onclick="DeleteOrder(this)">Delete</button>
                                     </a>
                                 </td>
-                                <td><a href="#">@MaDH</a></td>
-                                <td>@DateTime.Now.ToString("d")</td>
-                                <td>Sản phẩm @i</td>
-                                <td>@GiaTien VND</td>
-
-                                @if (i % 2 == 0)
+                                <td><a href="@Url.Action("OrderDetail", "AdminHome", new {id = @dh.MaDH})">@dh.MaDH</a></td>
+                                <td>@dh.MaKH</td>
+                                <td>@dh.ThoiGianTao</td>
+                                <td>@dh.PhuongThucThanhToan</td>
+                                <td>@giatridonhang</td>
+                                @if (dh.TrangThaiDonHang == "Đã bị hủy")
                                 {
-                                    <td>Đang giao hàng</td>
+                                    <td style="color: red;">@dh.TrangThaiDonHang</td>
                                 }
                                 else
                                 {
-                                    <td>Đã giao hàng thành công</td>
+                                    <td>@dh.TrangThaiDonHang</td>
                                 }
                             </tr>
                         }
@@ -116,3 +119,31 @@
     </div>
 </div>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+    function DeleteOrder(item) {
+        var formData = new FormData();
+        var ItemId = $(item).attr("itemid")
+
+        formData.append("MaDH", ItemId)
+        $("tr[itemid=" + ItemId + "]").remove();
+
+        $.ajax({
+            async: true,
+            type: 'POST',
+            contentType: false,
+            processData: false,
+            data: formData,
+            url: '/AdminHome/DeleteOrder',
+            success: function (data) {
+                if (data.Success) {
+                    alert(data.Message)
+                }
+            },
+            error: function () {
+                alert(data.Message);
+            }
+        });
+    }
+</script>
