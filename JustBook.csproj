@@ -1160,6 +1160,7 @@
     <Compile Include="ViewModel\LoaiSanPhamViewModel.cs" />
     <Compile Include="ViewModel\OrderDetailViewModel.cs" />
     <Compile Include="ViewModel\OrderManagementModel.cs" />
+    <Compile Include="ViewModel\OrderStateViewModel.cs" />
     <Compile Include="ViewModel\SanPhamViewModel.cs" />
     <Compile Include="ViewModel\ShoppingCartModel.cs" />
     <Compile Include="ViewModel\ShoppingViewModel.cs" />
