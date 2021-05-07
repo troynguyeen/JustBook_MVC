@@ -83,11 +83,9 @@
                                         </div>
                                     </a>
                                     <div class="bookCollection dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a class="bookItem dropdown-item" href="@Url.Action("Index", "Shopping")">Sách Lập Trình</a>
-                                        <a class="bookItem dropdown-item" href="#">Sách Văn Học</a>
-                                        <a class="bookItem dropdown-item" href="#">Sách Tiếng Anh</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="bookItem dropdown-item" href="#">Sách Giảm Giá</a>
+                                       @{ 
+                                           Html.RenderAction("CategoriesList", "Shopping");
+                                       }
                                     </div>
                                 </div>
                                 @if (Session["MaQT"] == null)

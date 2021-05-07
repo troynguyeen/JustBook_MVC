@@ -18,33 +18,48 @@ namespace JustBook.Controllers
             sp_model = new ShoppingViewModel();
         }
         // GET: Shopping
-        public ActionResult Index()
+        public ActionResult Index(int? maLoaiSP)
         {
-            IEnumerable<ShoppingViewModel> shoppingViewModels = (from sp in db.SanPhams
-                join
-                    loai_sp in db.LoaiSanPhams
-                    on sp.MaLoaiSP equals loai_sp.MaLoaiSP
-                select new ShoppingViewModel()
-                {
-                    ImagePath = sp.ImagePath,
-                    MaSP = sp.MaSP,
-                    TenSP = sp.TenSP,
-                    TacGia = sp.TacGia,
-                    NXB = sp.NXB,
-                    DonGia = sp.DonGia,
-                    MoTa = sp.MoTa,
-                    SoLuong = sp.SoLuong,
-                    SoTrang = sp.SoTrang,
-                    TrongLuong = sp.TrongLuong,
-                    KichThuoc = sp.KichThuoc,
-                    LoaiBia = sp.LoaiBia,
-                    TrangThai = sp.TrangThai,
-                    LoaiSanPham = loai_sp.TenLoaiSP
-                }
-            ).ToList();
-            return View(shoppingViewModels);
-        }
+            //IEnumerable<ShoppingViewModel> shoppingViewModels = (from sp in db.SanPhams
+            //    join
+            //        loai_sp in db.LoaiSanPhams
+            //        on sp.MaLoaiSP equals loai_sp.MaLoaiSP
+            //                                                     select new ShoppingViewModel()
+            //    {
+            //        ImagePath = sp.ImagePath,
+            //        MaSP = sp.MaSP,
+            //        TenSP = sp.TenSP,
+            //        TacGia = sp.TacGia,
+            //        NXB = sp.NXB,
+            //        DonGia = sp.DonGia,
+            //        MoTa = sp.MoTa,
+            //        SoLuong = sp.SoLuong,
+            //        SoTrang = sp.SoTrang,
+            //        TrongLuong = sp.TrongLuong,
+            //        KichThuoc = sp.KichThuoc,
+            //        LoaiBia = sp.LoaiBia,
+            //        TrangThai = sp.TrangThai,
+            //        LoaiSanPham = loai_sp.TenLoaiSP
+            //    }
+            //).ToList();
 
+            if (maLoaiSP != null)
+            {
+                var result = db.SanPhams.Where(book => book.MaLoaiSP == maLoaiSP).ToList();
+                return View(result);
+            }
+            else
+            {
+                var result = db.SanPhams.ToList();
+                return View(result);
+            }
+
+        }
+        public ActionResult CategoriesList()
+        {
+            var result = db.LoaiSanPhams.ToList();
+            return PartialView(result);
+        }
         public ActionResult Detail()
         {
             var currentId_Url = Url.RequestContext.RouteData.Values["id"];
