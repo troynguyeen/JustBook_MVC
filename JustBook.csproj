@@ -1206,6 +1206,7 @@
     <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Views\Login\AdminLogin.cshtml" />
     <Content Include="Views\AdminHome\OrderDetail.cshtml" />
+    <Content Include="Views\Shopping\CategoriesList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
