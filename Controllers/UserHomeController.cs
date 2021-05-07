@@ -11,10 +11,12 @@ namespace JustBook.Controllers
     {
         private DB_CT25Team23Entities db;
         private List<OrderDetailViewModel> listOfDetail;
+        private List<OrderStateViewModel> listOfState;
         public UserHomeController()
         {
             db = new DB_CT25Team23Entities();
             listOfDetail = new List<OrderDetailViewModel>();
+            listOfState = new List<OrderStateViewModel>();
         }
         public ActionResult Index()
         {
@@ -130,7 +132,46 @@ namespace JustBook.Controllers
 
         public ActionResult TrackingState()
         {
-            return View();
+            var currentId_Url = Url.RequestContext.RouteData.Values["id"];
+
+            OrderManagementModel dh_model_url = new OrderManagementModel();
+            DonHang dh = db.DonHangs.SingleOrDefault(model => model.MaDH.ToString() == currentId_Url.ToString());
+            TrangThaiDonHang trangthai = db.TrangThaiDonHangs.OrderByDescending(x => x.MaTrangThaiDH).FirstOrDefault(model => model.MaDH == dh.MaDH);
+
+            var ListOfChiTietDH = db.ChiTietDonHangs.Where(model => model.MaDonHang == dh.MaDH).ToList();
+            foreach (var chitiet in ListOfChiTietDH)
+            {
+                OrderDetailViewModel detail = new OrderDetailViewModel();
+                SanPham sanpham = db.SanPhams.FirstOrDefault(x => x.MaSP == chitiet.MaSP);
+
+                detail.MaChiTietDH = chitiet.MaChiTietDH;
+                detail.MaDonHang = dh.MaDH;
+                detail.MaSP = chitiet.MaSP;
+                detail.TenSP = sanpham.TenSP;
+                detail.ImagePath = sanpham.ImagePath;
+
+                listOfDetail.Add(detail);
+            }
+
+            var ListOfTrangThaiDH = db.TrangThaiDonHangs.Where(model => model.MaDH == dh.MaDH).ToList();
+            foreach (var trangthai_db in ListOfTrangThaiDH)
+            {
+                OrderStateViewModel state = new OrderStateViewModel();
+                state.MaDH = dh.MaDH;
+                state.MaTrangThaiDH = trangthai_db.MaTrangThaiDH;
+                state.ThoiGian = trangthai_db.ThoiGian;
+                state.TrangThai = trangthai_db.TrangThai;
+
+                listOfState.Add(state);
+            }
+
+            dh_model_url.MaDH = dh.MaDH;
+            dh_model_url.ThoiGianTao = dh.ThoiGianTao;
+            dh_model_url.TrangThaiDonHang = trangthai.TrangThai;
+            dh_model_url.ChiTietDonHang = listOfDetail;
+            dh_model_url.listOfState = listOfState;
+
+            return View(dh_model_url);
         }
 
     }
