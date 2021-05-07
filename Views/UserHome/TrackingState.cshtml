@@ -1,4 +1,5 @@
-﻿@{
+﻿@model JustBook.ViewModel.OrderManagementModel
+@{
     ViewBag.Title = "Trạng thái đơn hàng | JustBook";
     Layout = "~/Views/Header.cshtml";
 }
@@ -42,56 +43,163 @@
         border-bottom: 1px solid rgb(218, 218, 218);
     }
 
-    .detail_product {
+    .border_product {
         display: flex;
+        flex-wrap: wrap;
         justify-content: space-between;
         background-color: #FFF;
         padding: 15px 20px;
+    }
+
+    .detail_product {
+        display: flex;
+        flex: 0 1 49%;
+        padding: 10px 0;
+    }
+
+    .progressBar {
+        margin: 40px 50px 20px;
+        height: 10px;
+        border-radius: 10px;
+        display: flex;
+    }
+
+    .progress-step {
+        width: 100%;
+        background-color: rgb(89, 162, 56);
+        position: relative;
+    }
+
+        .progress-step:last-child {
+            width: 0px;
+        }
+
+        .progress-step::before {
+            position: absolute;
+            height: 16px;
+            width: 16px;
+            left: -8px;
+            top: -3px;
+            line-height: 45px;
+            border-radius: 50%;
+            content: "";
+            background-color: rgb(89, 162, 56);
+        }
+
+    .selected-step {
+        width: 100%;
+        background-color: rgb(239, 239, 239);
+        position: relative;
+    }
+        .selected-step:last-child {
+            width: 0px;
+        }
+        .selected-step::before {
+            position: absolute;
+            height: 16px;
+            width: 16px;
+            left: -8px;
+            top: -3px;
+            line-height: 45px;
+            border-radius: 50%;
+            content: "";
+            border: 4px solid rgb(89, 162, 56);
+            background-color: #FFF;
+        }
+
+    .unset {
+        width: 100%;
+        background-color: rgb(239, 239, 239);
+        position: relative;
+    }
+        .unset:last-child {
+            width: 0px;
+        }
+        .unset::before {
+            position: absolute;
+            height: 16px;
+            width: 16px;
+            left: -8px;
+            top: -3px;
+            line-height: 45px;
+            border-radius: 50%;
+            content: "";
+            background-color: rgb(239, 239, 239);
+        }
+
+    .progress-state {
+        position: absolute;
+        left: 0px;
+        top: 31px;
+        max-width: calc(100% - 30px);
+        min-width: 100px;
+        text-align: center;
+        transform: translateX(-50%);
+        font-size: 14px;
+        color: rgb(32, 32, 32);
+        opacity: 0.5;
+        line-height: 1.4;
     }
 </style>
 
 <div class="page-admin">
     <div class="sidebar-admin">
         <div class="sidebar-title">DANH SÁCH CHỨC NĂNG</div>
-        <a class="sidebar-item" href="@Url.Action("Index", "AdminHome")">
-            <span class="fa fa-home"></span>
-            <span class="sidebar-item-title">Trang chủ</span>
-        </a>
-        <a class="sidebar-item" href="@Url.Action("AdminAccount", "AdminHome")">
+        <a class="sidebar-item" href="@Url.Action("Index", "UserHome")">
             <span class="fa fa-user-alt"></span>
             <span class="sidebar-item-title">Thông tin tài khoản</span>
         </a>
-        <a class="sidebar-item" href="@Url.Action("AdminNotification", "AdminHome")">
+        <a class="sidebar-item" href="@Url.Action("Notification", "UserHome")">
             <span class="fas fa-bell"></span>
             <span class="sidebar-item-title">Thông báo của tôi</span>
-            <span class="badge" style="background-color: red;">5</span>
+            <span class="badge" style="background-color: red;">11</span>
         </a>
-        <a class="sidebar-item" href="@Url.Action("OrderManagement", "AdminHome")">
+        <a class="sidebar-item" href="@Url.Action("OrderHistory", "UserHome")">
             <span class="fa fa-address-card"></span>
             <span class="sidebar-item-title">Quản lý đơn hàng</span>
-        </a>
-        <a class="sidebar-item" href="@Url.Action("ProductManagement", "AdminHome")">
-            <span class="fas fa-tags"></span>
-            <span class="sidebar-item-title">Quản lý sản phẩm</span>
         </a>
     </div>
     <div class="tracking-page">
         <div class="title-tracking">
-            <div>
-                Theo dõi đơn hàng #<span id="MaDH">2312</span>
+            <div style="font-weight: bold;">
+                Theo dõi đơn hàng #<span id="MaDH">@Model.MaDH</span>
             </div>
             <div>
-                <a href="@Url.Action("OrderUserDetail", "AdminHome")">
+                <a href="@Url.Action("OrderUserDetail", "UserHome", new {id = @Model.MaDH})">
                     <button class="btn btn-warning" style="font-weight: bold; color: #000;" type="button">Xem chi tiết đơn hàng</button>
                 </a>
             </div>
         </div>
         <div style="margin-bottom: 10px;">TRẠNG THÁI ĐƠN HÀNG</div>
-        <div style="background-color: #FFF; padding: 20px;">
-            <div>Trạng thái: Giao hàng thành công | 15:32 Thứ tư, 05-08-2020</div>
-            <div class="progress-state">
-                <div class="progress" style="width: 650px; height: 10px; margin-bottom: 5px;">
-                    <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+        <div style="background-color: #FFF; padding: 30px 20px 80px;">
+            <div>Trạng thái: 
+                <span style="font-weight: bold;">
+                    Giao hàng thành công |
+                    @{var ThoiGianGH = (int)@Model.ThoiGianTao.DayOfWeek + 1;}
+                    @if (ThoiGianGH == 1)
+                    {
+                        <span>Chủ Nhật, @Model.ThoiGianTao.ToString("dd-MM-yyyy")</span>
+                    }
+                    else
+                    {
+                        <span>Thứ @ThoiGianGH, @Model.ThoiGianTao.ToString("dd-MM-yyyy")</span>
+                    }
+                </span></div>
+            <div class="progressBar">
+                <div id="step_1" class="progress-step">
+                    <span id="state_1" class="progress-state">Chờ xác nhận</span>
+                </div>
+                <div id="step_2" class="progress-step">
+                    <span id="state_2" class="progress-state">Admin đã tiếp nhận</span>
+                </div>
+                <div id="step_3" class="progress-step">
+                    <span id="state_3" class="progress-state">Đang đóng gói</span>
+                </div>
+                <div id="step_4" class="progress-step">
+                    <span id="state_4" class="progress-state">Đang giao hàng</span>
+                </div>
+                <div id="step_5" class="progress-step">
+                    <span id="state_5" class="progress-state">Giao hàng thành công</span>
                 </div>
             </div>
         </div>
@@ -99,30 +207,106 @@
             <div style="margin-top: 20px; margin-bottom: 10px;">CHI TIẾT TRẠNG THÁI ĐƠN HÀNG</div>
             <div class="trackingDetail">
                 <div class="border_trackingDetail">
-                    <div class="title_trackingDetail">Cập nhật mới nhất: Thứ tư, 05-08-2020</div>
-                    <div class="state_trackingDetail">15:32   Giao hàng thành công</div>
-                    <div class="state_trackingDetail">15:32   Giao hàng thành công</div>
-                    <div class="state_trackingDetail">15:32   Giao hàng thành công</div>
+                    @if (ThoiGianGH == 1)
+                    {
+                        <div class="title_trackingDetail">Cập nhật mới nhất: Chủ Nhật, @Model.ThoiGianTao.ToString("dd-MM-yyyy")</div>
+                    }
+                    else
+                    {
+                        <div class="title_trackingDetail">Cập nhật mới nhất: Thứ @ThoiGianGH, @Model.ThoiGianTao.ToString("dd-MM-yyyy")</div>
+                    }
+
+                    @foreach (var trangthai in Model.listOfState)
+                    {
+                        <div class="state_trackingDetail">
+                            <span style="margin-right: 10px;">@trangthai.ThoiGian.ToString("H:mm")</span>
+                            <span id="state">@trangthai.TrangThai</span>
+                        </div>
+                    }
                 </div>
             </div>
         </div>
         <div style="margin-top: 20px; margin-bottom: 10px;">KIỆN HÀNG GỒM CÓ</div>
-        <div class="detail_product">
-            <div style="display: flex; padding: 10px 0;">
-                <img style="margin-right: 30px;" src="https://salt.tikicdn.com/cache/200x200/ts/product/9d/4c/f5/71d4b5bb624f7ba5254cc022c4ba412a.jpg" width="80px" />
-                <div>
-                    <div>Giày Thể Thao Nam Biti's Hunter X - Summer 2K19 Adventure Collection DSMH01100DEN42 - Thunder Black (Size 42)</div>
-                    <div style="margin-top: 10px;">Bán và giao bởi <b>JustBook</b></div>
+        <div class="border_product">
+            @foreach (var chitiet in Model.ChiTietDonHang)
+            {
+                <div class="detail_product">
+                    <img style="margin-right: 30px;" src="@Url.Content(@chitiet.ImagePath)" width="80px" />
+                    <div>
+                        <div>@chitiet.TenSP</div>
+                        <div style="margin-top: 10px; font-size: 12px;">Bán và giao bởi <b>JustBook</b></div>
+                    </div>
                 </div>
-            </div>
-            <div style="display: flex; padding: 10px 0;">
-                <img style="margin-right: 30px;" src="https://salt.tikicdn.com/cache/200x200/ts/product/9d/4c/f5/71d4b5bb624f7ba5254cc022c4ba412a.jpg" width="80px" />
-                <div>
-                    <div>Giày Thể Thao Nam Biti's Hunter X - Summer 2K19 Adventure Collection DSMH01100DEN42 - Thunder Black (Size 42)</div>
-                    <div style="margin-top: 10px;">Bán và giao bởi <b>JustBook</b></div>
-                </div>
-            </div>
+            }
         </div>
     </div>
 </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+    function getState() {
+        var state = "";
+
+        $('span[id=state]').each(function () {
+
+            switch ($(this).text()) {
+                case "Giao hàng thành công":
+                    state = "state_5"
+                    break
+                case "Đang giao hàng":
+                    state = "state_4"
+                    break
+                case "Đang đóng gói":
+                    state = "state_3"
+                    break
+                case "Admin đã tiếp nhận":
+                    state = "state_2"
+                    break
+                default:
+                    state = "state_1"
+                    break
+            }
+        });
+
+        return state
+    }
+
+    var state = getState();
+
+    if (state === "state_5") {
+        $("#state_5").css("opacity", "1")
+        $("#step_5").attr("class", "selected-step")
+    }
+    else if (state === "state_4") {
+        $("#state_4").css("opacity", "1")
+
+        $("#step_4").attr("class", "selected-step")
+        $("#step_5").attr("class", "unset")
+    }
+    else if (state === "state_3") {
+        $("#state_3").css("opacity", "1")
+
+        $("#step_3").attr("class", "selected-step")
+        $("#step_4").attr("class", "unset")
+        $("#step_5").attr("class", "unset")
+    }
+    else if (state === "state_2") {
+        $("#state_2").css("opacity", "1")
+
+        $("#step_2").attr("class", "selected-step")
+        $("#step_3").attr("class", "unset")
+        $("#step_4").attr("class", "unset")
+        $("#step_5").attr("class", "unset")
+    }
+    else if (state === "state_1") {
+        $("#state_1").css("opacity", "1")
+
+        $("#step_1").attr("class", "selected-step")
+        $("#step_2").attr("class", "unset")
+        $("#step_3").attr("class", "unset")
+        $("#step_4").attr("class", "unset")
+        $("#step_5").attr("class", "unset")
+    }
+</script>
 
