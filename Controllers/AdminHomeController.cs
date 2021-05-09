@@ -240,9 +240,20 @@ namespace JustBook.Controllers
             return Json(new { Success = true, Message = "Xóa đơn hàng #" + MaDH + " thành công." }, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult ProductManagement()
+        public ActionResult ProductManagement(int? maLoaiSP)
         {
-            return View();
+            ShoppingViewModel sp_v = new ShoppingViewModel();
+            if (maLoaiSP != null)
+            {
+                var result = db.SanPhams.Where(book => book.MaLoaiSP == maLoaiSP).ToList();
+                return View(result);
+            }
+            else
+            {
+                var result = db.SanPhams.ToList();
+                return View(result);
+            }
+            
         }
 
         [HttpGet]
@@ -308,5 +319,38 @@ namespace JustBook.Controllers
             return Json(new { Success = true, Message = "Sản phẩm đã được thêm mới thành công." }, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
+        public ActionResult EditProduct()
+        {
+
+            var currentId_Url = Url.RequestContext.RouteData.Values["id"];
+
+            ShoppingViewModel sp_model_url = new ShoppingViewModel();
+            SanPham sp = db.SanPhams.Single(model => model.MaSP.ToString() == currentId_Url.ToString());
+            
+
+            sp_model_url.MaSP = currentId_Url.ToString();
+            sp_model_url.TenSP = sp.TenSP;
+            
+            sp_model_url.TacGia = sp.TacGia;
+            sp_model_url.NXB = sp.NXB;
+            sp_model_url.DonGia = sp.DonGia;
+            sp_model_url.MoTa = sp.MoTa;
+            sp_model_url.SoLuong = sp.SoLuong;
+            sp_model_url.SoTrang = sp.SoTrang;
+            sp_model_url.TrongLuong = sp.TrongLuong;
+            sp_model_url.KichThuoc = sp.KichThuoc;
+            sp_model_url.LoaiBia = sp.LoaiBia;
+            sp_model_url.TrangThai = sp.TrangThai;
+            sp_model_url.ImagePath = sp.ImagePath;
+            sp_model_url.danhmuc = (from loai_sp in db.LoaiSanPhams
+                                    select new SelectListItem()
+                                    {
+                                        Text = loai_sp.TenLoaiSP,
+                                        Value = loai_sp.MaLoaiSP.ToString(),
+                                        
+                                    });
+            return View(sp_model_url);
+        }
     }
 }

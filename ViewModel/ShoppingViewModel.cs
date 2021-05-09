@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace JustBook.ViewModel
 {
     public class ShoppingViewModel
     {
         public string MaSP { get; set; }
+       
         public string TenSP { get; set; }
         public string TacGia { get; set; }
         public string NXB { get; set; }
@@ -21,5 +23,7 @@ namespace JustBook.ViewModel
         public string TrangThai { get; set; }
         public string ImagePath { get; set; }
         public string LoaiSanPham { get; set; }
+        public IEnumerable<SelectListItem> danhmuc { get; set; }
+
     }
 }

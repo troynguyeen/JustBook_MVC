@@ -1,0 +1,254 @@
+﻿@model JustBook.ViewModel.ShoppingViewModel
+@{
+    ViewBag.Title = "AddProduct";
+    Layout = "~/Views/Header.cshtml";
+}
+
+<div class="content-add-product" style="margin: 0; padding: 50px 0;">
+    <div>
+        <a href="@Url.Action("ProductManagement", "AdminHome")" style="color: #337ab7; padding-right: 30px; font-size: 20px">
+            <span class="fas fa-arrow-left" style="font-size: 18px;"></span>
+            Trở về
+        </a>
+    </div>
+    <div class="card-todolist" style="margin: 0;">
+        <h2 class="hending" style="padding-bottom: 30px; font-weight: bold;">Thêm sản phẩm</h2>
+        <form class="fromadd_01" id="add_product">
+            <div class="rowsp_01">
+                <div class="col_01">
+                    <label class="text_label_01 ">Mã sản phẩm</label>
+                    <input id="MaSP" value="@Model.MaSP" autocomplete="off" type="text" placeholder="Nhập mã sản phẩm" style="width: 450px; border: 1px solid;" required>
+                </div>
+            </div>
+
+            <div class="rowsp_01">
+                <div class="col_01">
+                    <label class="text_label_01 mt_01">Tên sản phẩm</label>
+                    <input id="TenSP" value="@Model.TenSP" autocomplete="off" type="text" placeholder="Nhập tên sản phẩm" style="width: 450px; border: 1px solid;" required>
+                </div>
+            </div>
+
+            <div class="rowsp_01">
+                <div class="col_01">
+                    <label class="text_label_01 mt_01">Loại sách</label>
+                    @Html.DropDownListFor(model => model.LoaiSanPham, new SelectList(Model.danhmuc, "Value", "Text"),
+                        new { @style = "width: 250px; border: 1px solid; border-radius: 0px;", required = "required" })
+                </div>
+            </div>
+
+            <div class="rowsp_01">
+                <div class="col_01">
+                    <label class="text_label_01 mt_01">Tác giả</label>
+                    <input id="TacGia" value="@Model.TacGia" required autocomplete="off" type="text" placeholder="Nhập tên tác giả" style="width: 450px; border: 1px solid;">
+                </div>
+            </div>
+
+            <div class="rowsp_01">
+                <div class="col_01">
+                    <label class="text_label_01 mt_01">Nhà xuất bản</label>
+                    <input id="NXB" value="@Model.NXB" required autocomplete="off" type="text" placeholder="Nhập NXB" class="text_input_01">
+                </div>
+            </div>
+
+            <div class="rowsp_01">
+                <div class="col_01">
+                    <label class="text_label_01 mt_01">Đơn giá</label>
+                    <input id="DonGia" value="@Model.DonGia" required autocomplete="off" type="number" class="text_input_01"><samp> (VND)</samp>
+                </div>
+            </div>
+
+            <div class="rowsp_01 ">
+                <div class="col_01 col_left">
+                    <label class="text_label_01 mt_01">Loại bìa</label>
+                    <select id="LoaiBia" autocomplete="off" name="LoaiBia" style="padding: 5px; border: 1px solid; border-radius: 0px;">
+                    
+
+                    <option value="Bìa cứng" selected>Bìa cứng</option>
+                    
+                    <option value="Bìa mềm" selected>Bìa mềm</option>
+                    
+                        
+                        
+                    </select>
+                </div>
+            </div>
+
+           
+
+            <div class="rowsp_01">
+                <div class="col_01">
+                    <label class="text_label_01 mt_01">Số lượng</label>
+                    <input id="SoLuong" value="@Model.SoLuong " required autocomplete="off" type="number" class="text_input_01">
+                </div>
+            </div>
+
+            <div class="rowsp_01">
+                <div class="col_01">
+                    <label class="text_label_01 mt_01">Số trang</label>
+                    <input id="SoTrang" value="@Model.SoTrang"  required autocomplete="off" type="number" class="text_input_01">
+                </div>
+            </div>
+
+            <div class="rowsp_01">
+                <div class="col_01">
+                    <label class="text_label_01 mt_01">Kích thước</label>
+                    <input id="KichThuoc" value="@Model.KichThuoc" required autocomplete="off" type="number" class="text_input_01"><samp> (cm)</samp>
+                </div>
+            </div>
+
+            <div class="rowsp_01">
+                <div class="col_01">
+                    <label class="text_label_01 mt_01">Trọng lượng</label>
+                    <input id="TrongLuong" value="@Model.TrongLuong" required autocomplete="off" type="number" class="text_input_01"><samp> (kg)</samp>
+                </div>
+            </div>
+
+            <div class="rowsp_01">
+                <div class="col_01 ">
+                    <label class="text_label_01 mt_01">Hình ảnh</label>
+                    <input type="file" name="image" class="input_img_01" id="ImagePath" required>
+                    <div class="image_aria " id="image_aria">
+                        <img src="@Model.ImagePath" alt="anhSP" class="anh">
+                        <span class="them_image">Hình đại diện sách</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="rowsp_01">
+                <div class="col_01 col_len">
+                    <label class="text_label_01 mt_01">Mô tả</label>
+                    
+                    @Html.TextAreaFor(Model=>Model.MoTa, new { @class = "text_input_01", required="", rows = "10", cols = "70", id = "MoTa", name = "mota", form = "add_product", placeholder = "Nhập mô tả", autocomplete = "off" })
+                </div>
+            </div>
+
+            <div style="display: flex; justify-content: space-evenly;">
+                <input class="btn btn-primary" type="submit" name="submit" value="Thêm sản phẩm" id="btnSubmit">
+                <input class="btn btn-danger" type="button" name="xoanoidung" value="Xóa nội dung"
+                       data-toggle="modal" data-target="#messageModal">
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="messageModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4 class="modal-title" id="messageModalLabel" style="color: red; font-weight: bold;">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    Cảnh báo
+                </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="font-weight: bold;">
+                Bạn chắc chắn muốn xóa toàn bộ nội dung ?
+            </div>
+            <div class="modal-footer">
+                <button type="reset" class="btn btn-danger" onclick="XoaAnh()">Đồng ý</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Hủy bỏ</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+    const image = document.getElementById("ImagePath");
+    const vunganh = document.getElementById("image_aria");
+    const anh = vunganh.querySelector(".anh");
+    const anhtext = vunganh.querySelector(".them_image");
+
+    image.addEventListener("change", function () {
+        const file = this.files[0];
+
+        if (file) {
+            const reader = new FileReader();
+
+            anhtext.style.display = "none";
+            anh.style.display = "block";
+
+            reader.addEventListener("load", function () {
+                anh.setAttribute("src", this.result);
+            });
+
+            reader.readAsDataURL(".anh");
+
+        }
+    });
+
+    function XoaAnh() {
+        location.reload(true);
+    }
+
+    $(document).ready(function () {
+        $("#btnSubmit").click(function () {
+            SaveItem();
+        });
+    });
+
+    function ResetItem() {
+        $("#MaLoaiSP").val("");
+        $("#MaSP").val("");
+        $("#TenSP").val("");
+        $("#TacGia").val("");
+        $("#NXB").val("");
+        $("#DonGia").val("");
+        $("#MoTa").val("");
+        $("#SoLuong").val("");
+        $("#SoTrang").val("");
+        $("#TrongLuong").val("");
+        $("#KichThuoc").val("");
+        $("#LoaiBia").val("");
+        $("#TrangThai").val("");
+        $("#ImagePath").val("")
+    }
+
+    function SaveItem() {
+        var formData = new FormData();
+        formData.append("MaLoaiSP", $("#MaLoaiSP").val());
+        formData.append("MaSP", $("#MaSP").val());
+        formData.append("TenSP", $("#TenSP").val());
+        formData.append("TacGia", $("#TacGia").val());
+        formData.append("NXB", $("#NXB").val());
+        formData.append("DonGia", $("#DonGia").val());
+        formData.append("MoTa", $("#MoTa").val());
+        formData.append("SoLuong", $("#SoLuong").val());
+        formData.append("SoTrang", $("#SoTrang").val());
+        formData.append("TrongLuong", $("#TrongLuong").val());
+        formData.append("KichThuoc", $("#KichThuoc").val());
+        formData.append("LoaiBia", $("#LoaiBia").val());
+        formData.append("TrangThai", $("#TrangThai").val());
+        formData.append("ImagePath", $("#ImagePath").get(0).files[0]);
+
+        $.ajax({
+            async: true,
+            dataType: 'JSON',
+            type: 'POST',
+            contentType: false,
+            processData: false,
+            url: '/AdminHome/AddProduct',
+            data: formData,
+            success: function (data) {
+                if (data.Success) {
+                    alert(data.Message);
+                    ResetItem();
+                    location.reload(true);
+                } else {
+                    alert(data.Message);
+                }
+            },
+            error: function (error) {
+                alert("Có lỗi " + error);
+            }
+        });
+    }
+</script>
+
+
+

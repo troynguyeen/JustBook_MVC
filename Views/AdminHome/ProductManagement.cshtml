@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<JustBook.Models.SanPham>
 @{
     ViewBag.Title = "Quản lý sản phẩm | Admin";
     Layout = "~/Views/Header.cshtml";
@@ -64,44 +64,38 @@
                             <th>Tác giả</th>
                             <th>Đơn giá</th>
                             <th>Số lượng</th>
-                            <th>Trạng thái</th>
+                            
                         </tr>
                     </thead>
+                    @foreach (var sanpham in Model)
+                    {
                     <tbody>
-                        @for (int i = 1; i < 12; i++)
-                        {
-                            string MaSP = "IT0";
-                            int GiaTien = 10000;
-                            MaSP += i;
-                            GiaTien *= i;
-                            <tr class="order-rows">
-                                <td>
-                                    <a href="#">
-                                        <button class="btn btn-warning">Edit</button>
-                                    </a>
-                                    <a href="#">
-                                        <button class="btn btn-danger">Delete</button>
-                                    </a>
-                                </td>
-                                <td><a href="#">@MaSP</a></td>
-                                <td>Sách lập trình @i</td>
-                                <td>Sách IT</td>
-                                <td>Tác giả @i</td>
-                                <td>@GiaTien VND</td>
+                        
+                        <tr class="order-rows">
+                            <td>
+                                <a href="@Url.Action("EditProduct","AdminHome", new {id = @sanpham.MaSP})">
+                                    <button class="btn btn-warning">Edit</button>
+                                </a>
+                                <a href="#">
+                                    <button class="btn btn-danger">Delete</button>
+                                </a>
+                            </td>
+                            <td><a href="#">@sanpham.MaSP</a></td>
+                            <td>@sanpham.TenSP</td>
+                            <td>@sanpham.MaLoaiSP</td>
+                            <td>@sanpham.TacGia</td>
+                            <td>@sanpham.DonGia</td>
+                            <td>@sanpham.SoLuong</td>
+                            
 
-                                @if (i % 2 == 0)
-                                {
-                                    <td style="text-align: center;">@i</td>
-                                    <td style="text-align: center;">Còn hàng</td>
-                                }
-                                else
-                                {
-                                    <td style="text-align: center;">0</td>
-                                    <td style="text-align: center;">Hết hàng</td>
-                                }
-                            </tr>
-                        }
+
+
+
+
+                        </tr>
+                        
                     </tbody>
+                    }
                 </table>
             </div>
         </div>
