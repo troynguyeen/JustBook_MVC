@@ -14,11 +14,14 @@
                 <div class="login_box" style="margin-left: 350px">
                     @using (Html.BeginForm("Index", "Register", FormMethod.Post))
                     {
-                    <label style="color: red; margin-bottom: 15px;">
-                        @ViewBag.DuplicateMessage
-                    </label>
+                    <div>
+                        <label style="color: red; margin-bottom: 15px;">
+                            @ViewBag.DuplicateMessage
+                        </label>
+                    </div>
                     <form>
-                        <input class="center-block" type="email" id="email" name="Email" placeholder="Enter Email" required style="width: 500px; height: 50px;"><br>
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "center-block", placeholder = "Enter Email", @style = "width: 500px; height: 50px; margin-bottom: 20px;" } })
                         @Html.ValidationMessageFor(model => model.MatKhau, "", new { @class = "text-danger" })
                         @Html.EditorFor(model => model.MatKhau, new { htmlAttributes = new { @class = "center-block", placeholder = "Enter Password", @style = "width: 500px; height: 50px; margin-bottom: 20px;" } })
                         @Html.ValidationMessageFor(model => model.XacNhanMatKhau, "", new { @class = "text-danger" })
