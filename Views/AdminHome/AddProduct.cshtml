@@ -124,7 +124,7 @@
             </div>
 
             <div style="display: flex; justify-content: space-evenly;">
-                <input class="btn btn-primary" type="submit" name="submit" value="Thêm sản phẩm" id="btnSubmit">
+                <input class="btn btn-primary" type="button" name="addProduct" value="Thêm sản phẩm" id="btnSubmit">
                 <input class="btn btn-danger" type="button" name="xoanoidung" value="Xóa nội dung"
                     data-toggle="modal" data-target="#messageModal">
             </div>
@@ -189,6 +189,7 @@
 
     $(document).ready(function () {
         $("#btnSubmit").click(function () {
+            console.log($("#ImagePath").get(0).files[0]))
             SaveItem();
         });
     });
@@ -236,10 +237,9 @@
             url: '/AdminHome/AddProduct',
             data: formData,
             success: function (data) {
-                if (data.Success) {
+                if (data.Success == true) {
                     alert(data.Message);
                     ResetItem();
-                    location.reload(true);
                 } else {
                     alert(data.Message);
                 }

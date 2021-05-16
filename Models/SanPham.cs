@@ -28,5 +28,6 @@ namespace JustBook.Models
         public string TrangThai { get; set; }
         public string ImagePath { get; set; }
         public int MaLoaiSP { get; set; }
+        public string LoaiSanPham { get; set; }
     }
 }

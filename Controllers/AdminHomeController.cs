@@ -40,7 +40,7 @@ namespace JustBook.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AdminEditInformation(TaiKhoanQT admin)
         {
-            if(admin == null)
+            if (admin == null)
             {
                 return RedirectToAction("Index");
             }
@@ -65,24 +65,24 @@ namespace JustBook.Controllers
 
         public ActionResult OrderManagement()
         {
-            IEnumerable<OrderManagementModel> listOfDonHang = (from trangthai in 
+            IEnumerable<OrderManagementModel> listOfDonHang = (from trangthai in
                 (from trangthai in db.TrangThaiDonHangs
-                    orderby trangthai.MaTrangThaiDH descending 
-                    group trangthai by trangthai.MaDH into grp
-                    select grp.OrderByDescending(x => x.MaTrangThaiDH).FirstOrDefault())
-                    join dh in db.DonHangs on trangthai.MaDH equals dh.MaDH
-                select new OrderManagementModel()
-                {
-                    MaDH = dh.MaDH,
-                    MaKH = dh.MaKH,
-                    TenNguoiNhan = dh.TenNguoiNhan,
-                    PhoneNguoiNhan = dh.PhoneNguoiNhan,
-                    DiaChiNguoiNhan = dh.DiaChiNguoiNhan,
-                    ThoiGianTao = dh.ThoiGianTao,
-                    PhuongThucThanhToan = dh.PhuongThucThanhToan,
-                    TongGiaTriDonHang = dh.TongGiaTriDonHang,
-                    TrangThaiDonHang = trangthai.TrangThai
-                }
+                 orderby trangthai.MaTrangThaiDH descending
+                 group trangthai by trangthai.MaDH into grp
+                 select grp.OrderByDescending(x => x.MaTrangThaiDH).FirstOrDefault())
+                                                               join dh in db.DonHangs on trangthai.MaDH equals dh.MaDH
+                                                               select new OrderManagementModel()
+                                                               {
+                                                                   MaDH = dh.MaDH,
+                                                                   MaKH = dh.MaKH,
+                                                                   TenNguoiNhan = dh.TenNguoiNhan,
+                                                                   PhoneNguoiNhan = dh.PhoneNguoiNhan,
+                                                                   DiaChiNguoiNhan = dh.DiaChiNguoiNhan,
+                                                                   ThoiGianTao = dh.ThoiGianTao,
+                                                                   PhuongThucThanhToan = dh.PhuongThucThanhToan,
+                                                                   TongGiaTriDonHang = dh.TongGiaTriDonHang,
+                                                                   TrangThaiDonHang = trangthai.TrangThai
+                                                               }
             ).ToList();
             return View(listOfDonHang);
         }
@@ -137,7 +137,7 @@ namespace JustBook.Controllers
             int SoLuong = sp.SoLuong;
             double DonGia = sp.DonGia;
 
-            return Json(new { Success = true, SoLuong = SoLuong, DonGia = DonGia}, JsonRequestBehavior.AllowGet);
+            return Json(new { Success = true, SoLuong = SoLuong, DonGia = DonGia }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
@@ -167,13 +167,13 @@ namespace JustBook.Controllers
             }
 
             //Xóa trạng thái bị trùng
-            if(db.TrangThaiDonHangs.Any(x => x.MaDH == dh.MaDH && x.TrangThai == TrangThaiDonHang))
+            if (db.TrangThaiDonHangs.Any(x => x.MaDH == dh.MaDH && x.TrangThai == TrangThaiDonHang))
             {
                 TrangThaiDonHang trangthai_remove = db.TrangThaiDonHangs.FirstOrDefault(x => x.MaDH == dh.MaDH && x.TrangThai == TrangThaiDonHang);
                 db.TrangThaiDonHangs.Remove(trangthai_remove);
                 db.SaveChanges();
             }
-            
+
             //Cập nhật trạng thái
             TrangThaiDonHang trangthai = new TrangThaiDonHang();
             trangthai.MaDH = dh.MaDH;
@@ -253,21 +253,21 @@ namespace JustBook.Controllers
                 var result = db.SanPhams.ToList();
                 return View(result);
             }
-            
+
         }
 
         [HttpGet]
         public ActionResult AddProduct()
         {
             SanPhamViewModel sp_viewmodel = new SanPhamViewModel();
-            sp_viewmodel.CategorySelectListItem = 
+            sp_viewmodel.CategorySelectListItem =
                 (from loai_sp in db.LoaiSanPhams
-                    select new SelectListItem()
-                    {
-                        Text = loai_sp.TenLoaiSP,
-                        Value = loai_sp.MaLoaiSP.ToString(),
-                        Selected = true
-                    });
+                 select new SelectListItem()
+                 {
+                     Text = loai_sp.TenLoaiSP,
+                     Value = loai_sp.MaLoaiSP.ToString(),
+                     Selected = true
+                 });
             return View(sp_viewmodel);
         }
 
@@ -327,11 +327,11 @@ namespace JustBook.Controllers
 
             ShoppingViewModel sp_model_url = new ShoppingViewModel();
             SanPham sp = db.SanPhams.Single(model => model.MaSP.ToString() == currentId_Url.ToString());
-            
+
 
             sp_model_url.MaSP = currentId_Url.ToString();
             sp_model_url.TenSP = sp.TenSP;
-            
+
             sp_model_url.TacGia = sp.TacGia;
             sp_model_url.NXB = sp.NXB;
             sp_model_url.DonGia = sp.DonGia;
@@ -348,9 +348,51 @@ namespace JustBook.Controllers
                                     {
                                         Text = loai_sp.TenLoaiSP,
                                         Value = loai_sp.MaLoaiSP.ToString(),
-                                        
+
                                     });
             return View(sp_model_url);
+        }
+        [HttpPost]
+        public ActionResult EditProduct(SanPham sp_model_url)
+        {
+            SanPham sp = db.SanPhams.Single(model => model.MaSP == sp_model_url.MaSP);
+
+            sp.MaSP = sp_model_url.MaSP;
+            sp.TenSP = sp_model_url.TenSP;
+            sp.TacGia = sp_model_url.TacGia;
+            sp.NXB = sp_model_url.NXB;
+            sp.DonGia = sp_model_url.DonGia;
+            sp.MoTa = sp_model_url.MoTa;
+            sp.SoLuong = sp_model_url.SoLuong;
+            sp.SoTrang = sp_model_url.SoTrang;
+            sp.TrongLuong = sp_model_url.TrongLuong;
+            sp.KichThuoc = sp_model_url.KichThuoc;
+            sp.LoaiBia = sp_model_url.LoaiBia;
+            sp.TrangThai = sp_model_url.TrangThai;
+            sp.ImagePath = sp_model_url.ImagePath;
+            sp.MaLoaiSP = db.LoaiSanPhams.FirstOrDefault(x => x.TenLoaiSP == sp_model_url.LoaiSanPham).MaLoaiSP;
+
+            if(sp_model_url.SoLuong == 0)
+            {
+                sp.TrangThai = "hethang";
+            }
+            else
+            {
+                sp.TrangThai = "conhang";
+            }
+
+            db.SaveChanges();
+
+            return RedirectToAction("ProductManagement");
+        }
+
+        [HttpPost]
+        public JsonResult DeleteProduct(string MaSP)
+        {
+            SanPham sp = db.SanPhams.Single(model => model.MaSP == MaSP);
+            db.SanPhams.Remove(sp);
+            db.SaveChanges();
+            return Json(new { Success = true, Message = "Xóa sản phẩm #" + MaSP + " thành công." }, JsonRequestBehavior.AllowGet);
         }
     }
 }
