@@ -1208,6 +1208,7 @@
     <Content Include="Views\Login\AdminLogin.cshtml" />
     <Content Include="Views\AdminHome\OrderDetail.cshtml" />
     <Content Include="Views\Shopping\CategoriesList.cshtml" />
+    <Content Include="Views\AdminHome\EditProduct.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<JustBook.ViewModel.OrderManagementModel>
 @{
     ViewBag.Title = "Thông báo của tôi | JustBook";
     Layout = "~/Views/Header.cshtml";
@@ -29,7 +29,7 @@
         <a class="sidebar-item" href="@Url.Action("Notification", "UserHome")">
             <span class="fas fa-bell"></span>
             <span class="sidebar-item-title">Thông báo của tôi</span>
-            <span class="badge" style="background-color: red;">11</span>
+            <span class="badge" style="background-color: red;">@Session["TotalNotification"].ToString()</span>
         </a>
         <a class="sidebar-item" href="@Url.Action("OrderHistory", "UserHome")">
             <span class="fa fa-address-card"></span>
@@ -44,23 +44,16 @@
                     <thead>
                     </thead>
                     <tbody>
-                        @for (int i = 1; i < 12; i++)
+                        @foreach (var dh in Model)
                         {
-                            string MaDH = "DH0";
-                            int GiaTien = 10000;
-                            MaDH += i;
-                            GiaTien *= i;
                             <tr class="order-rows">
-                                <td>@DateTime.Now.ToString("d")</td>
+                                <td style="width: 180px;">@dh.ThoiGianTao</td>
                                 <td style="font-size: 12px">
-                                    Đơn hàng <a href="#">#@MaDH</a>
+                                    Đơn hàng <a href="#">#@dh.MaDH</a>
                                     đã sẵn sàng để giao đến quý khách.
-                                    Đơn hàng sẽ được giao trước 23:59 ngày @DateTime.Now.ToString("d")
+                                    Đơn hàng sẽ được giao trong vòng 24h kể từ thời gian bắt đầu đặt hàng
                                     <a href="@Url.Action("OrderHistory", "UserHome")"> Chi tiết</a>
                                 </td>
-                                <td style="width: 150px;"><a href="#">Đánh dấu đã đọc</a></td>
-                                <td style="width: 100px;"><a href="#" style="color: rgb(255, 66, 78);">Xóa</a></td>
-
                             </tr>
                         }
                     </tbody>

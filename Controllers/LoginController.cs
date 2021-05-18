@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using JustBook.Models;
+using JustBook.ViewModel;
 
 namespace JustBook.Controllers
 {
@@ -40,6 +41,22 @@ namespace JustBook.Controllers
             Session["MaQT"] = accountAdminDetail.MaQT;
             Session["TenQT"] = accountAdminDetail.TenQT;
 
+            //Lấy tổng đơn hàng của người QT quản lý set vào thanh Header
+            IEnumerable<OrderManagementModel> listOfDonHang = (from trangthai in
+            (from trangthai in db.TrangThaiDonHangs
+                orderby trangthai.MaTrangThaiDH descending
+                group trangthai by trangthai.MaDH into grp
+                select grp.OrderByDescending(x => x.MaTrangThaiDH).FirstOrDefault())
+                join dh in db.DonHangs on trangthai.MaDH equals dh.MaDH
+                orderby dh.MaDH descending
+                select new OrderManagementModel()
+                {
+                    MaDH = dh.MaDH,
+                    ThoiGianTao = dh.ThoiGianTao
+                }
+            ).ToList();
+
+            Session["TotalAdminNotification"] = listOfDonHang.Count();
             return RedirectToAction("Index", "AdminHome");
         }
 

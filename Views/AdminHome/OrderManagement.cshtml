@@ -38,7 +38,7 @@
         <a class="sidebar-item" href="@Url.Action("AdminNotification", "AdminHome")">
             <span class="fas fa-bell"></span>
             <span class="sidebar-item-title">Thông báo của tôi</span>
-            <span class="badge" style="background-color: red;">5</span>
+            <span class="badge" style="background-color: red;">@Session["TotalAdminNotification"].ToString()</span>
         </a>
         <a class="sidebar-item" href="@Url.Action("OrderManagement", "AdminHome")">
             <span class="fa fa-address-card"></span>
@@ -123,27 +123,29 @@
 
 <script type="text/javascript">
     function DeleteOrder(item) {
-        var formData = new FormData();
-        var ItemId = $(item).attr("itemid")
+        if (confirm("Bạn có chắc chắn muốn xóa đơn hàng này ?")) {
+            var formData = new FormData();
+            var ItemId = $(item).attr("itemid")
 
-        formData.append("MaDH", ItemId)
-        $("tr[itemid=" + ItemId + "]").remove();
+            formData.append("MaDH", ItemId)
+            $("tr[itemid=" + ItemId + "]").remove();
 
-        $.ajax({
-            async: true,
-            type: 'POST',
-            contentType: false,
-            processData: false,
-            data: formData,
-            url: '/AdminHome/DeleteOrder',
-            success: function (data) {
-                if (data.Success) {
-                    alert(data.Message)
+            $.ajax({
+                async: true,
+                type: 'POST',
+                contentType: false,
+                processData: false,
+                data: formData,
+                url: '/AdminHome/DeleteOrder',
+                success: function (data) {
+                    if (data.Success) {
+                        alert(data.Message)
+                    }
+                },
+                error: function () {
+                    alert(data.Message);
                 }
-            },
-            error: function () {
-                alert(data.Message);
-            }
-        });
+            });
+        }
     }
 </script>

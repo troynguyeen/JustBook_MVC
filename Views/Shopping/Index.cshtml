@@ -15,17 +15,11 @@
                             Danh mục
                         </h3>
 
-                        <ul class="category-list">
-                            <li class="category-item category-item--active">
-                                <a href="#" class="category-item__link">Sách Lập Trình</a>
-                            </li>
-                            <li class="category-item">
-                                <a href="#" class="category-item__link">Sách Văn Học</a>
-                            </li>
-                            <li class="category-item">
-                                <a href="#" class="category-item__link">Sách Tiếng Anh</a>
-                            </li>
-                        </ul>
+                        <div class="category-list">
+                            @{
+                                Html.RenderAction("CategoriesList", "Shopping");
+                            }
+                        </div>
                     </nav>
                 </div>
 

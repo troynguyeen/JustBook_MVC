@@ -1,9 +1,6 @@
 ﻿@model IEnumerable<JustBook.Models.LoaiSanPham>
-@*<a class="bookItem dropdown-item" href="@Url.Action("Index", "Shopping")">Sách Lập Trình</a>
-    <a class="bookItem dropdown-item" href="#">Sách Văn Học</a>
-    <a class="bookItem dropdown-item" href="#">Sách Tiếng Anh</a>
-    <div class="dropdown-divider"></div>
-    <a class="bookItem dropdown-item" href="#">Sách Giảm Giá</a>*@
+
+<a class="bookItem dropdown-item" href="@Url.Action("Index", "Shopping")">Tất cả sản phẩm</a>
 @foreach (var item in Model)
 {
     <a class="bookItem dropdown-item" href="@Url.Action("Index", "Shopping", new { maLoaiSP = item.MaLoaiSP})">@item.TenLoaiSP</a>
