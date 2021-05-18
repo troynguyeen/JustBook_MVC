@@ -11,6 +11,7 @@ namespace JustBook.ViewModel
         public string MaSP { get; set; }
         public string TenSP { get; set; }
         public int MaLoaiSP { get; set; }
+        public string DanhMuc { get; set; }
         public string TacGia { get; set; }
         public string NXB { get; set; }
         public double DonGia { get; set; }
@@ -22,6 +23,7 @@ namespace JustBook.ViewModel
         public string LoaiBia { get; set; }
         public string TrangThai { get; set; }
         public HttpPostedFileBase ImagePath { get; set; }
+        public string ImageLink { get; set; }
 
         public IEnumerable<SelectListItem> CategorySelectListItem { get; set; }
     }

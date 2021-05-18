@@ -56,7 +56,24 @@ namespace JustBook.Controllers
 
         public ActionResult Notification()
         {
-            return View();
+            int idKH = Int32.Parse(Session["MaKH"].ToString());
+            IEnumerable<OrderManagementModel> listOfDonHang = (from trangthai in
+               (from trangthai in db.TrangThaiDonHangs
+                group trangthai by trangthai.MaDH into grp
+                select grp.OrderByDescending(x => x.MaTrangThaiDH).FirstOrDefault())
+                    join dh in db.DonHangs on trangthai.MaDH equals dh.MaDH
+                    join chitiet in db.ChiTietDonHangs on dh.MaDH equals chitiet.MaDonHang
+                    join sp in db.SanPhams on chitiet.MaSP equals sp.MaSP
+                    where dh.MaKH == idKH
+                    orderby dh.MaDH descending
+                    select new OrderManagementModel()
+                    {
+                        MaDH = dh.MaDH,
+                        ThoiGianTao = dh.ThoiGianTao
+                    }
+               ).GroupBy(x => x.MaDH).Select(i => i.FirstOrDefault()).ToList();
+
+            return View(listOfDonHang);
         }
 
         public ActionResult OrderHistory()

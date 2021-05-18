@@ -19,7 +19,7 @@
         <a class="sidebar-item" href="@Url.Action("AdminNotification", "AdminHome")">
             <span class="fas fa-bell"></span>
             <span class="sidebar-item-title">Thông báo của tôi</span>
-            <span class="badge" style="background-color: red;">5</span>
+            <span class="badge" style="background-color: red;">@Session["TotalAdminNotification"].ToString()</span>
         </a>
         <a class="sidebar-item" href="@Url.Action("OrderManagement", "AdminHome")">
             <span class="fa fa-address-card"></span>

@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<JustBook.ViewModel.SanPhamViewModel>
 @{
     ViewBag.Title = "Quản lý sản phẩm | Admin";
     Layout = "~/Views/Header.cshtml";
@@ -33,7 +33,7 @@
         <a class="sidebar-item" href="@Url.Action("AdminNotification", "AdminHome")">
             <span class="fas fa-bell"></span>
             <span class="sidebar-item-title">Thông báo của tôi</span>
-            <span class="badge" style="background-color: red;">5</span>
+            <span class="badge" style="background-color: red;">@Session["TotalAdminNotification"].ToString()</span>
         </a>
         <a class="sidebar-item" href="@Url.Action("OrderManagement", "AdminHome")">
             <span class="fa fa-address-card"></span>
@@ -62,42 +62,42 @@
                             <th>Tên sản phẩm</th>
                             <th>Danh mục</th>
                             <th>Tác giả</th>
-                            <th>Đơn giá</th>
                             <th>Số lượng</th>
+                            <th>Đơn giá</th>
                             <th>Trạng thái</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @for (int i = 1; i < 12; i++)
+                        @foreach (var sanpham in Model)
                         {
-                            string MaSP = "IT0";
-                            int GiaTien = 10000;
-                            MaSP += i;
-                            GiaTien *= i;
-                            <tr class="order-rows">
+                            var giatrisanpham = string.Format("{0:#,##0 VND}", sanpham.DonGia);
+                            <tr class="order-rows" itemid="@sanpham.MaSP">
                                 <td>
-                                    <a href="#">
+                                    <a href="@Url.Action("EditProduct", "AdminHome", new { id = @sanpham.MaSP})">
                                         <button class="btn btn-warning">Edit</button>
                                     </a>
                                     <a href="#">
-                                        <button class="btn btn-danger">Delete</button>
+                                        <button itemid="@sanpham.MaSP" class="btn btn-danger" onclick="DeleteProduct(this)">Delete</button>
                                     </a>
                                 </td>
-                                <td><a href="#">@MaSP</a></td>
-                                <td>Sách lập trình @i</td>
-                                <td>Sách IT</td>
-                                <td>Tác giả @i</td>
-                                <td>@GiaTien VND</td>
+                                <td style="text-align: center;">
+                                    <a href="@Url.Action("EditProduct", "AdminHome", new { id = @sanpham.MaSP})">@sanpham.MaSP</a>
+                                </td>
+                                <td style="width: 200px;">@sanpham.TenSP</td>
+                                <td>@sanpham.DanhMuc</td>
+                                <td style="width: 200px;">@sanpham.TacGia</td>
+                                <td style="text-align: center;">@sanpham.SoLuong</td>
+                                <td>@giatrisanpham</td>
 
-                                @if (i % 2 == 0)
+                                @if (@sanpham.TrangThai == "Còn hàng")
                                 {
-                                    <td style="text-align: center;">@i</td>
                                     <td style="text-align: center;">Còn hàng</td>
+
                                 }
                                 else
                                 {
-                                    <td style="text-align: center;">0</td>
                                     <td style="text-align: center;">Hết hàng</td>
+
                                 }
                             </tr>
                         }
@@ -127,3 +127,35 @@
     </div>
 </div>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+
+    function DeleteProduct(item) {
+
+        if (confirm("Bạn có chắc chắn muốn xóa sản phẩm này ?")) {
+            var formData = new FormData();
+            var ItemId = $(item).attr("itemid")
+
+            formData.append("MaSP", ItemId)
+            $("tr[itemid=" + ItemId + "]").remove();
+
+            $.ajax({
+                async: true,
+                type: 'POST',
+                contentType: false,
+                processData: false,
+                data: formData,
+                url: '/AdminHome/DeleteProduct',
+                success: function (data) {
+                    if (data.Success) {
+                        alert(data.Message)
+                    }
+                },
+                error: function () {
+                    alert(data.Message);
+                }
+            });
+        }
+    }
+</script>

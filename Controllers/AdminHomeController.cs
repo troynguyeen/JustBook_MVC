@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -22,6 +23,11 @@ namespace JustBook.Controllers
         // GET: AdminHome
         public ActionResult Index()
         {
+            if (Session["MaQT"] == null)
+            {
+                return RedirectToAction("AdminLogin", "Login");
+            }
+
             return View();
         }
 
@@ -60,7 +66,21 @@ namespace JustBook.Controllers
         }
         public ActionResult AdminNotification()
         {
-            return View();
+            IEnumerable<OrderManagementModel> listOfDonHang = (from trangthai in
+                (from trangthai in db.TrangThaiDonHangs
+                 orderby trangthai.MaTrangThaiDH descending
+                 group trangthai by trangthai.MaDH into grp
+                 select grp.OrderByDescending(x => x.MaTrangThaiDH).FirstOrDefault())
+                    join dh in db.DonHangs on trangthai.MaDH equals dh.MaDH
+                    orderby dh.MaDH descending
+                    select new OrderManagementModel()
+                    {
+                        MaDH = dh.MaDH,
+                        ThoiGianTao = dh.ThoiGianTao
+                    }
+            ).ToList();
+
+            return View(listOfDonHang);
         }
 
         public ActionResult OrderManagement()
@@ -242,7 +262,20 @@ namespace JustBook.Controllers
 
         public ActionResult ProductManagement()
         {
-            return View();
+            IEnumerable<SanPhamViewModel> listOfSanPham = (from sanpham in db.SanPhams
+                    join loai_sp in db.LoaiSanPhams on sanpham.MaLoaiSP equals loai_sp.MaLoaiSP
+                    select new SanPhamViewModel()
+                    {
+                        MaSP = sanpham.MaSP,
+                        TenSP = sanpham.TenSP,
+                        DanhMuc = loai_sp.TenLoaiSP,
+                        TacGia = sanpham.TacGia,
+                        DonGia = sanpham.DonGia,
+                        SoLuong = sanpham.SoLuong,
+                        TrangThai = sanpham.TrangThai
+                    }
+            ).ToList();
+            return View(listOfSanPham);
         }
 
         [HttpGet]
@@ -284,7 +317,7 @@ namespace JustBook.Controllers
             }
             else
             {
-                string NewImage = sp_viewmodel.MaSP + Path.GetExtension(sp_viewmodel.ImagePath.FileName);
+                string NewImage = sp_viewmodel.MaSP + "_" + DateTime.Now.ToFileTime() + Path.GetExtension(sp_viewmodel.ImagePath.FileName);
                 sp_viewmodel.ImagePath.SaveAs(Server.MapPath("~/ImageProduct/" + NewImage));
 
                 SanPham sp = new SanPham();
@@ -301,12 +334,150 @@ namespace JustBook.Controllers
                 sp.TrongLuong = sp_viewmodel.TrongLuong;
                 sp.KichThuoc = sp_viewmodel.KichThuoc;
                 sp.LoaiBia = sp_viewmodel.LoaiBia;
-                sp.TrangThai = sp_viewmodel.TrangThai;
+
+                if(sp_viewmodel.SoLuong <= 0)
+                {
+                    sp.TrangThai = "Hết hàng";
+                }
+                else
+                {
+                    sp.TrangThai = "Còn hàng";
+                }
+                
                 db.SanPhams.Add(sp);
                 db.SaveChanges();
             }
             return Json(new { Success = true, Message = "Sản phẩm đã được thêm mới thành công." }, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
+        public ActionResult EditProduct (string id)
+        {
+            var MaSP = id;
+
+            SanPham sanpham = db.SanPhams.FirstOrDefault(x => x.MaSP == MaSP);
+            SanPhamViewModel sp_viewmodel = new SanPhamViewModel();
+
+            sp_viewmodel.MaSP = sanpham.MaSP;
+            sp_viewmodel.TenSP = sanpham.TenSP;
+            sp_viewmodel.TacGia = sanpham.TacGia;
+            sp_viewmodel.NXB = sanpham.NXB;
+            sp_viewmodel.DonGia = sanpham.DonGia;
+            sp_viewmodel.LoaiBia = sanpham.LoaiBia;
+            sp_viewmodel.SoLuong = sanpham.SoLuong;
+            sp_viewmodel.SoTrang = sanpham.SoTrang;
+            sp_viewmodel.KichThuoc = sanpham.KichThuoc;
+            sp_viewmodel.TrongLuong = sanpham.TrongLuong;
+            sp_viewmodel.ImageLink = sanpham.ImagePath;
+            sp_viewmodel.MoTa = sanpham.MoTa;
+            sp_viewmodel.MaLoaiSP = sanpham.MaLoaiSP;
+
+            sp_viewmodel.CategorySelectListItem =
+                (from loai_sp in db.LoaiSanPhams
+                 select new SelectListItem()
+                 {
+                     Text = loai_sp.TenLoaiSP,
+                     Value = loai_sp.MaLoaiSP.ToString(),
+                     Selected = true
+                 });
+            
+
+            return View(sp_viewmodel);
+        }
+
+        [HttpPost]
+        public JsonResult EditProduct(SanPhamViewModel sp_viewmodel)
+        {
+            if ((sp_viewmodel.TenSP == null) ||
+                    (sp_viewmodel.TacGia == null) ||
+                    (sp_viewmodel.NXB == null) ||
+                    (sp_viewmodel.DonGia == null) ||
+                    (sp_viewmodel.MoTa == null) ||
+                    (sp_viewmodel.SoLuong == null) ||
+                    (sp_viewmodel.SoTrang == null) ||
+                    (sp_viewmodel.TrongLuong == null) ||
+                    (sp_viewmodel.KichThuoc == null))
+            {
+                return Json(new { Success = false, Message = "Vui lòng nhập đầy đủ thông tin." }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                string NewImage = "";
+
+                if (sp_viewmodel.ImagePath != null)
+                {
+                    //Xóa image cũ của sp trong folder ImageProduct
+                    string path = Server.MapPath("~/ImageProduct/");
+                    string[] filePaths = Directory.GetFiles(path);
+
+                    for (int i = 0; i < filePaths.Length; i++)
+                    {
+                        if(filePaths[i].Contains(sp_viewmodel.MaSP))
+                        {
+                            FileInfo file = new FileInfo(filePaths[i]);
+                            file.Delete();
+                        }
+                    }
+
+                    //Save as image mới vào folder ImageProduct
+                    NewImage = sp_viewmodel.MaSP + "_" + DateTime.Now.ToFileTime() + Path.GetExtension(sp_viewmodel.ImagePath.FileName);
+                    sp_viewmodel.ImagePath.SaveAs(Server.MapPath("~/ImageProduct/" + NewImage));
+                }
+                
+                SanPham sp = db.SanPhams.FirstOrDefault(x => x.MaSP == sp_viewmodel.MaSP);
+
+                sp.MaLoaiSP = sp_viewmodel.MaLoaiSP;
+                sp.TenSP = sp_viewmodel.TenSP;
+                sp.TacGia = sp_viewmodel.TacGia;
+                sp.NXB = sp_viewmodel.NXB;
+                sp.DonGia = sp_viewmodel.DonGia;
+                sp.MoTa = sp_viewmodel.MoTa;
+                sp.SoLuong = sp_viewmodel.SoLuong;
+                sp.SoTrang = sp_viewmodel.SoTrang;
+                sp.TrongLuong = sp_viewmodel.TrongLuong;
+                sp.KichThuoc = sp_viewmodel.KichThuoc;
+                sp.LoaiBia = sp_viewmodel.LoaiBia;
+
+                if (NewImage != "")
+                {
+                    sp.ImagePath = "~/ImageProduct/" + NewImage;
+                }
+
+                if (sp_viewmodel.SoLuong <= 0)
+                {
+                    sp.TrangThai = "Hết hàng";
+                }
+                else
+                {
+                    sp.TrangThai = "Còn hàng";
+                }
+
+                db.SaveChanges();
+            }
+            return Json(new { Success = true, Message = "Cập nhật sản phẩm thành công." }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult DeleteProduct (string MaSP)
+        {
+            SanPham sanpham = db.SanPhams.FirstOrDefault(x => x.MaSP == MaSP);
+            db.SanPhams.Remove(sanpham);
+            db.SaveChanges();
+
+            //Xóa image của sp trong folder ImageProduct
+            string path = Server.MapPath("~/ImageProduct/");
+            string[] filePaths = Directory.GetFiles(path);
+
+            for (int i = 0; i < filePaths.Length; i++)
+            {
+                if (filePaths[i].Contains(MaSP))
+                {
+                    FileInfo file = new FileInfo(filePaths[i]);
+                    file.Delete();
+                }
+            }
+
+            return Json(new { Success = true, Message = "Xóa sản phẩm #" + MaSP + " thành công." }, JsonRequestBehavior.AllowGet);
+        }
     }
 }

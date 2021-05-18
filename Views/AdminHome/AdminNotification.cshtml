@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<JustBook.ViewModel.OrderManagementModel>
 @{
     ViewBag.Title = "Thông báo của tôi | Admin";
     Layout = "~/Views/Header.cshtml";
@@ -33,7 +33,7 @@
         <a class="sidebar-item" href="@Url.Action("AdminNotification", "AdminHome")">
             <span class="fas fa-bell"></span>
             <span class="sidebar-item-title">Thông báo của tôi</span>
-            <span class="badge" style="background-color: red;">5</span>
+            <span class="badge" style="background-color: red;">@Session["TotalAdminNotification"].ToString()</span>
         </a>
         <a class="sidebar-item" href="@Url.Action("OrderManagement", "AdminHome")">
             <span class="fa fa-address-card"></span>
@@ -52,21 +52,14 @@
                     <thead>
                     </thead>
                     <tbody>
-                        @for (int i = 1; i < 6; i++)
+                        @foreach (var dh in Model)
                         {
-                            string MaDH = "DH0";
-                            int GiaTien = 10000;
-                            MaDH += i;
-                            GiaTien *= i;
                             <tr class="order-rows">
-                                <td>@DateTime.Now.ToString("d")</td>
+                                <td style="width: 180px;">@dh.ThoiGianTao</td>
                                 <td style="font-size: 12px">
-                                    Bạn có 1 đơn hàng mới <a href="#">#@MaDH</a>
+                                    Bạn có 1 đơn hàng mới <a href="#">#@dh.MaDH</a>
                                     xin hãy vào phần <a href="@Url.Action("OrderManagement", "AdminHome")">Quản lý đơn hàng</a> để xem chi tiết
                                 </td>
-                                <td style="width: 150px;"><a href="#">Đánh dấu đã đọc</a></td>
-                                <td style="width: 100px;"><a href="#" style="color: rgb(255, 66, 78);">Xóa</a></td>
-
                             </tr>
                         }
                     </tbody>

@@ -1,6 +1,6 @@
 ﻿@model JustBook.ViewModel.SanPhamViewModel
 @{
-    ViewBag.Title = "AddProduct";
+    ViewBag.Title = "EditProduct";
     Layout = "~/Views/Header.cshtml";
 }
 
@@ -12,26 +12,26 @@
         </a>
     </div>
     <div class="card-todolist" style="margin: 0;">
-        <h2 class="hending" style="padding-bottom: 30px; font-weight: bold;">Thêm sản phẩm</h2>
+        <h2 class="hending" style="padding-bottom: 30px; font-weight: bold;">Cập nhật sản phẩm</h2>
         <form class="fromadd_01" id="add_product">
             <div class="rowsp_01">
                 <div class="col_01">
                     <label class="text_label_01 ">Mã sản phẩm</label>
-                    <input id="MaSP" autocomplete="off" type="text" placeholder="Nhập mã sản phẩm" style="width: 450px; border: 1px solid;" required>
+                    <input readonly id="MaSP" value="@Model.MaSP" autocomplete="off" type="text" placeholder="Nhập mã sản phẩm" style="width: 450px; border: 1px solid;" required>
                 </div>
             </div>
 
             <div class="rowsp_01">
                 <div class="col_01">
                     <label class="text_label_01 mt_01">Tên sản phẩm</label>
-                    <input id="TenSP" autocomplete="off" type="text" placeholder="Nhập tên sản phẩm" style="width: 450px; border: 1px solid;" required>
+                    <input id="TenSP" value="@Model.TenSP" autocomplete="off" type="text" placeholder="Nhập tên sản phẩm" style="width: 450px; border: 1px solid;" required>
                 </div>
             </div>
 
             <div class="rowsp_01">
                 <div class="col_01">
                     <label class="text_label_01 mt_01">Loại sách</label>
-                    @Html.DropDownListFor(model => model.MaLoaiSP, new SelectList(Model.CategorySelectListItem, "Value", "Text"),
+                    @Html.DropDownListFor(model => model.MaLoaiSP, new SelectList(Model.CategorySelectListItem, "Value", "Text", @Model.MaLoaiSP),
                         new { @style = "width: 250px; border: 1px solid; border-radius: 0px;", required = "required" })
                 </div>
             </div>
@@ -39,21 +39,21 @@
             <div class="rowsp_01">
                 <div class="col_01">
                     <label class="text_label_01 mt_01">Tác giả</label>
-                    <input id="TacGia" required autocomplete="off" type="text" placeholder="Nhập tên tác giả" style="width: 450px; border: 1px solid;">
+                    <input id="TacGia" value="@Model.TacGia" required autocomplete="off" type="text" placeholder="Nhập tên tác giả" style="width: 450px; border: 1px solid;">
                 </div>
             </div>
 
             <div class="rowsp_01">
                 <div class="col_01">
                     <label class="text_label_01 mt_01">Nhà xuất bản</label>
-                    <input id="NXB" required autocomplete="off" type="text" placeholder="Nhập NXB" class="text_input_01">
+                    <input id="NXB" value="@Model.NXB" required autocomplete="off" type="text" placeholder="Nhập NXB" class="text_input_01">
                 </div>
             </div>
 
             <div class="rowsp_01">
                 <div class="col_01">
                     <label class="text_label_01 mt_01">Đơn giá</label>
-                    <input id="DonGia" required autocomplete="off" type="number" class="text_input_01" min="1" oninput="validity.valid||(value='');"><samp> (VND)</samp>
+                    <input id="DonGia" value="@Model.DonGia" required autocomplete="off" type="number" class="text_input_01" min="1" oninput="validity.valid||(value='');"><samp> (VND)</samp>
                 </div>
             </div>
 
@@ -61,8 +61,16 @@
                 <div class="col_01 col_left">
                     <label class="text_label_01 mt_01">Loại bìa</label>
                     <select id="LoaiBia" autocomplete="off" name="LoaiBia" style="padding: 5px; border: 1px solid; border-radius: 0px;">
-                        <option value="Bìa cứng">Bìa cứng</option>
-                        <option value="Bìa mềm">Bìa mềm</option>
+                        @if (@Model.LoaiBia == "Bìa cứng")
+                        {
+                            <option selected value="Bìa cứng">Bìa cứng</option>
+                            <option value="Bìa mềm">Bìa mềm</option>
+                        }
+                        else
+                        {
+                            <option value="Bìa cứng">Bìa cứng</option>
+                            <option selected value="Bìa mềm">Bìa mềm</option>
+                        }
                     </select>
                 </div>
             </div>
@@ -70,28 +78,28 @@
             <div class="rowsp_01">
                 <div class="col_01">
                     <label class="text_label_01 mt_01">Số lượng</label>
-                    <input id="SoLuong" required autocomplete="off" type="number" class="text_input_01" min="0" oninput="validity.valid||(value='');">
+                    <input id="SoLuong" value="@Model.SoLuong" required autocomplete="off" type="number" class="text_input_01" min="0" oninput="validity.valid||(value='');">
                 </div>
             </div>
 
             <div class="rowsp_01">
                 <div class="col_01">
                     <label class="text_label_01 mt_01">Số trang</label>
-                    <input id="SoTrang" required autocomplete="off" type="number" class="text_input_01" min="1" oninput="validity.valid||(value='');">
+                    <input id="SoTrang" value="@Model.SoTrang" required autocomplete="off" type="number" class="text_input_01" min="1" oninput="validity.valid||(value='');">
                 </div>
             </div>
 
             <div class="rowsp_01">
                 <div class="col_01">
                     <label class="text_label_01 mt_01">Kích thước</label>
-                    <input id="KichThuoc" required autocomplete="off" type="number" class="text_input_01" min="1"><samp> (cm)</samp>
+                    <input id="KichThuoc" value="@Model.KichThuoc" required autocomplete="off" type="number" class="text_input_01" min="1"><samp> (cm)</samp>
                 </div>
             </div>
 
             <div class="rowsp_01">
                 <div class="col_01">
                     <label class="text_label_01 mt_01">Trọng lượng</label>
-                    <input id="TrongLuong" required autocomplete="off" type="number" class="text_input_01" min="1"><samp> (kg)</samp>
+                    <input id="TrongLuong" value="@Model.TrongLuong" required autocomplete="off" type="number" class="text_input_01" min="1"><samp> (kg)</samp>
                 </div>
             </div>
 
@@ -100,7 +108,7 @@
                     <label class="text_label_01 mt_01">Hình ảnh</label>
                     <input type="file" name="image" class="input_img_01" id="ImagePath" required>
                     <div class="image_aria " id="image_aria">
-                        <img src="" alt="anhSP" class="anh">
+                        <img src="@Url.Content(@Model.ImageLink)" alt="anhSP" class="anh">
                         <span class="them_image">Hình đại diện sách</span>
                     </div>
                 </div>
@@ -109,41 +117,15 @@
             <div class="rowsp_01">
                 <div class="col_01 col_len">
                     <label class="text_label_01 mt_01">Mô tả</label>
-                    <textarea required rows="10" cols="70" id="MoTa" name="mota" form="add_product" placeholder="Nhập mô tả" autocomplete="off" class="text_input_01"></textarea>
+                    <textarea required rows="10" cols="70" id="MoTa" name="mota" form="add_product" placeholder="Nhập mô tả" autocomplete="off" class="text_input_01">@Model.MoTa</textarea>
                 </div>
             </div>
 
             <div style="display: flex; justify-content: space-evenly;">
-                <input class="btn btn-primary" type="button" name="submit" value="Thêm sản phẩm" id="btnSubmit">
-                <input class="btn btn-danger" type="button" name="xoanoidung" value="Xóa nội dung"
-                    data-toggle="modal" data-target="#messageModal">
+                <input class="btn btn-primary" type="button" name="submit" value="Lưu lại thay đổi" onclick="SaveItem()">
+                <input class="btn btn-danger" type="reset" name="reset" value="Reset ban đầu" onclick="ResetImage()">
             </div>
         </form>
-    </div>
-</div>
-
-<!-- Modal -->
-<div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="messageModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                
-                <h4 class="modal-title" id="messageModalLabel" style="color: red; font-weight: bold;">
-                    <i class="fas fa-exclamation-triangle"></i>
-                    Cảnh báo
-                </h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body" style="font-weight: bold;">
-                Bạn chắc chắn muốn xóa toàn bộ nội dung ?
-            </div>
-            <div class="modal-footer">
-                <button type="reset" class="btn btn-danger" onclick="XoaAnh()">Đồng ý</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Hủy bỏ</button>
-            </div>
-        </div>
     </div>
 </div>
 
@@ -154,8 +136,15 @@
     const vunganh = document.getElementById("image_aria");
     const anh = vunganh.querySelector(".anh");
     const anhtext = vunganh.querySelector(".them_image");
+    const ImagePath = $("img[class=anh]").attr("src");
+
+    $(document).ready(function () {
+        anhtext.style.display = "none";
+        anh.style.display = "block";
+    });
 
     image.addEventListener("change", function () {
+
         const file = this.files[0];
 
         if (file) {
@@ -173,15 +162,9 @@
         }
     });
 
-    function XoaAnh() {
-        location.reload(true);
+    function ResetImage() {
+        $("img[class=anh]").attr("src", ImagePath);
     }
-
-    $(document).ready(function () {
-        $("#btnSubmit").click(function () {
-            SaveItem();
-        });
-    });
 
     function SaveItem() {
         var formData = new FormData();
@@ -205,7 +188,7 @@
             type: 'POST',
             contentType: false,
             processData: false,
-            url: '/AdminHome/AddProduct',
+            url: '/AdminHome/EditProduct',
             data: formData,
             success: function (data) {
                 if (data.Success) {
@@ -220,5 +203,6 @@
             }
         });
     }
+
 </script>
 

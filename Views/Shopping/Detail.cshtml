@@ -41,6 +41,10 @@
                     </div>
                     <div class="details col-md-7">
                         <h3 class="product-title">@Model.TenSP</h3>
+                        @if(Model.SoLuong <= 0)
+                        {
+                            <div style="color: #d43f3a; font-weight: bold; font-size: 20px;">Out of Stock!</div>
+                        }
                         <div class="info">
                             <div class="row">
                                 <div class="col-md-6">
@@ -123,45 +127,50 @@
         getSoLuong().then(
             function (soluong) {
 
-                formData.append("SelectedID", itemId);
+                if (soluong > 0) {
+                    formData.append("SelectedID", itemId);
 
-                if (quantityItem === "" || quantityItem <= 0) {
-                    formData.append("QuantityBuying", 1);
-                    $("input[name=quantityItemName]").val(1);
-                }
+                    if (quantityItem === "" || quantityItem <= 0) {
+                        formData.append("QuantityBuying", 1);
+                        $("input[name=quantityItemName]").val(1);
+                    }
 
-                if (quantityItem <= soluong) {
-                    formData.append("QuantityBuying", quantityItem);
-                } else {
-                    formData.append("QuantityBuying", soluong);
-                    $("input[name=quantityItemName]").val(soluong);
-                    alert("Bạn chỉ có thể mua tối đa " + soluong + " sản phẩm.");
-                }
+                    if (quantityItem <= soluong) {
+                        formData.append("QuantityBuying", quantityItem);
+                    } else {
+                        formData.append("QuantityBuying", soluong);
+                        $("input[name=quantityItemName]").val(soluong);
+                        alert("Bạn chỉ có thể mua tối đa " + soluong + " sản phẩm.");
+                    }
 
-                $.ajax({
-                    async: true,
-                    type: 'POST',
-                    contentType: false,
-                    processData: false,
-                    data: formData,
-                    url: '/Cart/Index',
-                    success: function (data) {
-                        if (data.Success) {
-                            $("#cartCount").text(data.Counter);
-                            $("#totalPrice_temp").text(data.TotalPrice_temp);
-                            $("#totalPrice").text(data.TotalPrice);
+                    $.ajax({
+                        async: true,
+                        type: 'POST',
+                        contentType: false,
+                        processData: false,
+                        data: formData,
+                        url: '/Cart/Index',
+                        success: function (data) {
+                            if (data.Success) {
+                                $("#cartCount").text(data.Counter);
+                                $("#totalPrice_temp").text(data.TotalPrice_temp);
+                                $("#totalPrice").text(data.TotalPrice);
 
-                            if (data.Message != "") {
+                                if (data.Message != "") {
+                                    alert(data.Message);
+                                }
+                            } else {
                                 alert(data.Message);
                             }
-                        } else {
+                        },
+                        error: function () {
                             alert(data.Message);
                         }
-                    },
-                    error: function () {
-                        alert(data.Message);
-                    }
-                })
+                    })
+                }
+                else {
+                    alert("Sản phẩm này đã hết hàng xin hãy quay lại sau.")
+                }
             }
         );
     }

@@ -45,12 +45,12 @@ namespace JustBook.Controllers
 
             if (maLoaiSP != null)
             {
-                var result = db.SanPhams.Where(book => book.MaLoaiSP == maLoaiSP).ToList();
+                var result = db.SanPhams.Where(book => book.MaLoaiSP == maLoaiSP && book.SoLuong > 0).ToList();
                 return View(result);
             }
             else
             {
-                var result = db.SanPhams.ToList();
+                var result = db.SanPhams.Where(book => book.SoLuong > 0).ToList();
                 return View(result);
             }
 
